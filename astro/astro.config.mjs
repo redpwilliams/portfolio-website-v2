@@ -2,9 +2,11 @@ import { defineConfig } from "astro/config"
 import { sanityIntegration as sanity } from "@sanity/astro"
 import react from "@astrojs/react"
 
-if (process.env.mode !== "production") {
+if (process.env.NODE_ENV !== "production") {
   import("dotenv/config")
 }
+
+console.log(`Project Mode: ${process.env.NODE_ENV}`)
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,5 +20,6 @@ export default defineConfig({
       studioBasePath: "/studio"
     }),
     react()
-  ]
+  ],
+  server: { port: 3000, host: true }
 })
