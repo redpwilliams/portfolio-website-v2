@@ -7,17 +7,20 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@astrojs/check": "^0.3.1",
     "@astrojs/react": "^3.0.6",
+    "@commitlint/types": "^18.4.3",
     "@sanity/astro": "^2.1.4",
     "@sanity/client": "^6.8.6",
     "@sanity/vision": "^3.20.1",
     "@types/react": "^18.2.38",
     "@types/react-dom": "^18.2.17",
     "astro": "^3.5.7",
+    "conventional-changelog-atom": "^4.0.0",
     "dotenv": "^16.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -25,6 +28,14 @@
     "typescript": "^5.3.2"
   },
   "devDependencies": {
+    "husky": "^8.0.3",
     "react-error-overlay": "^6.0.11"
+  },
+  "prettier": {
+    "semi": false,
+    "printWidth": 100,
+    "bracketSpacing": true,
+    "singleQuote": true,
+    "trailingComma": "none"
   }
 }
