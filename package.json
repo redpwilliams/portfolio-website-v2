@@ -36,6 +36,10 @@
     "printWidth": 100,
     "bracketSpacing": true,
     "singleQuote": true,
-    "trailingComma": "none"
+    "trailingComma": "none",
+    "useTabs": false,
+    "quoteProps": "consistent",
+    "jsxSingleQuote": true,
+    "bracketSameLine": true
   }
 }
