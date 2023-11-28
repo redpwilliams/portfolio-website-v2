@@ -7,7 +7,7 @@ const Config: UserConfig = {
   // Resolve and load @commitlint/config-conventional from node_modules
   extends: ['@commitlint/config-conventional'],
 
-  // Resolve and load conventional-changelog-atom from node_modules
+  // Define commit structure
   parserPreset: {
     parserOpts: {
       headerPattern: /^(\w*)\(([^)]*)\): (.*)$/,
