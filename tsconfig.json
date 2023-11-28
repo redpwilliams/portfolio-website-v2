@@ -1,6 +1,22 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@*": ["./src/*"],
+
+      // Normal imports
+      "@pages*": ["./src/pages/*"],
+      "@layouts*": ["./src/layouts/*"],
+      "@components*": ["./src/components/*"],
+      "@schemas/*": ["schemas/*"],
+
+      // Imports from index.ts files (idk why this works but we ball)
+      "@pages": ["./src/pages/index.ts"],
+      "@layouts": ["./src/layouts/index.ts"],
+      "@components": ["./src/components/index.ts"],
+      "@schemas": ["schemas/index.ts"]
+    },
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -17,6 +33,9 @@
     "incremental": true,
     "types": ["vite/client"]
   },
-  "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": ["**/*.ts", "**/*.tsx", "src"],
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "esm": true
+  }
 }
