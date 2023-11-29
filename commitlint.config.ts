@@ -28,26 +28,7 @@ const Config: UserConfig = {
 
   // Custom URL to show upon failure
   // helpUrl: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint',
-  helpUrl: Object.keys(CommitFields).toLocaleString(),
-
-  // Custom prompt configuration
-  prompt: {
-    messages: {
-      emptyWarning: 'The commit cannot be empty.'
-    },
-    questions: {
-      type: {
-        description: 'Select the type of change to commit:',
-        enum: CommitFields
-      },
-      scope: {
-        description: 'The scope, component, or filename affected.'
-      },
-      subject: {
-        description: 'A short description of the changes.'
-      }
-    }
-  }
+  helpUrl: Object.keys(CommitFields).toLocaleString()
 }
 
 module.exports = Config
