@@ -27,7 +27,8 @@ const Config: UserConfig = {
   defaultIgnores: true,
 
   // Custom URL to show upon failure
-  helpUrl: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint',
+  // helpUrl: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint',
+  helpUrl: Object.keys(CommitFields).toLocaleString(),
 
   // Custom prompt configuration
   prompt: {
