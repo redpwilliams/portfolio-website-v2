@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run ESLint, only fail if there are errors
+npx --no -- eslint .
+
+# Run Prettier to format the code
+npx --no -- prettier --write .
