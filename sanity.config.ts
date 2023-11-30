@@ -1,4 +1,4 @@
-import { defineConfig, isDev, type PluginOptions } from 'sanity'
+import { defineConfig, isDev } from 'sanity'
 import { deskTool } from 'sanity/desk'
 import { visionTool } from '@sanity/vision'
 import { schemaTypes } from '@schemas'
