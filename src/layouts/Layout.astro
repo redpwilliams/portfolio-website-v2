@@ -1,63 +1,69 @@
 ---
 interface Props {
-	title: string;
+  title: string
 }
 
-const { title } = Astro.props;
+const { title } = Astro.props
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='description' content='Astro description' />
+    <meta name='viewport' content='width=device-width' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <meta name='generator' content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
 <style is:global>
-	:root {
-		--text-main: #F4F3F2;
-		--text-gray-light: #D3D3D3;
-		--text-gray-dark: #A3A3A3;
+  :root {
+    --text-main: #f4f3f2;
+    --text-gray-light: #d3d3d3;
+    --text-gray-dark: #a3a3a3;
 
-		--bg-color: #1E1E1E;
+    --bg-color: #1e1e1e;
 
-		--gradient: linear-gradient(
-			45deg,
-			rgba(255, 133, 64, 1),
-			rgba(255, 64, 64, 1)
-		);
-	
+    --gradient: linear-gradient(45deg, rgba(255, 133, 64, 1), rgba(255, 64, 64, 1));
+  }
+  html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: system-ui, sans-serif;
+    background-color: var(--bg-color);
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+  }
 
-	} 
-	html {
-		height: 100%;
-		margin: 0;
-		padding: 0;
-	}
-	body {
-		font-family: system-ui, sans-serif;
-		background-color: var(--bg-color);
-		background-size: cover;
-		margin: 0;
-		padding: 0;
-	}
+  h1 {
+    color: var(--text-main);
+  }
 
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
+  h2 {
+    color: var(--text-main);
+  }
+
+  h3 {
+    color: var(--text-main);
+  }
+
+  code {
+    font-family:
+      Menlo,
+      Monaco,
+      Lucida Console,
+      Liberation Mono,
+      DejaVu Sans Mono,
+      Bitstream Vera Sans Mono,
+      Courier New,
+      monospace;
+  }
 </style>

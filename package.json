@@ -31,9 +31,13 @@
     "@typescript-eslint/parser": "^6.13.1",
     "depcheck": "^1.4.7",
     "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-astro": "^0.30.0",
+    "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-react": "^7.33.2",
     "husky": "^8.0.3",
     "lint-staged": "^12.5.0",
+    "prettier-plugin-astro": "^0.12.2",
     "react-error-overlay": "^6.0.11"
   },
   "prettier": {
@@ -45,10 +49,23 @@
     "useTabs": false,
     "quoteProps": "consistent",
     "jsxSingleQuote": true,
-    "bracketSameLine": true
+    "bracketSameLine": true,
+    "overrides": [
+      {
+        "files": "**/*.astro",
+        "options": {
+          "parser": "astro"
+        }
+      }
+    ],
+    "plugins": [
+      "prettier-plugin-astro"
+    ]
   },
   "lint-staged": {
-    "*.{js,ts,tsx,mjs,astro}": "eslint  --fix",
-    "*.{js,ts,tsx,css,md,astro}": "npx prettier --write"
+    "*.{js,ts,tsx,mjs,astro}": [
+      "eslint  --fix",
+      "npx prettier --write"
+    ]
   }
 }
