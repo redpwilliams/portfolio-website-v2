@@ -1,16 +1,53 @@
 ---
-import Layout from '../layouts/Layout.astro'
+import { Layout } from '@layouts'
+import { Button, SectionHeader } from '@components'
 ---
 
 <Layout title='Welcome to Astro.'>
   <main>
-    <h3>Hey! I&apos;m</h3>
-    <h1>Red Williams</h1>
-    <h2>student</h2>
-    <p>
-      I&apos;m a student at Virginia Tech studying Computer Engineering and a minor in Computer
-      Science, with an expected graduation date of Winter 2025. I&apos;m always seeking to learn
-      from others and expand my skillset!
-    </p>
+    <>
+      <p>Hey! I&apos;m</p>
+      <h1>Red Williams</h1>
+      <h2>student</h2>
+      <p>
+        I&apos;m a student at Virginia Tech studying Computer Engineering and a minor in Computer
+        Science, with an expected graduation date of Winter 2025. I&apos;m always seeking to learn
+        from others and expand my skillset!
+      </p>
+      <Button text={"Let's Chat!"} href={'#'} />
+    </>
+    <section>
+      <SectionHeader title='Essence' />
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum
+        est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin
+        lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat
+        lectus.
+        <br />
+        <br />
+         Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus
+        ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi
+        convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.
+      </p>
+    </section>
+    <section>
+      <SectionHeader title='Projects' />
+      <!-- TODO - Use array from Sanity query to .map and display project component -->
+      <Button text='View the Archive' href='#' />
+    </section>
+    <section>
+      <SectionHeader title='Reports' />
+      <!-- TODO - Use array from Sanity query to .map and display blog component -->
+    </section>
+    <section>
+      <h3>Get In Touch</h3>
+      <p>
+        I am currently looking for Internships around Summer 2024. I would love the opportunity to
+        work and learn from you! Please reach out if you have any questions, or would like to hear
+        from me. Thanks!
+      </p>
+      <Button text="Let's Connect" href='#' />
+    </section>
   </main>
 </Layout>
