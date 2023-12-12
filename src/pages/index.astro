@@ -3,11 +3,13 @@ import { Layout } from '@layouts'
 import { Button, SectionHeader } from '@components'
 
 import type { IconType } from 'react-icons'
+import type { CSSProperties } from 'react'
 
 import { FiGithub } from 'react-icons/fi'
 
 type AsideLink = {
   icon: IconType
+  style?: CSSProperties
   link: string
 }
 
@@ -74,147 +76,147 @@ const email = 'redpwilliams@gmail.com'
       {
         socials.map((social) => (
           <li>
-            <social.icon className='.icons' />
+            <social.icon style={social.style} />
           </li>
         ))
       }
     </ul>
   </aside>
-  <style>
-    main {
-      padding: 0 1em;
-    }
-
-    aside {
-      color: var(--text-gray-light);
-      font-family: var(--font-mono);
-      display: none;
-    }
-
-    @media (min-width: 60em) {
-      aside {
-        position: fixed;
-        height: 100vh;
-        width: var(--aside-width);
-        display: block;
-        overflow-y: auto;
-      }
-
-      .email {
-        left: 0;
-        right: auto;
-      }
-
-      .socials {
-        right: 0;
-        left: auto;
-      }
-
-      .email > div {
-        writing-mode: sideways-lr;
-        display: flex;
-        flex-direction: column;
-        justify-content: end;
-        align-items: center;
-        flex-wrap: nowrap;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-      }
-
-      .socials > ul {
-        display: flex;
-        flex-direction: column;
-        justify-content: start;
-        align-items: center;
-        flex-wrap: nowrap;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-      }
-
-      .email > div > a,
-      .socials > ul > li {
-        display: inline-block;
-        position: relative;
-        margin: 0 auto;
-      }
-      .email > div > a::before {
-        content: '';
-        display: inline-block;
-        width: 0.12rem;
-        height: 150px;
-        background-color: var(--text-gray-light);
-        vertical-align: middle;
-        margin-top: 40px;
-      }
-
-      .socials > ul::before {
-        content: '';
-        display: inline-block;
-        width: 0.12rem;
-        height: 150px;
-        background-color: var(--text-gray-light);
-        vertical-align: middle;
-        margin-bottom: 40px;
-      }
-
-      svg {
-        transform: scale(1.5);
-      }
-    }
-
-    section {
-      margin: 30px 0vw;
-      max-width: 1000px;
-    }
-
-    .hero {
-      /* border: 4px solid blue; */
-    }
-    #hey {
-      color: var(--text-gray-dark);
-      font-family: var(--font-mono);
-      font-weight: 700;
-      margin-left: 9px;
-      font-size: clamp(1.1rem, 2vw, 1.6rem);
-    }
-
-    h1 {
-      margin-bottom: -5px;
-      font-weight: 500;
-      color: var(--text-main);
-      font-size: clamp(3rem, 5vw, 6rem);
-    }
-
-    h2 {
-      display: inline-block;
-      /* display: none; */
-      font-family: var(--font-mono);
-      font-weight: 400;
-      font-size: clamp(1rem, 3vw, 1.6rem);
-      text-transform: capitalize;
-      position: relative;
-    }
-
-    h2::before {
-      --bar-width: 12.5rem;
-      content: '';
-      background-image: var(--gradient);
-      width: clamp(8rem, 18vw, 20rem);
-      height: 15px;
-      margin-right: 10px;
-      display: inline-block;
-      vertical-align: middle;
-    }
-
-    .intro {
-      font-size: 1.5rem;
-      margin: 2rem 0;
-      line-height: 1.8;
-      font-size: clamp(1rem, 1.4vw, 5rem);
-    }
-  </style>
 </Layout>
+<style>
+  main {
+    padding: 0 1em;
+  }
+
+  aside {
+    color: var(--text-gray-light);
+    font-family: var(--font-mono);
+    display: none;
+  }
+
+  @media (min-width: 60em) {
+    aside {
+      position: fixed;
+      height: 100vh;
+      width: var(--aside-width);
+      display: block;
+      overflow-y: auto;
+    }
+
+    .email {
+      left: 0;
+      right: auto;
+    }
+
+    .socials {
+      right: 0;
+      left: auto;
+    }
+
+    .email > div {
+      writing-mode: sideways-lr;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      align-items: center;
+      flex-wrap: nowrap;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    .socials > ul {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+      flex-wrap: nowrap;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+
+    .email > div > a,
+    .socials > ul > li {
+      display: inline-block;
+      position: relative;
+      margin: 0 auto;
+    }
+    .email > div > a::before {
+      content: '';
+      display: inline-block;
+      width: 0.12rem;
+      height: 150px;
+      background-color: var(--text-gray-light);
+      vertical-align: middle;
+      margin-top: 40px;
+    }
+
+    .socials > ul::before {
+      content: '';
+      display: inline-block;
+      width: 0.12rem;
+      height: 150px;
+      background-color: var(--text-gray-light);
+      vertical-align: middle;
+      margin-bottom: 40px;
+    }
+
+    svg {
+      transform: scale(1.5);
+    }
+  }
+
+  section {
+    margin: 30px 0vw;
+    max-width: 1000px;
+  }
+
+  .hero {
+    /* border: 4px solid blue; */
+  }
+  #hey {
+    color: var(--text-gray-dark);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    margin-left: 9px;
+    font-size: clamp(1.1rem, 2vw, 1.6rem);
+  }
+
+  h1 {
+    margin-bottom: -5px;
+    font-weight: 500;
+    color: var(--text-main);
+    font-size: clamp(3rem, 5vw, 6rem);
+  }
+
+  h2 {
+    display: inline-block;
+    /* display: none; */
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: clamp(1rem, 3vw, 1.6rem);
+    text-transform: capitalize;
+    position: relative;
+  }
+
+  h2::before {
+    --bar-width: 12.5rem;
+    content: '';
+    background-image: var(--gradient);
+    width: clamp(8rem, 18vw, 20rem);
+    height: 15px;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .intro {
+    font-size: 1.5rem;
+    margin: 2rem 0;
+    line-height: 1.8;
+    font-size: clamp(1rem, 1.4vw, 5rem);
+  }
+</style>
