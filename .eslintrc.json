@@ -7,8 +7,6 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
-    "plugin:react/jsx-runtime",
     "plugin:prettier/recommended",
     "plugin:astro/recommended"
   ],
@@ -21,6 +19,10 @@
       "parserOptions": {
         "sourceType": "script"
       }
+    },
+    {
+      "files": ["*.ts"],
+      "parser": "@typescript-eslint/parser"
     }
   ],
   "parser": "astro-eslint-parser",
@@ -38,13 +40,5 @@
       "version": "detect"
     }
   },
-  "plugins": ["@typescript-eslint", "react"],
-  "rules": {
-    "react/no-unknown-property": [
-      2,
-      {
-        "ignore": ["is:global"]
-      }
-    ]
-  }
+  "plugins": ["@typescript-eslint", "react"]
 }
