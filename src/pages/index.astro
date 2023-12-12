@@ -6,7 +6,7 @@ import type { IconType } from 'react-icons'
 import type { CSSProperties } from 'react'
 
 import { FiGithub } from 'react-icons/fi'
-
+import { FaSpotify } from 'react-icons/fa'
 type AsideLink = {
   icon: IconType
   style?: CSSProperties
@@ -16,6 +16,10 @@ type AsideLink = {
 const socials: AsideLink[] = [
   {
     icon: FiGithub,
+    link: ''
+  },
+  {
+    icon: FaSpotify,
     link: ''
   }
 ]
@@ -117,7 +121,7 @@ const email = 'redpwilliams@gmail.com'
       writing-mode: sideways-lr;
       display: flex;
       flex-direction: column;
-      justify-content: end;
+      justify-content: center;
       align-items: center;
       flex-wrap: nowrap;
       position: absolute;
@@ -136,13 +140,14 @@ const email = 'redpwilliams@gmail.com'
       top: 0;
       left: 0;
       right: 0;
+      gap: 20px;
     }
 
     .email > div > a,
     .socials > ul > li {
       display: inline-block;
       position: relative;
-      margin: 0 auto;
+      padding: 0.4em;
     }
     .email > div > a::before {
       content: '';
@@ -161,7 +166,7 @@ const email = 'redpwilliams@gmail.com'
       height: 150px;
       background-color: var(--text-gray-light);
       vertical-align: middle;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
 
     svg {
