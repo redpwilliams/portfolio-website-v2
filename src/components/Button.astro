@@ -13,15 +13,16 @@ const { href, text } = Astro.props
 <style>
   button {
     cursor: pointer;
-    border-width: 3px;
-    border-image: var(--gradient);
+    border: double 2px transparent;
+    background-image: linear-gradient(var(--bg-color), var(--bg-color)), var(--gradient);
     border-image-slice: 1;
-    border-radius: 20%;
-    background-size: cover;
+    border-radius: 4px;
     background-color: var(--bg-color);
-    padding: 0.8em 2.2em;
-    font-weight: 600;
-    font-size: 1.2rem;
+    padding: 0.7em 3.5em;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    font-weight: 500;
+    font-size: 1rem;
     text-transform: uppercase;
     display: block;
   }
