@@ -1,9 +1,12 @@
 ---
 import { Layout } from '@layouts'
 import { Button, SectionHeader } from '@components'
+
+const email = 'redpwilliams@gmail.com'
 ---
 
 <Layout title='Welcome to Astro.'>
+  <aside class='email'><div><a>{email}</a></div></aside>
   <main>
     <section class='hero'>
       <p id='hey'>Hey! I&apos;m</p>
@@ -50,25 +53,76 @@ import { Button, SectionHeader } from '@components'
       <Button text="Let's Connect" href='#' />
     </section>
   </main>
-  <aside class='email'></aside>
-  <aside class='socials'></aside>
+  <aside class='socials'>socials</aside>
   <style>
     main {
       padding: 0 1em;
-      /* border: 4px solid red; */
+    }
+
+    aside {
+      /* border: 4px solid gold; */
+      color: var(--text-gray-light);
+      font-family: var(--font-mono);
+      display: none;
+    }
+
+    @media (min-width: 60em) {
+      aside {
+        position: fixed;
+        height: 100vh;
+        width: var(--aside-width);
+        display: block;
+        overflow-y: autok;
+      }
+
+      .socials {
+        position: fixed;
+        right: 0;
+        left: auto;
+        bottom: 0;
+        width: 40px;
+      }
+
+      .email {
+        position: fixed;
+        left: 0;
+        right: auto;
+        top: 0;
+        width: 40px;
+      }
+
+      .email > div {
+        writing-mode: sideways-lr;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items: center;
+        flex-wrap: nowrap;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .email > div > a {
+        display: inline-block;
+        position: relative;
+        margin: 0 auto;
+      }
+      .email > div > a::before {
+        content: '';
+        display: inline-block;
+        width: 0.12rem;
+        height: 150px;
+        background-color: var(--text-gray-light);
+        vertical-align: middle;
+        margin-top: 40px;
+      }
     }
 
     section {
       margin: 30px 0vw;
       max-width: 1000px;
-    }
-
-    @media (min-width: 60em) {
-      section {
-        /* background-color: blue; */
-        margin-left: 10%;
-        margin-right: 10%;
-      }
     }
 
     .hero {
@@ -114,9 +168,7 @@ import { Button, SectionHeader } from '@components'
       font-size: 1.5rem;
       margin: 2rem 0;
       line-height: 1.8;
-      font-size: clamp(1rem, 1.5vw, 5rem);
+      font-size: clamp(1rem, 1.2vw, 5rem);
     }
-
-    @media;
   </style>
 </Layout>
