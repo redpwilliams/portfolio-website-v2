@@ -5,17 +5,17 @@ import { Button, SectionHeader } from '@components'
 
 <Layout title='Welcome to Astro.'>
   <main>
-    <>
-      <p>Hey! I&apos;m</p>
+    <section class='hero'>
+      <p id='hey'>Hey! I&apos;m</p>
       <h1>Red Williams</h1>
       <h2>student</h2>
-      <p>
+      <p class='intro'>
         I&apos;m a student at Virginia Tech studying Computer Engineering and a minor in Computer
         Science, with an expected graduation date of Winter 2025. I&apos;m always seeking to learn
         from others and expand my skillset!
       </p>
       <Button text={"Let's Chat!"} href={'#'} />
-    </>
+    </section>
     <section>
       <SectionHeader title='Essence' />
       <p>
@@ -50,4 +50,55 @@ import { Button, SectionHeader } from '@components'
       <Button text="Let's Connect" href='#' />
     </section>
   </main>
+  <style>
+    main {
+      padding: 0 1em;
+      /* border: 4px solid red; */
+    }
+
+    section {
+      margin: 30px 10%;
+      max-width: 1000px;
+    }
+
+    .hero {
+      /* border: 4px solid blue; */
+    }
+    #hey {
+      color: var(--text-gray-dark);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      margin-left: 9px;
+      font-size: 1.6rem;
+    }
+
+    h1 {
+      font-weight: 500;
+      margin-bottom: -15px;
+    }
+
+    h2 {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-weight: 400;
+      font-size: 1.6rem;
+      text-transform: capitalize;
+    }
+
+    h2::before {
+      --bar-width: 12.5rem;
+      content: '';
+      background-image: var(--gradient);
+      width: 26rem;
+      height: 15px;
+      margin-right: 10px;
+      display: inline-block;
+    }
+
+    .intro {
+      font-size: 1.5rem;
+      margin: 2rem 0;
+      line-height: 1.5em;
+    }
+  </style>
 </Layout>

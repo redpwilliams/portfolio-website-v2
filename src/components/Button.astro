@@ -10,4 +10,23 @@ const { href, text } = Astro.props
 <button>
   <a href={href} target='_blank' referrerpolicy='no-referrer'>{text}</a>
 </button>
-<style></style>
+<style>
+  button {
+    cursor: pointer;
+    border-width: 3px;
+    border-image: var(--gradient);
+    border-image-slice: 1;
+    border-radius: 20%;
+    background-size: cover;
+    background-color: var(--bg-color);
+    padding: 0.8em 2.2em;
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    display: block;
+  }
+
+  a {
+    color: var(--text-main);
+  }
+</style>

@@ -9,3 +9,19 @@ const { title } = Astro.props
 <h3>
   {title}
 </h3>
+<style>
+  h3 {
+    display: inline-block;
+    position: relative;
+    font-weight: 500;
+  }
+  h3::after {
+    --bar-width: calc(100% + 2.5rem);
+    content: '';
+    background-image: var(--gradient);
+    width: var(--bar-width);
+    height: 10px;
+    display: block;
+    margin-top: 10px;
+  }
+</style>
