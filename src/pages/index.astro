@@ -2,6 +2,22 @@
 import { Layout } from '@layouts'
 import { Button, SectionHeader } from '@components'
 
+import type { IconType } from 'react-icons'
+
+import { FiGithub } from 'react-icons/fi'
+
+type AsideLink = {
+  icon: IconType
+  link: string
+}
+
+const socials: AsideLink[] = [
+  {
+    icon: FiGithub,
+    link: ''
+  }
+]
+
 const email = 'redpwilliams@gmail.com'
 ---
 
@@ -55,9 +71,13 @@ const email = 'redpwilliams@gmail.com'
   </main>
   <aside class='socials'>
     <ul>
-      <li>One</li>
-      <li>Two</li>
-      <li>Three</li>
+      {
+        socials.map((social) => (
+          <li>
+            <social.icon className='.icons' />
+          </li>
+        ))
+      }
     </ul>
   </aside>
   <style>
@@ -139,6 +159,10 @@ const email = 'redpwilliams@gmail.com'
         background-color: var(--text-gray-light);
         vertical-align: middle;
         margin-bottom: 40px;
+      }
+
+      svg {
+        transform: scale(1.5);
       }
     }
 
