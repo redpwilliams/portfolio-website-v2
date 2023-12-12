@@ -5,7 +5,7 @@ import { Button, SectionHeader } from '@components'
 const email = 'redpwilliams@gmail.com'
 ---
 
-<Layout title='Welcome to Astro.'>
+<Layout title='Red Williams'>
   <aside class='email'><div><a>{email}</a></div></aside>
   <main>
     <section class='hero'>
@@ -53,7 +53,13 @@ const email = 'redpwilliams@gmail.com'
       <Button text="Let's Connect" href='#' />
     </section>
   </main>
-  <aside class='socials'>socials</aside>
+  <aside class='socials'>
+    <ul>
+      <li>One</li>
+      <li>Two</li>
+      <li>Three</li>
+    </ul>
+  </aside>
   <style>
     main {
       padding: 0 1em;
@@ -74,17 +80,14 @@ const email = 'redpwilliams@gmail.com'
         overflow-y: auto;
       }
 
+      .email {
+        left: 0;
+        right: auto;
+      }
+
       .socials {
         right: 0;
         left: auto;
-        bottom: 0;
-      }
-
-      .email {
-        position: fixed;
-        left: 0;
-        right: auto;
-        top: 0;
       }
 
       .email > div {
@@ -100,7 +103,20 @@ const email = 'redpwilliams@gmail.com'
         right: 0;
       }
 
-      .email > div > a {
+      .socials > ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        flex-wrap: nowrap;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .email > div > a,
+      .socials > ul > li {
         display: inline-block;
         position: relative;
         margin: 0 auto;
@@ -113,6 +129,16 @@ const email = 'redpwilliams@gmail.com'
         background-color: var(--text-gray-light);
         vertical-align: middle;
         margin-top: 40px;
+      }
+
+      .socials > ul::before {
+        content: '';
+        display: inline-block;
+        width: 0.12rem;
+        height: 150px;
+        background-color: var(--text-gray-light);
+        vertical-align: middle;
+        margin-bottom: 40px;
       }
     }
 
