@@ -1,6 +1,6 @@
 ---
 import { Layout } from '@layouts'
-import { SVG, Button, SectionHeader } from '@components'
+import { Button, SectionHeader, AsideSocial } from '@components'
 
 // AsideLink types
 import type { IconType } from 'react-icons'
@@ -67,7 +67,6 @@ const email = 'redpwilliams@gmail.com'
         Science, with an expected graduation date of Winter 2025. I&apos;m always seeking to learn
         from others and expand my skillset!
       </p>
-      <SVG />
       <Button text={"Let's Chat!"} href={'#'} />
     </section>
     <section>
@@ -110,7 +109,9 @@ const email = 'redpwilliams@gmail.com'
         socials.map((social) => (
           <li>
             <a href={social.link}>
-              <social.icon className={social.class} style={social.style} />
+              <AsideSocial>
+                <social.icon className={social.class} style={social.style} />
+              </AsideSocial>
             </a>
           </li>
         ))
