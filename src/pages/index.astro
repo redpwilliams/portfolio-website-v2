@@ -1,16 +1,22 @@
 ---
 import { Layout } from '@layouts'
-import { Button, SectionHeader } from '@components'
+import { SVG, Button, SectionHeader } from '@components'
 
+// AsideLink types
 import type { IconType } from 'react-icons'
 import type { CSSProperties } from 'react'
 
-import { FiGithub } from 'react-icons/fi'
-import { FaSpotify } from 'react-icons/fa'
+// Icons
+import { FiGithub, FiInstagram, FiLinkedin } from 'react-icons/fi'
+import { FaDiscord } from 'react-icons/fa'
+import { LiaSpotify } from 'react-icons/lia'
+import { FaXTwitter } from 'react-icons/fa6'
+
 type AsideLink = {
   icon: IconType
-  style?: CSSProperties
   link: string
+  class?: string
+  style?: CSSProperties
 }
 
 const socials: AsideLink[] = [
@@ -19,7 +25,29 @@ const socials: AsideLink[] = [
     link: ''
   },
   {
-    icon: FaSpotify,
+    icon: LiaSpotify,
+    style: {
+      // color: 'green',
+      // position: 'relative',
+      transform: 'scale(1.85)' // Spotify logo is weird for whatever reason
+    },
+    link: '',
+    class: 'disap'
+  },
+  {
+    icon: FiInstagram,
+    link: ''
+  },
+  {
+    icon: FiLinkedin,
+    link: ''
+  },
+  {
+    icon: FaXTwitter,
+    link: ''
+  },
+  {
+    icon: FaDiscord,
     link: ''
   }
 ]
@@ -39,6 +67,7 @@ const email = 'redpwilliams@gmail.com'
         Science, with an expected graduation date of Winter 2025. I&apos;m always seeking to learn
         from others and expand my skillset!
       </p>
+      <SVG />
       <Button text={"Let's Chat!"} href={'#'} />
     </section>
     <section>
@@ -80,7 +109,9 @@ const email = 'redpwilliams@gmail.com'
       {
         socials.map((social) => (
           <li>
-            <social.icon style={social.style} />
+            <a href={social.link}>
+              <social.icon className={social.class} style={social.style} />
+            </a>
           </li>
         ))
       }
@@ -147,7 +178,7 @@ const email = 'redpwilliams@gmail.com'
     .socials > ul > li {
       display: inline-block;
       position: relative;
-      padding: 0.4em;
+      padding: 0 0.4em;
     }
     .email > div > a::before {
       content: '';
@@ -169,8 +200,18 @@ const email = 'redpwilliams@gmail.com'
       margin-bottom: 20px;
     }
 
+    .socials a,
+    .socials a:visited {
+      color: var(--text-gray-light);
+    }
+
+    .socials a:hover svg {
+      transition: all 0.5s;
+      stroke: red;
+    }
+
     svg {
-      transform: scale(1.5);
+      transform: scale(1.3);
     }
   }
 

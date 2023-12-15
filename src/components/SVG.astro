@@ -1,0 +1,35 @@
+---
+import { FiInstagram } from 'react-icons/fi'
+---
+
+<FiInstagram id={'icon'} />
+<script>
+  const icon = document.getElementById('icon')
+  const defsElement = document.createElementNS('http://www.w3.org/2000/svg', 'defs')
+
+  const linearGradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient')
+  linearGradient.setAttribute('id', 'gradient')
+  linearGradient.setAttribute('x1', '0%')
+  linearGradient.setAttribute('y1', '0%')
+  linearGradient.setAttribute('x2', '100%')
+  linearGradient.setAttribute('y2', '100%')
+
+  const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop')
+  stop1.setAttribute('offset', '0%')
+  stop1.setAttribute('style', 'stop-color: rgba(255, 133, 64, 1)')
+
+  const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop')
+  stop2.setAttribute('offset', '100%')
+  stop2.setAttribute('style', 'stop-color: rgba(255, 64, 64, 1)')
+
+  linearGradient.appendChild(stop1)
+  linearGradient.appendChild(stop2)
+
+  defsElement.appendChild(linearGradient)
+
+  icon?.insertBefore(defsElement, icon?.firstChild)
+  if (icon) {
+    // eslint-disable-next-line no-undef
+    icon.style.stroke = 'url(#gradient)'
+  }
+</script>
