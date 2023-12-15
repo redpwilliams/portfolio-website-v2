@@ -4,11 +4,13 @@
 
   const icons = Array.from(document.getElementsByTagName('svg'))
   const [color1, color2] = getGradient()
+
+  const id = 'gradient'
   icons.forEach((icon) => {
     const defsElement = document.createElementNS('http://www.w3.org/2000/svg', 'defs')
 
     const linearGradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient')
-    linearGradient.setAttribute('id', 'gradient')
+    linearGradient.setAttribute('id', id)
     linearGradient.setAttribute('x1', '100%')
     linearGradient.setAttribute('y1', '0%')
     linearGradient.setAttribute('x2', '0%')
@@ -28,6 +30,12 @@
     defsElement.appendChild(linearGradient)
 
     icon?.insertBefore(defsElement, icon?.firstChild)
-    icon.style.stroke = 'url(#gradient)'
+
+    // Apply to either fill or stroke
+    if (getComputedStyle(icon).getPropertyValue('stroke-width') === '0px') {
+      icon.style.fill = `url(#${id})`
+    } else {
+      icon.style.stroke = `url(#${id})`
+    }
   })
 </script>
