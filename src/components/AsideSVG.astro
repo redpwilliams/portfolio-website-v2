@@ -38,20 +38,20 @@
     const liParent = icon.closest('li')
     if (!liParent) return
 
-    const hoverStyles = document.createElement('style')
+    let prefix: 'fill' | 'stroke'
+    prefix =
+      getComputedStyle(icon).getPropertyValue('stroke-width') === '0px'
+        ? // Apply to fill (Spotify, X/Twitter, Discord)
+          (prefix = 'fill')
+        : // Apply to stroke (Instagram, Github, LinkedIn)
+          (prefix = 'stroke')
 
-    if (getComputedStyle(icon).getPropertyValue('stroke-width') === '0px') {
-      // Apply to fill (Spotify, X/Twitter, Discord)
-      // icon.style.fill = `url(#${id})`
-      hoverStyles.innerHTML = `
+    const hoverStyles = document.createElement('style')
+    hoverStyles.innerHTML = `
         #${liParent.id}:hover svg {
-          fill: url(#${id});
+          ${prefix}: url(#${id});
         }
       `
-      icon.appendChild(hoverStyles)
-    } else {
-      // Apply to stroke (Instagram, Github, LinkedIn)
-      icon.style.stroke = `url(#${id})`
-    }
+    icon.appendChild(hoverStyles)
   })
 </script>
