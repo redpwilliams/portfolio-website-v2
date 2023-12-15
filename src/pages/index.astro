@@ -15,7 +15,6 @@ import { FaXTwitter } from 'react-icons/fa6'
 type AsideLink = {
   icon: IconType
   link: string
-  class?: string
   style?: CSSProperties
 }
 
@@ -31,8 +30,7 @@ const socials: AsideLink[] = [
       // position: 'relative',
       transform: 'scale(1.85)' // Spotify logo is weird for whatever reason
     },
-    link: '',
-    class: 'disap'
+    link: ''
   },
   {
     icon: FiInstagram,
@@ -110,7 +108,7 @@ const email = 'redpwilliams@gmail.com'
           <li>
             <a href={social.link}>
               <AsideSocial>
-                <social.icon className={social.class} style={social.style} />
+                <social.icon className='aside-social' style={social.style} />
               </AsideSocial>
             </a>
           </li>

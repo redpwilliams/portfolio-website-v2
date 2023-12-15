@@ -2,7 +2,10 @@
 <script>
   import { getGradient } from '@util'
 
-  const icons = Array.from(document.getElementsByTagName('svg'))
+  const icons = Array.from(
+    // eslint-disable-next-line no-undef
+    document.getElementsByClassName('aside-social') as HTMLCollectionOf<HTMLElement>
+  )
   const [color1, color2] = getGradient()
 
   const id = 'gradient'
