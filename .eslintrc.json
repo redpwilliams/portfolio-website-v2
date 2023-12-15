@@ -12,29 +12,14 @@
   ],
   "overrides": [
     {
-      "env": {
-        "node": true
-      },
-      "files": [".astro"],
+      "files": ["*.astro"],
+      "parser": "astro-eslint-parser",
       "parserOptions": {
-        "sourceType": "script"
+        "parser": "@typescript-eslint/parser",
+        "extraFileExtensions": [".astro"]
       }
-    },
-    {
-      "files": ["*.ts"],
-      "parser": "@typescript-eslint/parser"
     }
   ],
-  "parser": "astro-eslint-parser",
-  "parserOptions": {
-    "parser": "@typescript-eslint/parser",
-    "extraFileExtensions": [".astro"],
-    "ecmaVersion": "latest",
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "sourceType": "module"
-  },
   "settings": {
     "react": {
       "version": "detect"
