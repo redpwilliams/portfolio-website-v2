@@ -42,10 +42,10 @@
 
     if (getComputedStyle(icon).getPropertyValue('stroke-width') === '0px') {
       // Apply to fill (Spotify, X/Twitter, Discord)
-      icon.style.fill = `url(#${id})`
+      // icon.style.fill = `url(#${id})`
       hoverStyles.innerHTML = `
-        #${liParent.id}:hover {
-          opacity: 0;
+        #${liParent.id}:hover svg {
+          fill: url(#${id});
         }
       `
       icon.appendChild(hoverStyles)
