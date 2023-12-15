@@ -1,6 +1,6 @@
 ---
 import { Layout } from '@layouts'
-import { Button, SectionHeader, AsideSocial } from '@components'
+import { Button, SectionHeader, AsideSVG } from '@components'
 
 // AsideLink types
 import type { IconType } from 'react-icons'
@@ -12,13 +12,13 @@ import { FaDiscord } from 'react-icons/fa'
 import { LiaSpotify } from 'react-icons/lia'
 import { FaXTwitter } from 'react-icons/fa6'
 
-type AsideLink = {
+type AsideSocial = {
   icon: IconType
   link: string
   style?: CSSProperties
 }
 
-const socials: AsideLink[] = [
+const socials: AsideSocial[] = [
   {
     icon: FiGithub,
     link: ''
@@ -26,8 +26,6 @@ const socials: AsideLink[] = [
   {
     icon: LiaSpotify,
     style: {
-      // color: 'green',
-      // position: 'relative',
       transform: 'scale(1.85)' // Spotify logo is weird for whatever reason
     },
     link: ''
@@ -107,9 +105,9 @@ const email = 'redpwilliams@gmail.com'
         socials.map((social) => (
           <li>
             <a href={social.link}>
-              <AsideSocial>
+              <AsideSVG>
                 <social.icon className='aside-social' style={social.style} />
-              </AsideSocial>
+              </AsideSVG>
             </a>
           </li>
         ))
