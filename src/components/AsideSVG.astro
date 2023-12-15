@@ -35,9 +35,22 @@
     icon?.insertBefore(defsElement, icon?.firstChild)
 
     // Apply to either fill or stroke
+    const liParent = icon.closest('li')
+    if (!liParent) return
+
+    const hoverStyles = document.createElement('style')
+
     if (getComputedStyle(icon).getPropertyValue('stroke-width') === '0px') {
+      // Apply to fill (Spotify, X/Twitter, Discord)
       icon.style.fill = `url(#${id})`
+      hoverStyles.innerHTML = `
+        #${liParent.id}:hover {
+          opacity: 0;
+        }
+      `
+      icon.appendChild(hoverStyles)
     } else {
+      // Apply to stroke (Instagram, Github, LinkedIn)
       icon.style.stroke = `url(#${id})`
     }
   })
