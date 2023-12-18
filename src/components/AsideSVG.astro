@@ -1,3 +1,12 @@
+---
+import type { IconType } from 'react-icons'
+interface Props {
+  social: IconType
+}
+
+// const { social } = Astro.props
+---
+
 <slot />
 <script>
   import { getGradient } from '@util'
@@ -6,10 +15,16 @@
     // eslint-disable-next-line no-undef
     document.getElementsByClassName('aside-social') as HTMLCollectionOf<HTMLElement>
   )
-  const [color1, color2] = getGradient()
+  icons.forEach((icon, index) => {
+    const svg = icon.closest('svg')
+    console.log(svg)
+    console.log(index)
+    svg.id = 'icon-' + index
+    const domId = svg.id
 
-  const id = 'gradient'
-  icons.forEach((icon) => {
+    const [color1, color2] = getGradient()
+
+    const id = 'gradient-' + index
     const defsElement = document.createElementNS('http://www.w3.org/2000/svg', 'defs')
 
     const linearGradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient')
@@ -21,37 +36,45 @@
 
     const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop')
     stop1.setAttribute('offset', '0%')
-    stop1.setAttribute('style', `stop-color: ${color1}`)
+    stop1.setAttribute('stop-color', 'gray')
 
     const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop')
     stop2.setAttribute('offset', '100%')
-    stop2.setAttribute('style', `stop-color: ${color2}`)
+    stop2.setAttribute('stop-color', 'gray')
 
     linearGradient.appendChild(stop1)
     linearGradient.appendChild(stop2)
 
     defsElement.appendChild(linearGradient)
 
-    icon?.insertBefore(defsElement, icon?.firstChild)
+    svg.insertBefore(defsElement, svg.firstChild)
 
-    // Apply to either fill or stroke
-    const liParent = icon.closest('li')
-    if (!liParent) return
+    let prefix: 'fill' | 'stroke'
+    getComputedStyle(svg).getPropertyValue('stroke-width') === '0px'
+      ? // Apply to fill (Spotify, X/Twitter, Discord)
+        (prefix = 'fill')
+      : // Apply to stroke (Instagram, Github, LinkedIn)
+        (prefix = 'stroke')
 
+    //const liParent = svg.closest('li')
     const hoverStyles = document.createElement('style')
 
-    if (getComputedStyle(icon).getPropertyValue('stroke-width') === '0px') {
-      // Apply to fill (Spotify, X/Twitter, Discord)
-      icon.style.fill = `url(#${id})`
-      hoverStyles.innerHTML = `
-        #${liParent.id}:hover {
-          opacity: 0;
-        }
-      `
-      icon.appendChild(hoverStyles)
-    } else {
-      // Apply to stroke (Instagram, Github, LinkedIn)
-      icon.style.stroke = `url(#${id})`
+    hoverStyles.innerHTML = `
+    #${domId} {
+      ${prefix}: url(#${id});
     }
+
+    #${domId} stop {
+      transition: 1s ease;
+    }
+
+    #${domId}:hover stop:first-child {
+      stop-color: ${color1};
+    }
+    #${domId}:hover stop:last-child {
+      stop-color: ${color2};
+    }
+      `
+    svg.appendChild(hoverStyles)
   })
 </script>
