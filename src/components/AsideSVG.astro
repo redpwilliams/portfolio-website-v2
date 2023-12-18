@@ -28,10 +28,10 @@
       : // Apply to stroke (Instagram, Github, LinkedIn)
         (prefix = 'stroke')
 
-    //const liParent = svg.closest('li')
+    icon.id = 'icon-' + index
+
     const hoverStyles = document.createElement('style')
 
-    icon.id = 'icon-' + index
     hoverStyles.innerHTML = `
       #${icon.id} {
         ${prefix}: url(#${gradientID});
@@ -41,13 +41,14 @@
         transition: 1s ease;
       }
 
-      #${icon.id}:hover stop:first-child {
+      li #${icon.id}:hover stop:first-child {
         stop-color: var(--gradient-start);
       }
-      #${icon.id}:hover stop:last-child {
+      li #${icon.id}:hover stop:last-child {
         stop-color: var(--gradient-end);
       }
-        `
+      
+    `
     icon.appendChild(hoverStyles)
   })
 </script>
