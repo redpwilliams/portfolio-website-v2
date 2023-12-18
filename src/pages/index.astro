@@ -111,11 +111,9 @@ const email = 'redpwilliams@gmail.com'
       {
         socials.map((social) => (
           <li id={social.liId}>
-            <a href={social.link}>
-              <AsideSVG>
-                <social.icon className='aside-social' style={social.style} />
-              </AsideSVG>
-            </a>
+            <AsideSVG social={social.icon}>
+              <social.icon className='aside-social' style={social.style} />
+            </AsideSVG>
           </li>
         ))
       }
@@ -128,7 +126,7 @@ const email = 'redpwilliams@gmail.com'
   }
 
   aside {
-    color: var(--text-gray-light);
+    /* color: var(--text-gray-light); */
     font-family: var(--font-mono);
     display: none;
   }
@@ -206,17 +204,32 @@ const email = 'redpwilliams@gmail.com'
 
     .socials a,
     .socials a:visited {
-      color: var(--text-gray-light);
+      /* color: var(--text-gray-light); */
     }
 
     .socials a:hover svg {
       transition: all 0.5s;
-      stroke: red;
     }
 
     svg {
       transform: scale(1.3);
     }
+
+    svg stop {
+      transition: 1s ease;
+    }
+
+    /* #icon-0,
+    #icon-2,
+    #icon-3 {
+      stroke: url(#gradient);
+    }
+
+    #icon-1,
+    #icon-4,
+    #icon-5 {
+      fill: url(#gradient);
+    } */
   }
 
   section {
