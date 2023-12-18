@@ -1,29 +1,17 @@
 /**
- * Retrieves the gradient style defined in the root CSS variable '--gradient',
- * extracts its components, and returns an array containing the start color and end color.
+ * Creates and returns the linear gradient attribute for a <defs> definition tag.
  *
- * @returns {string[]} An array containing the start color and end color of the gradient.
- * @example
- * const gradientColors = getGradient();
- * // Returns ["rgba(255, 133, 64, 1)", "rgba(255, 64, 64, 1)"]
- * @description This ommits the angle because that is less likely to change throughut
- * the implementation of this website.
+ * @param {HTMLElement} icon - The HTML element to which the linear gradient
+ * will be applied.
+ * @param {number} index - The index of the linear gradient.
+ * @param {string} id - The ID to be assigned to the linear gradient.
+ * @returns {SVGLinearGradientElement} The created linear gradient SVG element.
  */
-export function getGradient() {
-  // Get gradient style from root
-  let gradient = getComputedStyle(document.documentElement).getPropertyValue('--gradient')
-
-  // Extract components of gradient
-  gradient = gradient.substring(gradient.indexOf('(') + 1, gradient.length - 1)
-  // Ex: "45deg, rgba(255, 133, 64, 1), rgba(255, 64, 64, 1)"
-
-  const components = gradient.split(',').map((prop) => prop.trim())
-  const startColor = components.slice(1, 5).join(', ')
-  const endColor = components.slice(5).join(', ')
-  return [startColor, endColor]
-}
-
-export function createLinearGradient(icon: HTMLElement, index: number, id: string) {
+export function createLinearGradient(
+  icon: HTMLElement,
+  index: number,
+  id: string
+): SVGLinearGradientElement {
   const linearGradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient')
   linearGradient.setAttribute('id', id)
   linearGradient.setAttribute('x1', '0%')
