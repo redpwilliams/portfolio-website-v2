@@ -31,8 +31,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "types": ["vite/client"],
-    "strictNullChecks": false
+    "types": ["vite/client"]
   },
   "include": ["**/*.ts", "**/*.tsx", "src"],
   "exclude": ["node_modules"],
