@@ -1,4 +1,14 @@
-<slot />
+---
+interface Props {
+  href: string
+}
+
+const { href } = Astro.props
+---
+
+<a href={href} target='_blank'>
+  <slot />
+</a>
 <script>
   // Astro should allow this entire script to run once
 

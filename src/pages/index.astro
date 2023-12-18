@@ -14,37 +14,37 @@ import { FaXTwitter } from 'react-icons/fa6'
 
 type AsideSocial = {
   icon: IconType
-  link: string
+  href: string
   style?: CSSProperties
 }
 
 const socials: AsideSocial[] = [
   {
     icon: FiGithub,
-    link: ''
+    href: 'https://github.com/Red-CS/'
   },
   {
     icon: LiaSpotify,
-    link: '',
+    href: '',
     style: {
       transform: 'scale(1.85)' // Spotify logo is weird for whatever reason
     }
   },
   {
     icon: FiInstagram,
-    link: ''
+    href: ''
   },
   {
     icon: FiLinkedin,
-    link: ''
+    href: ''
   },
   {
     icon: FaXTwitter,
-    link: ''
+    href: ''
   },
   {
     icon: FaDiscord,
-    link: ''
+    href: ''
   }
 ]
 
@@ -104,7 +104,7 @@ const email = 'redpwilliams@gmail.com'
       {
         socials.map((social) => (
           <li>
-            <AsideSVG>
+            <AsideSVG href={social.href}>
               <social.icon className='aside-social' style={social.style} />
             </AsideSVG>
           </li>
