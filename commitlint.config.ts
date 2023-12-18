@@ -10,8 +10,8 @@ const Config: UserConfig = {
   // Define commit structure
   parserPreset: {
     parserOpts: {
-      headerPattern: /^(\w*)\(([^)]*)\): (.*)$/,
-      headerCorrespondence: ['type', 'scope', 'subject']
+      headerPattern: /^(\w*): (.*)$/,
+      headerCorrespondence: ['type', 'subject']
     }
   },
 
