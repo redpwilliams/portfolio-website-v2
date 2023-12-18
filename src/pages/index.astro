@@ -154,6 +154,7 @@ const email = 'redpwilliams@gmail.com'
       bottom: 0;
       left: 0;
       right: 0;
+      font-size: 0.9rem;
     }
 
     .socials > ul {
@@ -180,23 +181,19 @@ const email = 'redpwilliams@gmail.com'
       padding: 0.4em;
     }
 
-    .email > div > a::before {
-      content: '';
-      display: inline-block;
-      width: 0.12rem;
-      height: 150px;
-      background-color: var(--text-gray-light);
-      vertical-align: middle;
-      margin-top: 40px;
-    }
-
+    .email > div > a::before,
     .socials > ul::before {
       content: '';
       display: inline-block;
       width: 0.12rem;
-      height: 150px;
+      height: 125px;
       background-color: var(--text-gray-light);
       vertical-align: middle;
+      margin-top: 20px;
+    }
+
+    .socials > ul::before {
+      margin-top: 0;
       margin-bottom: 20px;
     }
 
