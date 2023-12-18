@@ -1,7 +1,8 @@
 <slot />
 <script>
-  import { getGradient, createLinearGradient } from '@util'
   // Astro should allow this entire script to run once
+
+  import { createLinearGradient } from '@util'
 
   // Get all icons included in the AsideSVG component
   const icons = Array.from(
@@ -27,8 +28,8 @@
       : // Apply to stroke (Instagram, Github, LinkedIn)
         (prefix = 'stroke')
 
-    // Import gradients
-    const [gradientStart, gradientEnd] = getGradient()
+    // // Import gradients
+    // const [gradientStart, gradientEnd] = getGradient()
 
     //const liParent = svg.closest('li')
     const hoverStyles = document.createElement('style')
@@ -44,10 +45,10 @@
       }
 
       #${icon.id}:hover stop:first-child {
-        stop-color: ${gradientStart};
+        stop-color: var(--gradient-start);
       }
       #${icon.id}:hover stop:last-child {
-        stop-color: ${gradientEnd};
+        stop-color: var(--gradient-end);
       }
         `
     icon.appendChild(hoverStyles)
