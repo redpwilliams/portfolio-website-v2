@@ -15,42 +15,35 @@ import { FaXTwitter } from 'react-icons/fa6'
 type AsideSocial = {
   icon: IconType
   link: string
-  liId: string
   style?: CSSProperties
 }
 
 const socials: AsideSocial[] = [
   {
     icon: FiGithub,
-    link: '',
-    liId: 'github'
+    link: ''
   },
   {
     icon: LiaSpotify,
     link: '',
-    liId: 'spotify',
     style: {
       transform: 'scale(1.85)' // Spotify logo is weird for whatever reason
     }
   },
   {
     icon: FiInstagram,
-    liId: 'instagram',
     link: ''
   },
   {
     icon: FiLinkedin,
-    liId: 'linkedin',
     link: ''
   },
   {
     icon: FaXTwitter,
-    liId: 'twitter',
     link: ''
   },
   {
     icon: FaDiscord,
-    liId: 'discord',
     link: ''
   }
 ]
@@ -110,8 +103,8 @@ const email = 'redpwilliams@gmail.com'
     <ul>
       {
         socials.map((social) => (
-          <li id={social.liId}>
-            <AsideSVG social={social.icon}>
+          <li>
+            <AsideSVG>
               <social.icon className='aside-social' style={social.style} />
             </AsideSVG>
           </li>

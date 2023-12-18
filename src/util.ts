@@ -22,3 +22,25 @@ export function getGradient() {
   const endColor = components.slice(5).join(', ')
   return [startColor, endColor]
 }
+
+export function createLinearGradient(icon: HTMLElement, index: number, id: string) {
+  const linearGradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient')
+  linearGradient.setAttribute('id', id)
+  linearGradient.setAttribute('x1', '0%')
+  linearGradient.setAttribute('y1', '100%')
+  linearGradient.setAttribute('x2', '100%')
+  linearGradient.setAttribute('y2', '0%')
+
+  const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop')
+  stop1.setAttribute('offset', '0%')
+  stop1.setAttribute('stop-color', 'var(--text-gray-light')
+
+  const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop')
+  stop2.setAttribute('offset', '100%')
+  stop2.setAttribute('stop-color', 'var(--text-gray-light')
+
+  linearGradient.appendChild(stop1)
+  linearGradient.appendChild(stop2)
+
+  return linearGradient
+}
