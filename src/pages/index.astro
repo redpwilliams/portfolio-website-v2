@@ -175,6 +175,11 @@ const email = 'redpwilliams@gmail.com'
       position: relative;
       padding: 0 0.4em;
     }
+
+    .socials li {
+      padding: 0.4em;
+    }
+
     .email > div > a::before {
       content: '';
       display: inline-block;
@@ -200,16 +205,8 @@ const email = 'redpwilliams@gmail.com'
       color: var(--text-gray-light);
     }
 
-    .socials a:hover svg {
-      transition: all 0.5s;
-    }
-
     svg {
       transform: scale(1.3);
-    }
-
-    svg stop {
-      transition: 1s ease;
     }
   }
 
@@ -218,9 +215,6 @@ const email = 'redpwilliams@gmail.com'
     max-width: 1000px;
   }
 
-  .hero {
-    /* border: 4px solid blue; */
-  }
   #hey {
     color: var(--text-gray-dark);
     font-family: var(--font-mono);
@@ -238,7 +232,6 @@ const email = 'redpwilliams@gmail.com'
 
   h2 {
     display: inline-block;
-    /* display: none; */
     font-family: var(--font-mono);
     font-weight: 400;
     font-size: clamp(1rem, 3vw, 1.6rem);

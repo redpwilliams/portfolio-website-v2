@@ -38,17 +38,27 @@
       }
 
       #${icon.id} stop {
-        transition: 1s ease;
+        transition: stop-color 0.25s ease;
       }
 
-      li #${icon.id}:hover stop:first-child {
+      li {
+        transition: all 0.25s ease;
+      }
+
+      li:hover {
+      transition: 0.3s ease;
+        transform: translateX(-3px);
+      }
+
+      li:hover #${icon.id} stop:first-child {
         stop-color: var(--gradient-start);
       }
-      li #${icon.id}:hover stop:last-child {
+
+      li:hover #${icon.id} stop:last-child {
         stop-color: var(--gradient-end);
       }
-      
     `
+
     icon.appendChild(hoverStyles)
   })
 </script>
