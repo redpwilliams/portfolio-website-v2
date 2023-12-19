@@ -1,6 +1,8 @@
 ---
 import { Layout } from '@layouts'
 import { Button, SectionHeader } from '@components'
+import ProfilePicture from '../img/pfp.png'
+import { Image } from 'astro:assets'
 ---
 
 <Layout title='Red Williams'>
@@ -30,6 +32,12 @@ import { Button, SectionHeader } from '@components'
         ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi
         convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.
       </p>
+      <Image
+        src={ProfilePicture}
+        alt='A profile picture with a hexagonal outline'
+        quality='high'
+        format='png'
+      />
     </section>
     <section>
       <SectionHeader title='Projects' />
@@ -103,5 +111,12 @@ import { Button, SectionHeader } from '@components'
     .intro {
       width: 80%;
     }
+  }
+
+  img {
+    max-width: 65%;
+    height: auto;
+    margin: 1rem auto;
+    display: block;
   }
 </style>
