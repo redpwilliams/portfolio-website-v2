@@ -140,6 +140,9 @@ import { Image } from 'astro:assets'
 
   .pfp {
     width: 65%;
+    position: relative;
+    z-index: 2;
+    transform: translate(-5.86px, -11.66px);
   }
 
   .stroke {
@@ -148,5 +151,26 @@ import { Image } from 'astro:assets'
     position: absolute;
     margin: auto;
     inset: 0;
+    transform: translate(5.86px, 11.66px);
+    transition: all 0.2s ease;
+  }
+
+  .pfp:hover + .stroke {
+    animation: strokeRT 4s ease forwards;
+    animation-duration: 0.7s;
+    transition: all 0.2s ease;
+  }
+
+  @keyframes strokeRT {
+    0% {
+      transform: translate(5.86px, 11.66px) rotate(0deg);
+    }
+    50% {
+      transform: translate(5.86px, 11.66px) rotate(60deg);
+    }
+    100% {
+      transform: translate(11.72px, 23.32px) rotate(60deg);
+    }
   }
 </style>
+ 3
