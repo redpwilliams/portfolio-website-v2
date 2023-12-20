@@ -130,6 +130,9 @@ import { Image } from 'astro:assets'
     height: fit-content;
     margin: 0 auto;
     position: relative;
+    --x-offset: 6px;
+    --y-offset: 7px;
+    --translate-factor: 2;
   }
 
   img {
@@ -142,7 +145,7 @@ import { Image } from 'astro:assets'
     width: 65%;
     position: relative;
     z-index: 2;
-    transform: translate(-5.86px, -11.66px);
+    transform: translate(calc(-1 * (var(--x-offset))), calc(-1 * (var(--y-offset))));
   }
 
   .stroke {
@@ -151,7 +154,7 @@ import { Image } from 'astro:assets'
     position: absolute;
     margin: auto;
     inset: 0;
-    transform: translate(5.86px, 11.66px);
+    transform: translate(var(--x-offset), var(--y-offset));
     transition: all 0.2s ease;
   }
 
@@ -163,13 +166,13 @@ import { Image } from 'astro:assets'
 
   @keyframes strokeRT {
     0% {
-      transform: translate(5.86px, 11.66px) rotate(0deg);
+      transform: translate(var(--x-offset), var(--y-offset)) rotate(0deg);
     }
     50% {
-      transform: translate(5.86px, 11.66px) rotate(60deg);
+      transform: translate(var(--x-offset), var(--y-offset)) rotate(60deg);
     }
     100% {
-      transform: translate(11.72px, 23.32px) rotate(60deg);
+      transform: translate(calc(2 * (var(--x-offset))), calc(2 * (var(--y-offset)))) rotate(60deg);
     }
   }
 </style>
