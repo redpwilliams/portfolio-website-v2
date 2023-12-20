@@ -180,7 +180,6 @@ const { title } = Astro.props
     }
 
     .email > div {
-      writing-mode: sideways-lr;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -206,6 +205,12 @@ const { title } = Astro.props
       gap: 16px;
     }
 
+    .email > div > a {
+      /* writing-mode: sideways-lr; */
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
     .email > div > a,
     .socials > ul > li {
       display: inline-block;
@@ -225,11 +230,6 @@ const { title } = Astro.props
       height: 125px;
       background-color: var(--text-gray-light);
       vertical-align: middle;
-      margin-top: 20px;
-    }
-
-    .socials > ul::before {
-      margin-top: 0;
       margin-bottom: 20px;
     }
 
