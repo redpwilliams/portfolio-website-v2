@@ -122,25 +122,6 @@ import { Image } from 'astro:assets'
     font-size: clamp(1rem, 1.4vw, 5rem);
   }
 
-  @media (min-width: 60em) {
-    .intro {
-      width: 80%;
-    }
-
-    .essence-grid {
-      display: grid;
-      grid-template-columns: 70% 30%;
-      place-items: center;
-    }
-
-    #img-wrapper {
-      min-width: 16rem;
-      --x-offset: 8px !important;
-      --y-offset: 14px !important;
-      --translation-factor: 1.7 !important;
-    }
-  }
-
   #img-wrapper {
     width: fit-content;
     height: fit-content;
@@ -161,7 +142,7 @@ import { Image } from 'astro:assets'
   }
 
   .pfp {
-    width: 65%;
+    width: 55%;
     position: relative;
     z-index: 2;
     transform: translate(calc(-1 * (var(--x-offset))), calc(-1 * (var(--y-offset))));
@@ -172,7 +153,7 @@ import { Image } from 'astro:assets'
   }
 
   .stroke {
-    width: 55%;
+    width: 45%;
   }
 
   .stroke-wrapper {
@@ -215,5 +196,32 @@ import { Image } from 'astro:assets'
 
   .pfp:hover ~ .stroke-wrapper .rotate {
     transform: rotate(60deg);
+  }
+
+  @media (min-width: 60em) {
+    .intro {
+      width: 80%;
+    }
+
+    .essence-grid {
+      display: grid;
+      grid-template-columns: 70% 30%;
+      place-items: center;
+    }
+
+    #img-wrapper {
+      min-width: 16rem;
+      --x-offset: 8px !important;
+      --y-offset: 14px !important;
+      --translation-factor: 1.7 !important;
+    }
+
+    .pfp {
+      width: 65%;
+    }
+
+    .stroke {
+      width: 55%;
+    }
   }
 </style>
