@@ -155,20 +155,18 @@ import { Image } from 'astro:assets'
     margin: auto;
     inset: 0;
     transform: translate(var(--x-offset), var(--y-offset));
-    transition: all 0.2s ease;
   }
 
   .pfp:hover + .stroke {
     animation: strokeRT 4s ease forwards;
-    animation-duration: 0.7s;
-    transition: all 0.2s ease;
+    animation-duration: 0.5s;
   }
 
   @keyframes strokeRT {
     0% {
       transform: translate(var(--x-offset), var(--y-offset)) rotate(0deg);
     }
-    50% {
+    40% {
       transform: translate(var(--x-offset), var(--y-offset)) rotate(60deg);
     }
     100% {
@@ -176,4 +174,3 @@ import { Image } from 'astro:assets'
     }
   }
 </style>
- 3
