@@ -146,6 +146,7 @@ import { Image } from 'astro:assets'
     position: relative;
     z-index: 2;
     transform: translate(calc(-1 * (var(--x-offset))), calc(-1 * (var(--y-offset))));
+    transition: transform 0.5s ease;
   }
 
   .stroke {
@@ -160,7 +161,9 @@ import { Image } from 'astro:assets'
   }
 
   .pfp:hover {
-    animation: pfpRT 0.5s ease forwards;
+    /* animation: pfpRT 0.5s ease forwards; */
+
+    transform: translate(calc(-2 * (var(--x-offset))), calc(-2 * (var(--y-offset))));
   }
 
   .pfp:hover + .stroke {
@@ -180,15 +183,6 @@ import { Image } from 'astro:assets'
     100% {
       transform: translate(calc(2 * (var(--x-offset))), calc(2 * (var(--y-offset)))) rotate(60deg);
       opacity: 1;
-    }
-  }
-
-  @keyframes pfpRT {
-    40% {
-      transform: translate(calc(-1 * (var(--x-offset))), calc(-1 * (var(--y-offset))));
-    }
-    100% {
-      transform: translate(calc(-2 * (var(--x-offset))), calc(-2 * (var(--y-offset))));
     }
   }
 </style>
