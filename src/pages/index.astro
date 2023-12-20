@@ -41,14 +41,15 @@ import { Image } from 'astro:assets'
           format='png'
           class='pfp'
         />
-
-        <Image
-          src={BackgroundStroke}
-          alt='A profile picture with a hexagonal outline'
-          quality='high'
-          format='svg'
-          class='stroke'
-        />
+        <div class='stroke-wrapper'>
+          <Image
+            src={BackgroundStroke}
+            alt='A profile picture with a hexagonal outline'
+            quality='high'
+            format='svg'
+            class='stroke'
+          />
+        </div>
       </div>
     </section>
     <section>
@@ -135,7 +136,8 @@ import { Image } from 'astro:assets'
     --translate-factor: 2;
   }
 
-  img {
+  img,
+  .stroke-wrapper {
     height: auto;
     margin: 1rem auto;
     display: block;
@@ -151,13 +153,18 @@ import { Image } from 'astro:assets'
 
   .stroke {
     width: 55%;
+    transition: transform 0.5s ease 1s;
+  }
+  .stroke-wrapper {
     height: auto;
     position: absolute;
     margin: auto;
     inset: 0;
     transform: translate(var(--x-offset), var(--y-offset));
     opacity: 0.5;
-    transition: opacity 0.5s;
+    transition:
+      opacity 0.5s,
+      transform 0.5s ease 0.2s;
   }
 
   .pfp:hover {
@@ -166,23 +173,12 @@ import { Image } from 'astro:assets'
     transform: translate(calc(-2 * (var(--x-offset))), calc(-2 * (var(--y-offset))));
   }
 
-  .pfp:hover + .stroke {
-    animation: strokeRT 0.5s ease forwards;
+  .pfp:hover + .stroke-wrapper {
     opacity: 1;
+    transform: translate(calc(2 * (var(--x-offset))), calc(2 * (var(--y-offset))));
   }
 
-  @keyframes strokeRT {
-    0% {
-      transform: translate(var(--x-offset), var(--y-offset)) rotate(0deg);
-      opacity: 0.5;
-    }
-    40% {
-      transform: translate(var(--x-offset), var(--y-offset)) rotate(60deg);
-      opacity: 0.5;
-    }
-    100% {
-      transform: translate(calc(2 * (var(--x-offset))), calc(2 * (var(--y-offset)))) rotate(60deg);
-      opacity: 1;
-    }
+  .pfp:hover ~ .stroke-wrapper .stroke {
+    transform: rotate(60deg);
   }
 </style>
