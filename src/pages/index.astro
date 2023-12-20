@@ -155,22 +155,40 @@ import { Image } from 'astro:assets'
     margin: auto;
     inset: 0;
     transform: translate(var(--x-offset), var(--y-offset));
+    opacity: 0.5;
+    transition: opacity 0.5s;
+  }
+
+  .pfp:hover {
+    animation: pfpRT 0.5s ease forwards;
   }
 
   .pfp:hover + .stroke {
-    animation: strokeRT 4s ease forwards;
-    animation-duration: 0.5s;
+    animation: strokeRT 0.5s ease forwards;
+    opacity: 1;
   }
 
   @keyframes strokeRT {
     0% {
       transform: translate(var(--x-offset), var(--y-offset)) rotate(0deg);
+      opacity: 0.5;
     }
     40% {
       transform: translate(var(--x-offset), var(--y-offset)) rotate(60deg);
+      opacity: 0.5;
     }
     100% {
       transform: translate(calc(2 * (var(--x-offset))), calc(2 * (var(--y-offset)))) rotate(60deg);
+      opacity: 1;
+    }
+  }
+
+  @keyframes pfpRT {
+    40% {
+      transform: translate(calc(-1 * (var(--x-offset))), calc(-1 * (var(--y-offset))));
+    }
+    100% {
+      transform: translate(calc(-2 * (var(--x-offset))), calc(-2 * (var(--y-offset))));
     }
   }
 </style>
