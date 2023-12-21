@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity'
+import { defineType, defineField, defineArrayMember } from 'sanity'
 
 /**
  * Things to consider adding:
@@ -28,7 +28,14 @@ export default defineType({
       title: 'Thumbnail',
       name: 'thumbnail',
       type: 'image',
-      description: 'Image for the project.'
+      description: 'Project thumbnail.'
+    }),
+    // Description
+    defineField({
+      title: 'Description',
+      name: 'description',
+      type: 'string',
+      description: 'Project description.'
     }),
     // Links
     defineField({
@@ -57,6 +64,19 @@ export default defineType({
           name: 'documentation',
           type: 'url',
           description: 'Documentation link.'
+        })
+      ]
+    }),
+    // Technology list
+    defineField({
+      title: 'Technology List',
+      name: 'technologies',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          title: 'Tech',
+          name: 'tech',
+          type: 'string'
         })
       ]
     }),
