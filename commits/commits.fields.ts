@@ -38,10 +38,6 @@ export const CommitFields: CommitTypes = {
     title: 'Peformance Enhancements',
     description: 'Optimizations and improvements (e.g.page load time, images, seo, etc.).'
   },
-  revert: {
-    title: 'Reverts',
-    description: 'Reverts to a previous commit.'
-  },
   docs: {
     title: 'Docs',
     description: 'Changes to README or other documentation.'
