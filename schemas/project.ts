@@ -11,6 +11,8 @@ import { defineType, defineField, defineArrayMember } from 'sanity'
  * - Download link
  */
 
+//NOTE - It might be worthwhile to export an interface for the types defined here
+
 export default defineType({
   title: 'Projects',
   name: 'project',
@@ -89,3 +91,20 @@ export default defineType({
     })
   ]
 })
+
+export type TProject = {
+  title: string
+  image: {
+    url: string
+    alt: string
+  }
+  description: string
+  links: {
+    github: string
+    documentation: string
+    project_url: string
+  }
+  technologies: string[]
+  featured: boolean
+}
+// *[_type == 'project'] { "imageUrl": thumbnail.asset->url }

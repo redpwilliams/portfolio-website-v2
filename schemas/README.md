@@ -4,4 +4,4 @@ This project uses Sanity.io to supply its content. This content is structured an
 
 1. Importing types from Sanity to type/structure the schema definition itself.
 2. Exporting the schema itself (to `index.ts`).
-3. Exporting an interface that reflects the properties of the schema for type checking later on.
+3. Exporting a type that reflects the properties of the schema for type checking later on.
