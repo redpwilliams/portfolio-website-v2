@@ -52,3 +52,22 @@ All commands are run from the root of the project, from a terminal:
 ## Sanity Integration
 
 A `projectID` is needed for the sanity integration. `SANITY_PROJECT_ID="[projectId]"` should be loaded in a `.env` file, ignored by `.gitignore`. See [`astro.config.mjs`](./astro.config.mjs#14)
+
+## Commitlint
+
+Commit linting is configured with the [Commitlint](https://commitlint.js.org/#/) module. This helps to maintain a clean commit history for later viewing.
+I've separated the [types of commits](./commits/commits.fields.ts) and their [formatting rules](./commits/commits.rules.ts) in the `commits` folder, and will reiterate the fields here:
+
+| Field      | Description                                                                    |
+| :--------- | :----------------------------------------------------------------------------- |
+| `feat`     | New behaviors or major milestones                                              |
+| `refactor` | Changes to codebase to improve structure, organization, and/or readability     |
+| `fix`      | Fixes to bugs or bad behaviors                                                 |
+| `style`    | Changes to the styling of components                                           |
+| `chore`    | Tasks that don't modify src, like updating dependencies, adding assets, etc.   |
+| `working`  | Intermediate commits that represent a working idea, or one that is in progress |
+| `perf`     | Optimizations and improvements (e.g. page load time, images, etc. )            |
+| `docs`     | Changes to README files or other documentation                                 |
+| `test`     | Addition/modifications to test cases                                           |
+
+Along with husky, this works with [lint-staged](https://github.com/lint-staged/lint-staged) to run `eslint` and `prettier` only on staged files at commit.
