@@ -1,7 +1,7 @@
 export type SanityResponse = {
   query: string
-  result: Array<{
-    [field: string]: string | boolean | object | string[]
-  }>
+  result: SanityResult<T>
   ms: number
 }
+
+export type SanityResult<T extends Record<string, string | string[] | object | boolean>> = Array<T>
