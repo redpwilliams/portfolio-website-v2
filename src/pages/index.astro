@@ -57,6 +57,15 @@ import { Image } from 'astro:assets'
     <section>
       <SectionHeader title='Projects' />
       <!-- TODO - Use array from Sanity query to .map and display project component -->
+      <div>Hello</div>
+      <script>
+        import { fetchSanityData } from '@util'
+        const QUERY = encodeURIComponent('*[_type == "project"]')
+        fetchSanityData(QUERY).then(({ data, empty }) => {
+          console.log(data)
+          console.log(empty)
+        })
+      </script>
       <Button text='View the Archive' href='#' />
     </section>
     <section>

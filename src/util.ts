@@ -1,3 +1,8 @@
+/* eslint-disable prefer-const */
+
+// Necessary type definitions
+import type { SanityResponse } from '@types'
+
 /**
  * Creates and returns the linear gradient attribute for a <defs> definition tag.
  *
@@ -5,7 +10,6 @@
  * will be applied.
  * @param {number} index - The index of the linear gradient.
  * @param {string} id - The ID to be assigned to the linear gradient.
- * @returns {SVGLinearGradientElement} The created linear gradient SVG element.
  */
 export function createLinearGradient(
   icon: HTMLElement,
@@ -31,4 +35,28 @@ export function createLinearGradient(
   linearGradient.appendChild(stop2)
 
   return linearGradient
+}
+
+/**
+ * Fetches data from Sanity studio.
+ * @param {string} query - The sanity query to run.
+ * @returns {Promise<{ data: SanityResponse, empty: boolean }>} A Promise that
+ * resolves to an object containing the fetched data and an indicator of
+ * whether the result is empty.
+ */
+export async function fetchSanityData(
+  query: string
+): Promise<{ data: SanityResponse; empty: boolean }> {
+  let data: SanityResponse
+  let empty: boolean
+
+  const PROJECT_ID = import.meta.env.PUBLIC_SANITY_PROJECT_ID
+  const DATASET = 'production'
+  const URL = `https://${PROJECT_ID}.api.sanity.io/v2022-03-07/data/query/${DATASET}?query=${query}`
+
+  const res = await fetch(URL)
+  data = await res.json()
+
+  empty = data.result.length == 0
+  return { data, empty }
 }
