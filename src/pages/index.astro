@@ -1,9 +1,24 @@
 ---
+// SSR this page
+export const prerender = true
+
 import { Layout } from '@layouts'
-import { Button, SectionHeader } from '@components'
+import { Button, SectionHeader, Project } from '@components'
 import ProfilePicture from '../img/pfp.png'
 import BackgroundStroke from '../img/pfp_outline.svg'
 import { Image } from 'astro:assets'
+
+import type { SanityResponse, SanityResult } from '@types'
+import type { TProject } from '@schemas/project'
+
+const PROJECT_ID = import.meta.env.PUBLIC_SANITY_PROJECT_ID
+const DATASET = 'production'
+const QUERY = encodeURIComponent('*[_type == "project"]')
+
+const URL = `https://${PROJECT_ID}.api.sanity.io/v2022-03-07/data/query/${DATASET}?query=${QUERY}`
+
+const res = await fetch(URL)
+const projects = ((await res.json()) as SanityResponse).result as SanityResult<TProject>
 ---
 
 <Layout title='Red Williams'>
@@ -56,16 +71,13 @@ import { Image } from 'astro:assets'
     </section>
     <section>
       <SectionHeader title='Projects' />
-      <!-- TODO - Use array from Sanity query to .map and display project component -->
-      <div>Hello</div>
-      <script>
-        import { fetchSanityData } from '@util'
-        const QUERY = encodeURIComponent('*[_type == "project"]')
-        fetchSanityData(QUERY).then(({ data, empty }) => {
-          console.log(data)
-          console.log(empty)
-        })
-      </script>
+      <ul id='projects'>
+        {
+          projects.map((project) => {
+            return <Project {...{ project }} />
+          })
+        }
+      </ul>
       <Button text='View the Archive' href='#' />
     </section>
     <section>
