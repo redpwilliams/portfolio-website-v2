@@ -2,23 +2,22 @@
 // SSR this page
 export const prerender = true
 
+// Components and Images
 import { Layout } from '@layouts'
 import { Button, SectionHeader, Project } from '@components'
 import ProfilePicture from '../img/pfp.png'
 import BackgroundStroke from '../img/pfp_outline.svg'
 import { Image } from 'astro:assets'
 
-import type { SanityResponse, SanityResult } from '@types'
+// Sanity functions and types
+import type { SanityResult } from '@types'
 import type { TProject } from '@schemas/project'
+import { fetchSanityData } from '@util'
 
-const PROJECT_ID = import.meta.env.PUBLIC_SANITY_PROJECT_ID
-const DATASET = 'production'
 const QUERY = encodeURIComponent('*[_type == "project"]')
 
-const URL = `https://${PROJECT_ID}.api.sanity.io/v2022-03-07/data/query/${DATASET}?query=${QUERY}`
-
-const res = await fetch(URL)
-const projects = ((await res.json()) as SanityResponse).result as SanityResult<TProject>
+const { data } = await fetchSanityData(QUERY)
+const projects: SanityResult<TProject> = data.result
 ---
 
 <Layout title='Red Williams'>
