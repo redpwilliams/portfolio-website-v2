@@ -14,9 +14,9 @@ import type { SanityResult } from '@types'
 import type { TProject } from '@schemas/project'
 import { fetchSanityData } from '@util'
 
-const QUERY = encodeURIComponent('*[_type == "project"]')
-
-const { data } = await fetchSanityData(QUERY)
+// Fetch Sanity data
+const query = '*[_type == "project"]'
+const { data } = await fetchSanityData(query)
 const projects: SanityResult<TProject> = data.result
 ---
 

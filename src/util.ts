@@ -40,7 +40,8 @@ export function createLinearGradient(icon: HTMLElement, index: number, id: strin
 export async function fetchSanityData(query: string) {
   const PROJECT_ID = import.meta.env.PUBLIC_SANITY_PROJECT_ID as string
   const DATASET = 'production'
-  const URL = `https://${PROJECT_ID}.api.sanity.io/v2022-03-07/data/query/${DATASET}?query=${query}`
+  const QUERY = encodeURIComponent(query)
+  const URL = `https://${PROJECT_ID}.api.sanity.io/v2022-03-07/data/query/${DATASET}?query=${QUERY}`
 
   const res = await fetch(URL)
   const data: SanityResponse = await res.json()
