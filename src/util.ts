@@ -1,5 +1,3 @@
-/* eslint-disable prefer-const */
-
 // Necessary type definitions
 import type { SanityResponse } from '@types'
 
@@ -37,19 +35,15 @@ export function createLinearGradient(icon: HTMLElement, index: number, id: strin
  * Fetches data from Sanity studio.
  * @param query - The sanity query to run.
  * @returns A Promise that resolves to an object containing
- * the fetched data and an indicator of whether the result is empty.
+ * the fetched data.
  */
 export async function fetchSanityData(query: string) {
-  let data: SanityResponse
-  let empty: boolean
-
   const PROJECT_ID = import.meta.env.PUBLIC_SANITY_PROJECT_ID as string
   const DATASET = 'production'
   const URL = `https://${PROJECT_ID}.api.sanity.io/v2022-03-07/data/query/${DATASET}?query=${query}`
 
   const res = await fetch(URL)
-  data = await res.json()
+  const data: SanityResponse = await res.json()
 
-  empty = data.result.length == 0
-  return { data, empty }
+  return { data }
 }
