@@ -1,6 +1,6 @@
 import type { UserConfig } from '@commitlint/types'
-import { CommitFields } from './options/commits.fields'
-import { CommitRules } from './options/commits.rules'
+import { CommitFields } from './commits/commits.fields'
+import { CommitRules } from './commits/commits.rules'
 
 // Commitlint config
 const Config: UserConfig = {
@@ -10,8 +10,8 @@ const Config: UserConfig = {
   // Define commit structure
   parserPreset: {
     parserOpts: {
-      headerPattern: /^(\w*)\(([^)]*)\): (.*)$/,
-      headerCorrespondence: ['type', 'scope', 'subject']
+      headerPattern: /^(\w*): (.*)$/,
+      headerCorrespondence: ['type', 'subject']
     }
   },
 

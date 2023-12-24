@@ -30,13 +30,13 @@ export const CommitFields: CommitTypes = {
     title: 'Chores',
     description: "Changes that don't modify src."
   },
+  working: {
+    title: 'Working',
+    description: 'Intermediate commits that represent a working idea, or one that is in progress'
+  },
   perf: {
     title: 'Peformance Enhancements',
     description: 'Optimizations and improvements (e.g.page load time, images, seo, etc.).'
-  },
-  revert: {
-    title: 'Reverts',
-    description: 'Reverts to a previous commit.'
   },
   docs: {
     title: 'Docs',

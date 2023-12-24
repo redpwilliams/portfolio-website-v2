@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity'
+import { defineType, defineField, defineArrayMember } from 'sanity'
 
 /**
  * Things to consider adding:
@@ -10,6 +10,8 @@ import { defineType, defineField } from 'sanity'
  * - Status (ongoing, completed, or in a specific development phase)
  * - Download link
  */
+
+//NOTE - It might be worthwhile to export an interface for the types defined here
 
 export default defineType({
   title: 'Projects',
@@ -28,7 +30,14 @@ export default defineType({
       title: 'Thumbnail',
       name: 'thumbnail',
       type: 'image',
-      description: 'Image for the project.'
+      description: 'Project thumbnail.'
+    }),
+    // Description
+    defineField({
+      title: 'Description',
+      name: 'description',
+      type: 'string',
+      description: 'Project description.'
     }),
     // Links
     defineField({
@@ -60,6 +69,19 @@ export default defineType({
         })
       ]
     }),
+    // Technology list
+    defineField({
+      title: 'Technology List',
+      name: 'technologies',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          title: 'Tech',
+          name: 'tech',
+          type: 'string'
+        })
+      ]
+    }),
     // Featured
     defineField({
       title: 'Featured',
@@ -69,3 +91,20 @@ export default defineType({
     })
   ]
 })
+
+export type TProject = {
+  title: string
+  image: {
+    url: string
+    alt: string
+  }
+  description: string
+  links: {
+    github: string
+    documentation: string
+    project_url: string
+  }
+  technologies: string[]
+  featured: boolean
+}
+// *[_type == 'project'] { "imageUrl": thumbnail.asset->url }

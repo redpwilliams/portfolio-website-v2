@@ -1,0 +1,29 @@
+---
+interface Props {
+  title: string
+}
+
+const { title } = Astro.props
+---
+
+<h3>
+  {title}
+</h3>
+<style>
+  h3 {
+    display: inline-block;
+    position: relative;
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+  h3::after {
+    --bar-width: calc(100% + 2.5rem);
+    --bar-spacing: 6px;
+    content: '';
+    background-image: var(--gradient);
+    width: var(--bar-width);
+    height: 10px;
+    display: block;
+    margin-top: var(--bar-spacing);
+  }
+</style>

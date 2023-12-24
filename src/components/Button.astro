@@ -1,0 +1,33 @@
+---
+interface Props {
+  href: string
+  text: string
+}
+
+const { href, text } = Astro.props
+---
+
+<button>
+  <a href={href} target='_blank' referrerpolicy='no-referrer'>{text}</a>
+</button>
+<style>
+  button {
+    cursor: pointer;
+    border: double 2px transparent;
+    background-image: linear-gradient(var(--bg-color), var(--bg-color)), var(--gradient);
+    border-image-slice: 1;
+    border-radius: 4px;
+    background-color: var(--bg-color);
+    padding: 0.7em 3.5em;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    font-weight: 500;
+    font-size: 1rem;
+    text-transform: uppercase;
+    display: block;
+  }
+
+  a {
+    color: var(--text-main);
+  }
+</style>

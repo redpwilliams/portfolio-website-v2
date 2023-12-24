@@ -11,10 +11,10 @@
       "@components*": ["./src/components/*"],
       "@schemas/*": ["schemas/*"],
 
-      // Imports from index.ts files (idk why this works but we ball)
+      // Imports from index.astro files (idk why this works but we ball)
       "@pages": ["./src/pages/index.ts"],
-      "@layouts": ["./src/layouts/index.ts"],
-      "@components": ["./src/components/index.ts"],
+      "@layouts": ["./src/layouts/_index.astro"],
+      "@components": ["./src/components/_index.astro"],
       "@schemas": ["schemas/index.ts"]
     },
     "target": "ES2017",
