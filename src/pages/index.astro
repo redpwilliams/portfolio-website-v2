@@ -15,8 +15,8 @@ import type { TProject } from '@schemas/project'
 import { fetchSanityData } from '@util'
 
 // Fetch Sanity data
-const query = '*[_type == "project"]'
-const { data } = await fetchSanityData(query)
+const query = '*[_type == "project"] { ..., "imageUrl": thumbnail.asset->url }'
+const data = await fetchSanityData(query)
 const projects: SanityResult<TProject> = data.result
 ---
 

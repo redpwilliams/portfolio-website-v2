@@ -46,5 +46,5 @@ export async function fetchSanityData(query: string) {
   const res = await fetch(URL)
   const data: SanityResponse = await res.json()
 
-  return { data }
+  return data
 }
