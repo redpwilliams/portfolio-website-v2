@@ -51,20 +51,20 @@ const { href } = Astro.props
         transition: stop-color 0.25s ease;
       }
 
-      li {
+      .icon-wrapper {
         transition: all 0.25s ease;
       }
 
-      li:hover {
+      .icon-wrapper:hover {
       transition: 0.3s ease;
         transform: translateX(-3px);
       }
 
-      li:hover #${icon.id} stop:first-child {
+      .icon-wrapper:hover #${icon.id} stop:first-child {
         stop-color: var(--gradient-start);
       }
 
-      li:hover #${icon.id} stop:last-child {
+      .icon-wrapper:hover #${icon.id} stop:last-child {
         stop-color: var(--gradient-end);
       }
     `

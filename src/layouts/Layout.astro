@@ -83,7 +83,7 @@ const { title } = Astro.props
       <ul>
         {
           socials.map((social) => (
-            <li>
+            <li class='icon-wrapper'>
               <AsideSVG href={social.href}>
                 <social.icon className='aside-social' style={social.style} />
               </AsideSVG>
