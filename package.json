@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "prepare": "husky install",
-    "test": "vitest"
+    "test": "vitest run"
   },
   "dependencies": {
     "@astrojs/check": "^0.3.1",
