@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from 'vite'
 import path from 'path'
 
@@ -11,5 +12,9 @@ export default defineConfig({
       '@pages': path.resolve(__dirname, './src/pages'),
       '@schemas': path.resolve(__dirname, './schemas')
     }
+  },
+  //@ts-expect-error Reference type doesn't work with this, vscode error?
+  test: {
+    include: ['./tests/*']
   }
 })
