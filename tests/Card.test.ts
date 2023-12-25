@@ -7,3 +7,7 @@ const add = (a: number, b: number) => {
 test('should add', () => {
   expect(add(1, 2)).toBe(3)
 })
+
+test('should run after changing lint-staged', () => {
+  expect(add(2, -1)).toBe(1)
+})

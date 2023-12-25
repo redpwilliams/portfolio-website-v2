@@ -68,9 +68,10 @@
     ]
   },
   "lint-staged": {
-    "*.{js,ts,tsx,mjs,astro}": [
+    "*.{js,ts,mjs,astro}": [
       "eslint  --fix",
       "npx prettier --write"
-    ]
+    ],
+    "*.{ts,astro}": "npx vitest run"
   }
 }
