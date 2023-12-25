@@ -15,7 +15,7 @@
       "@pages": ["./src/pages/index.ts"],
       "@layouts": ["./src/layouts/_index.astro"],
       "@components": ["./src/components/_index.astro"],
-      "@schemas": ["schemas/index.ts"]
+      "@schemas": ["schemas/_index.ts"]
     },
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
