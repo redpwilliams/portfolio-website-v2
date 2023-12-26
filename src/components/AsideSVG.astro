@@ -1,12 +1,13 @@
 ---
 interface Props {
   href: string
+  translate: 'true' | 'false'
 }
 
-const { href } = Astro.props
+const { href, translate } = Astro.props
 ---
 
-<a href={href} target='_blank'>
+<a class='icon-wrapper' href={href} target='_blank' data-translate={translate}>
   <slot />
 </a>
 <script>
@@ -51,15 +52,6 @@ const { href } = Astro.props
         transition: stop-color 0.25s ease;
       }
 
-      .icon-wrapper {
-        transition: all 0.25s ease;
-      }
-
-      .icon-wrapper:hover {
-      transition: 0.3s ease;
-        transform: translateX(-3px);
-      }
-
       .icon-wrapper:hover #${icon.id} stop:first-child {
         stop-color: var(--gradient-start);
       }
@@ -72,3 +64,15 @@ const { href } = Astro.props
     icon.appendChild(hoverStyles)
   })
 </script>
+<style>
+  .icon-wrapper {
+    display: inline-block;
+    padding: 0.2em;
+    transition: transform 0.25s ease;
+  }
+
+  .icon-wrapper[data-translate='true']:hover {
+    transition: transform 0.3s ease;
+    transform: translateX(-3px);
+  }
+</style>
