@@ -1,9 +1,6 @@
 ---
+// Icon component
 import { Icon } from '@components'
-
-// AsideLink types
-import type { IconType } from 'react-icons'
-import type { CSSProperties } from 'react'
 
 // Icons
 import { FiGithub, FiInstagram, FiLinkedin } from 'react-icons/fi'
@@ -11,13 +8,10 @@ import { FaDiscord } from 'react-icons/fa'
 import { LiaSpotify } from 'react-icons/lia'
 import { FaXTwitter } from 'react-icons/fa6'
 
-type AsideSocial = {
-  icon: IconType
-  href: string
-  style?: CSSProperties
-}
+// Types
+import type { IconProps } from '@types'
 
-const socials: AsideSocial[] = [
+const socials: IconProps[] = [
   {
     icon: FiGithub,
     href: 'https://github.com/Red-CS/'
