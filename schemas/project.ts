@@ -42,7 +42,7 @@ export default defineType({
     // Links
     defineField({
       title: 'Links',
-      name: 'link',
+      name: 'links',
       type: 'object',
       description: 'Github and Project links.',
       fields: [
