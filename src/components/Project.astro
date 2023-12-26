@@ -23,7 +23,7 @@ const { project } = Astro.props
   {
     project.links.github !== '' && (
       <Icon href={project.links.github} translate='false'>
-        <FiGithub className='aside-social' style={{ scale: '1.2' }} />
+        <FiGithub className='icon' style={{ scale: '1.2' }} />
       </Icon>
     )
   }
@@ -31,7 +31,7 @@ const { project } = Astro.props
   {
     project.links.project_url !== '' && (
       <Icon href={project.links.project_url} translate='false'>
-        <FiExternalLink className='aside-social' style={{ scale: '1.3' }} />
+        <FiExternalLink className='icon' style={{ scale: '1.3' }} />
       </Icon>
     )
   }

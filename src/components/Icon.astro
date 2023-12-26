@@ -16,10 +16,10 @@ const { href, translate } = Astro.props
 
   import { createLinearGradient } from '@util'
 
-  // Get all icons included in the AsideSVG component
+  // Get all icons included in the Icon component
   const icons = Array.from(
     // eslint-disable-next-line no-undef
-    document.getElementsByClassName('aside-social') as HTMLCollectionOf<HTMLElement>
+    document.getElementsByClassName('icon') as HTMLCollectionOf<HTMLElement>
   )
 
   icons.forEach((icon, index) => {
