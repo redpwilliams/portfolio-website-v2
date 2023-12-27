@@ -91,7 +91,7 @@ export type TProject = {
   description: string
   links: {
     github: string
-    project_url: string
+    project_url?: string
   }
   technologies: string[]
   featured: boolean
