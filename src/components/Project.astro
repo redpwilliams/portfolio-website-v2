@@ -74,6 +74,19 @@ const { project } = Astro.props
   .title {
     font-size: 1.4rem;
     margin-bottom: 10px;
+    position: relative;
+    display: flex;
+    min-width: 0;
+  }
+
+  .title::after {
+    content: '';
+    background-image: var(--gradient);
+    height: 10px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    flex: 1;
+    align-self: flex-end;
   }
 
   .description {
