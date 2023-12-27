@@ -94,10 +94,7 @@ export default defineType({
 
 export type TProject = {
   title: string
-  image: {
-    url: string
-    alt: string
-  }
+  image_url: string
   description: string
   links: {
     github: string
@@ -107,4 +104,3 @@ export type TProject = {
   technologies: string[]
   featured: boolean
 }
-// *[_type == 'project'] { "imageUrl": thumbnail.asset->url }
