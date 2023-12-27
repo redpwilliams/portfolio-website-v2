@@ -59,13 +59,6 @@ export default defineType({
           name: 'project_url',
           type: 'url',
           description: 'Any other link relevant to the project.'
-        }),
-        // Documentation
-        defineField({
-          title: 'Documentation',
-          name: 'documentation',
-          type: 'url',
-          description: 'Documentation link.'
         })
       ]
     }),
@@ -98,7 +91,6 @@ export type TProject = {
   description: string
   links: {
     github: string
-    documentation: string
     project_url: string
   }
   technologies: string[]
