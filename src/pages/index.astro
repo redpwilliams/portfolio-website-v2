@@ -76,6 +76,7 @@ const projects: SanityResult<TProject> = data.result
             return <Project {...{ project }} />
           })
         }
+        <Project project={projects[2]} />
       </ul>
       <Button text='View the Archive' href='#' />
     </section>
@@ -247,5 +248,8 @@ const projects: SanityResult<TProject> = data.result
 
   #projects {
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
+    gap: 15px;
   }
 </style>
