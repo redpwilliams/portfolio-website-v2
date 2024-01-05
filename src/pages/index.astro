@@ -95,7 +95,9 @@ const projects: SanityResult<TProject> = data.result
     </section>
   </main>
 </Layout>
-<style>
+<style lang='scss'>
+  @use 'src/main' as *;
+
   section {
     margin: 30px 0vw;
     max-width: 100%;
@@ -123,17 +125,16 @@ const projects: SanityResult<TProject> = data.result
     font-size: clamp(1rem, 3vw, 1.6rem);
     text-transform: capitalize;
     position: relative;
-  }
 
-  h2::before {
-    --bar-width: 12.5rem;
-    content: '';
-    background-image: var(--gradient);
-    width: clamp(8rem, 18vw, 20rem);
-    height: 15px;
-    margin-right: 10px;
-    display: inline-block;
-    vertical-align: middle;
+    &::before {
+      content: '';
+      background-image: var(--gradient);
+      width: clamp(8rem, 18vw, 20rem);
+      height: 15px;
+      margin-right: 10px;
+      display: inline-block;
+      vertical-align: middle;
+    }
   }
 
   .intro {
@@ -205,21 +206,21 @@ const projects: SanityResult<TProject> = data.result
       calc(-1 * var(--translation-factor) * (var(--x-offset))),
       calc(-1 * var(--translation-factor) * (var(--y-offset)))
     );
+
+    & + .translate {
+      opacity: 1;
+      transform: translate(
+        calc(var(--translation-factor) * (var(--x-offset))),
+        calc(var(--translation-factor) * (var(--y-offset)))
+      );
+    }
+
+    & + .translate .pfp:hover ~ .stroke-wrapper .rotate {
+      transform: rotate(60deg);
+    }
   }
 
-  .pfp:hover + .translate {
-    opacity: 1;
-    transform: translate(
-      calc(var(--translation-factor) * (var(--x-offset))),
-      calc(var(--translation-factor) * (var(--y-offset)))
-    );
-  }
-
-  .pfp:hover ~ .stroke-wrapper .rotate {
-    transform: rotate(60deg);
-  }
-
-  @media (min-width: 60em) {
+  @media (min-width: $breakpoint-main) {
     .intro {
       width: 80%;
     }
