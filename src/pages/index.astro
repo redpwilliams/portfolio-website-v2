@@ -253,4 +253,10 @@ const projects: SanityResult<TProject> = data.result
     grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
     gap: 15px;
   }
+
+  @media (min-width: $breakpoint-main) {
+    #projects {
+      display: block;
+    }
+  }
 </style>

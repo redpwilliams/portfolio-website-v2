@@ -36,6 +36,7 @@ const { project } = Astro.props
         })
       }
     </ul>
+    {/* Github link + icon */}
     {
       isNonEmpty(project.links.github) && (
         <Icon href={project.links.github || '#'} style={{ marginRight: '10px' }}>
@@ -44,6 +45,7 @@ const { project } = Astro.props
       )
     }
 
+    {/* Project link + icon */}
     {
       isNonEmpty(project.links.project_url) && (
         <Icon href={project.links.project_url || '#'}>
@@ -61,6 +63,7 @@ const { project } = Astro.props
     border: 3px solid #4a4a4a;
     height: fit-content;
   }
+
   .thumbnail {
     width: 100%;
     height: auto !important;
