@@ -88,7 +88,9 @@ const { title } = Astro.props
     </aside>
   </body>
 </html>
-<style is:global>
+<style is:global lang='scss'>
+  @use 'src/main' as *;
+
   :root {
     --text-main: #f4f3f2;
     --text-gray-light: #d3d3d3;
@@ -144,7 +146,7 @@ const { title } = Astro.props
     }
   }
 
-  @media (min-width: 60em) {
+  @media (min-width: $breakpoint-main) {
     body {
       display: grid;
       grid-template-columns: var(--aside-width) 1fr var(--aside-width);
@@ -163,56 +165,12 @@ const { title } = Astro.props
       overflow-y: auto;
     }
 
-    .email {
-      left: 0;
-      right: auto;
-    }
-
-    .socials {
-      right: 0;
-      left: auto;
-    }
-
-    .email > div {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: nowrap;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      font-size: 0.9rem;
-    }
-
-    .socials > ul {
-      display: flex;
-      flex-direction: column;
-      justify-content: start;
-      align-items: center;
-      flex-wrap: nowrap;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      gap: 16px;
-    }
-
-    .email > div > a {
-      /* writing-mode: sideways-lr; */
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
-    }
-
-    .email > div > a,
-    .socials > ul > li {
+    %aside-positioned-element {
       display: inline-block;
       position: relative;
     }
 
-    .email > div > a::before,
-    .socials > ul::before {
+    %aside-positioned-element-before {
       content: '';
       display: inline-block;
       width: 0.12rem;
@@ -220,6 +178,55 @@ const { title } = Astro.props
       background-color: var(--text-gray-light);
       vertical-align: middle;
       margin-bottom: 20px;
+    }
+
+    .email {
+      left: 0;
+      right: auto;
+
+      & > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        font-size: 0.9rem;
+      }
+
+      & > div > a {
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        @extend %aside-positioned-element;
+      }
+
+      & > div > a::before {
+        @extend %aside-positioned-element-before;
+      }
+    }
+
+    .socials {
+      right: 0;
+      left: auto;
+      & > ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        flex-wrap: nowrap;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        gap: 16px;
+      }
+
+      & > ul::before {
+        @extend %aside-positioned-element-before;
+      }
     }
 
     .socials a,
