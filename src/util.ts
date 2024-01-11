@@ -43,8 +43,16 @@ export async function fetchSanityData(query: string) {
   const QUERY = encodeURIComponent(query)
   const URL = `https://${PROJECT_ID}.api.sanity.io/v2022-03-07/data/query/${DATASET}?query=${QUERY}`
 
-  const res = await fetch(URL)
-  const data: SanityResponse = await res.json()
+  let data: SanityResponse
+
+  try {
+    const res = await fetch(URL)
+    data = await res.json()
+  } catch (err) {
+    // Fetch failed, returning empty SanityResult array
+    // TODO - Craft better error detection
+    data = { query: QUERY, result: [], ms: 0 }
+  }
 
   return data
 }
