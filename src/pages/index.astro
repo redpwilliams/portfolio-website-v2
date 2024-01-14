@@ -74,7 +74,12 @@ const projects: SanityResult<TProject> = data.result
         // If there are no projects that were fetched . . .
         data.result.length === 0 ? (
           // . . . Display an empty message
-          <div>Empty message</div>
+          <>
+            <h4>Nothing to See right now!</h4>
+            <p>
+              In the meantime, see what I've been working on in my <a>Github</a>
+            </p>
+          </>
         ) : (
           // . . . Else display projects as normal
           <>
