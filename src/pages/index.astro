@@ -18,6 +18,11 @@ import { fetchSanityData } from '@util'
 const query = '*[_type == "project"] { ..., "image_url": thumbnail.asset->url }'
 const data = await fetchSanityData(query)
 const projects: SanityResult<TProject> = data.result
+
+const a = await fetchSanityData('*[_type == "report"]')
+const b = a.result[0].content
+
+import { PortableText } from 'astro-portabletext'
 ---
 
 <Layout title='Red Williams'>
@@ -96,6 +101,7 @@ const projects: SanityResult<TProject> = data.result
       <section>
         <SectionHeader title='Reports' />
         <!-- TODO - Use array from Sanity query to .map and display blog component -->
+        <PortableText value={b} />
       </section>
       <section>
         <h3>Let's Connect!</h3>

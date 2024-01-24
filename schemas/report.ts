@@ -30,8 +30,8 @@ export default defineType({
     defineField({
       title: 'Read time',
       name: 'read_time',
-      type: 'string',
-      description: 'Report reading time.'
+      type: 'number',
+      description: 'Report reading time (in minutes).'
     }),
     // Date published
     defineField({
