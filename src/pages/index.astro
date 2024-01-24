@@ -4,21 +4,22 @@ export const prerender = true
 
 // Components and Images
 import { Layout } from '@layouts'
-import { Button, SectionHeader, Project } from '@components'
+import { Button, SectionHeader, Project, Report } from '@components'
 import ProfilePicture from '@img/pfp.png'
 import BackgroundStroke from '@img/pfp_outline.svg'
 import { Image } from 'astro:assets'
 
 // Sanity functions and types
-// import { PortableText } from 'astro-portabletext'
 import type { SanityResult } from '@types'
 import type { TProject } from '@schemas/project'
 import { fetchSanityData } from '@util'
 import type { TReport } from '@schemas/report'
 
 // Fetch Sanity data
-const query =
-  '[*[_type == "project"] { ..., "image_url": thumbnail.asset->url }, *[_type == "report"]]'
+const query = `[
+    *[_type == "project"] { ..., "image_url": thumbnail.asset->url },
+    *[_type == "report"] { ..., "image_url": thumbnail.asset->url },
+   ]`
 const data = await fetchSanityData(query)
 const projects: SanityResult<TProject> = data.result[0]
 const reports: SanityResult<TReport> = data.result[1]
@@ -78,6 +79,7 @@ console.log(reports)
       <SectionHeader title='Projects' />
       {
         // If there are no projects that were fetched . . .
+        // FIXME - Separate into projects specifically, not just entire data object
         data.result.length === 0 ? (
           // . . . Display an empty message
           <>
@@ -100,8 +102,23 @@ console.log(reports)
       }
       <section>
         <SectionHeader title='Reports' />
-        <!-- TODO - Use array from Sanity query to .map and display blog component -->
-        <!-- <PortableText value={b} /> -->
+        {
+          // If there are no projects that were fetched . . .
+          // FIXME - Separate into projects specifically, not just entire data object
+          data.result.length === 0 ? (
+            // . . . Display an empty message
+            <>
+              <h4>Nothing to See right now!</h4>
+            </>
+          ) : (
+            // . . . Else display reports as normal
+            <ul id='reports'>
+              {reports.map((report) => {
+                return <Report {...{ report }} />
+              })}
+            </ul>
+          )
+        }
       </section>
       <section>
         <h3>Let's Connect!</h3>

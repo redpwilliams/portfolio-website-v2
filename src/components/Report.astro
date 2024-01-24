@@ -1,0 +1,20 @@
+---
+import type { TReport } from '../../schemas/report'
+import { Image } from 'astro:assets'
+
+interface Props {
+  report: TReport
+}
+
+const { report } = Astro.props
+---
+
+<li>
+  <Image
+    src={report.image_url}
+    alt={`Thumbnail image describing the ${report.title} project `}
+    width={500}
+    height={500}
+    class='thumbnail'
+  />
+</li>
