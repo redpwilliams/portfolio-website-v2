@@ -7,7 +7,8 @@ export type SanityResponse = {
   ms: number
 }
 
-export type SanityResult<T extends Record<string, string | string[] | object | boolean>> = Array<T>
+export type SanityResult<T extends Record<string, string | string[] | object | number | boolean>> =
+  Array<T>
 
 export type IconProps = {
   icon: IconType
