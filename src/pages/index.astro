@@ -11,9 +11,8 @@ import { Image } from 'astro:assets'
 
 // Sanity functions and types
 import type { SanityResult } from '@types'
-import type { TProject } from '@schemas/project'
+import type { TProject, TReport } from '@schemas'
 import { fetchSanityData } from '@util'
-import type { TReport } from '@schemas/report'
 
 // Fetch Sanity data
 const query = `[
@@ -23,8 +22,6 @@ const query = `[
 const data = await fetchSanityData(query)
 const projects: SanityResult<TProject> = data.result[0]
 const reports: SanityResult<TReport> = data.result[1]
-
-console.log(reports)
 ---
 
 <Layout title='Red Williams'>
@@ -287,6 +284,12 @@ console.log(reports)
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
+      gap: 0 15px;
+    }
+
+    #reports {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
       gap: 15px;
     }
 

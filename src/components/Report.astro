@@ -1,26 +1,78 @@
 ---
-import type { TReport } from '@schemas/report'
-import { Image } from 'astro:assets'
+import type { TReport } from '@schemas'
+import { TbPencilCode } from 'react-icons/tb'
+import { Icon } from '@components'
 
 interface Props {
   report: TReport
 }
 
 const { report } = Astro.props
+
+const monthTable: Record<string, string> = {
+  '01': 'January',
+  '02': 'February',
+  '03': 'March',
+  '04': 'April',
+  '05': 'May',
+  '06': 'June',
+  '07': 'July',
+  '08': 'August',
+  '09': 'September',
+  '10': 'October',
+  '11': 'November',
+  '12': 'December'
+}
+
+const dateComponents: (string | number)[] = report.date_published.split('-')
+
+// Transform month
+dateComponents[1] = monthTable[dateComponents[1]]
+
+// Transform day
+dateComponents[2] = parseInt(dateComponents[2] as string)
 ---
 
-<li>
-  <Image
-    src={report.image_url}
-    alt={`Thumbnail image describing the ${report.title} project `}
-    width={500}
-    height={500}
-    class='thumbnail'
-  />
-  <h4>{report.title}</h4>
-  <p>{report.description}</p>
-  <div>
-    <span>{report.read_time} minute read</span>
-    <span>{report.date_published}</span>
+<li class='container'>
+  <div class='content'>
+    <Icon href='#'>
+      <TbPencilCode className='icon' style={{ scale: '2', strokeWidth: '1.5' }} />
+    </Icon>
+    <h4>{report.title}</h4>
+    <p>{report.description}</p>
+  </div>
+  <div class='metadata'>
+    <span>{report.read_time} min read</span>
+    <span>{dateComponents[1]} {dateComponents[2]}, {dateComponents[0]}</span>
   </div>
 </li>
+<style lang='scss'>
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #191919;
+    padding: 20px;
+  }
+
+  .content {
+  }
+
+  h4 {
+    font-size: 22px;
+    color: var(--text-main);
+    margin: 2rem 0;
+    font-weight: 500;
+  }
+
+  p {
+    margin-bottom: 7px;
+  }
+
+  .metadata {
+    color: var(--text-gray-dark);
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
