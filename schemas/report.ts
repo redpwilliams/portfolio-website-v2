@@ -60,6 +60,6 @@ export type TReport = {
   image_url: string
   title: string
   description: string
-  read_time: string
+  read_time: number
   date_published: string
 }

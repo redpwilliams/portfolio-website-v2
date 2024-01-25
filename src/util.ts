@@ -41,7 +41,7 @@ export async function fetchSanityData(query: string) {
   const PROJECT_ID = import.meta.env.PUBLIC_SANITY_PROJECT_ID as string
   const DATASET = 'production'
   const QUERY = encodeURIComponent(query)
-  const URL = `https://${PROJECT_ID}.api.sanity.io/v2022-03-07/data/query/${DATASET}?query=${QUERY}`
+  const URL = `https://${PROJECT_ID}.api.sanity.io/v2024-01-01/data/query/${DATASET}?query=${QUERY}`
 
   let data: SanityResponse
 

@@ -1,5 +1,5 @@
 ---
-import type { TReport } from '../../schemas/report'
+import type { TReport } from '@schemas/report'
 import { Image } from 'astro:assets'
 
 interface Props {
@@ -17,4 +17,10 @@ const { report } = Astro.props
     height={500}
     class='thumbnail'
   />
+  <h4>{report.title}</h4>
+  <p>{report.description}</p>
+  <div>
+    <span>{report.read_time} minute read</span>
+    <span>{report.date_published}</span>
+  </div>
 </li>
