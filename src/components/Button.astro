@@ -1,13 +1,15 @@
 ---
-interface Props {
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<'button'> {
   href: string
   text: string
 }
 
-const { href, text } = Astro.props
+const { href, text, ...attrs } = Astro.props
 ---
 
-<button>
+<button {...attrs}>
   <a href={href} target='_blank' referrerpolicy='no-referrer'>{text}</a>
 </button>
 <style>
