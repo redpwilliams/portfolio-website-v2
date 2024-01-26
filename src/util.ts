@@ -19,11 +19,11 @@ export function createLinearGradient(icon: HTMLElement, index: number, id: strin
 
   const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop')
   stop1.setAttribute('offset', '0%')
-  stop1.setAttribute('stop-color', 'var(--text-gray-light')
+  stop1.setAttribute('stop-color', 'var(--text-gray-light)')
 
   const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop')
   stop2.setAttribute('offset', '100%')
-  stop2.setAttribute('stop-color', 'var(--text-gray-light')
+  stop2.setAttribute('stop-color', 'var(--text-gray-light)')
 
   linearGradient.appendChild(stop1)
   linearGradient.appendChild(stop2)
