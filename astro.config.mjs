@@ -5,7 +5,7 @@ import react from '@astrojs/react'
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'hybrid',
+  output: 'server',
   integrations: [
     sanity({
       // eslint-disable-next-line no-undef
