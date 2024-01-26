@@ -93,7 +93,7 @@ const reports: SanityResult<TReport> = data.result[1]
                 return <Project {...{ project }} />
               })}
             </ul>
-            <Button text='View the Archive' href='#' />
+            <Button text='View the Archive' href='#' style='margin: 0 auto;' />
           </>
         )
       }
@@ -132,7 +132,7 @@ const reports: SanityResult<TReport> = data.result[1]
     @use 'src/main' as *;
 
     section {
-      margin: 30px 0vw;
+      margin: 5rem 0;
       max-width: 100%;
     }
 
@@ -174,7 +174,7 @@ const reports: SanityResult<TReport> = data.result[1]
       font-size: 1.5rem;
       margin: 2rem 0;
       line-height: 1.8;
-      font-size: clamp(1rem, 1.4vw, 5rem);
+      font-size: clamp(1rem, 1.4vw, 1.3rem);
     }
 
     #img-wrapper {
@@ -254,6 +254,9 @@ const reports: SanityResult<TReport> = data.result[1]
     }
 
     @media (min-width: $breakpoint-main) {
+      .hero {
+        margin: 10rem 0;
+      }
       .intro {
         width: 80%;
       }
