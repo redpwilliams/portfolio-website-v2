@@ -117,14 +117,16 @@ const reports: SanityResult<TReport> = data.result[1]
           )
         }
       </section>
-      <section>
+      <section class='connect'>
         <h3>Let's Connect!</h3>
         <p>
           I am currently looking for Internships around Summer 2024. I would love the opportunity to
           work and learn from you! Please reach out if you have any questions, or would like to hear
-          from me. Thanks!
+          from me.
+          <br />
+           Thanks!
         </p>
-        <Button text='Get in touch' href='#' />
+        <Button text='Get in touch' href='#' style={{ margin: '10px auto' }} />
       </section>
     </section>
   </main>
@@ -250,6 +252,20 @@ const reports: SanityResult<TReport> = data.result[1]
 
       & ~ .stroke-wrapper .rotate {
         transform: rotate(60deg);
+      }
+    }
+
+    .connect {
+      text-align: center;
+      max-width: 40rem;
+      margin: 0 auto;
+
+      & h3 {
+        margin-bottom: 10px;
+      }
+
+      & p {
+        padding: 15px 0;
       }
     }
 
