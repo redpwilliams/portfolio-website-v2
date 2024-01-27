@@ -19,6 +19,17 @@ export default defineType({
       type: 'string',
       description: 'Report title.'
     }),
+    // Slug
+    defineField({
+      title: 'Slug',
+      name: 'slug',
+      type: 'slug',
+      options: {
+        source: 'title',
+        slugify: (input) => input.toLowerCase().replace(/\s+/g, '-').slice(0, 200)
+      },
+      validation: (Rule) => Rule.required()
+    }),
     // Description
     defineField({
       title: 'Description',
@@ -59,6 +70,7 @@ export default defineType({
 export type TReport = {
   image_url: string
   title: string
+  slug: string
   description: string
   read_time: number
   date_published: string
