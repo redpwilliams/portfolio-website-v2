@@ -1,0 +1,18 @@
+---
+import { fetchSanityData } from '@util'
+import type { TReport } from '@schemas'
+import { Layout } from '@layouts'
+
+const { slug } = Astro.params
+
+// Fetch Sanity data
+const query = `*[_type == "report" && slug.current == "${slug}"][0] { ..., "slug": slug.current }`
+const data = await fetchSanityData(query)
+const report = data.result as unknown as TReport
+
+if (!report) return Astro.redirect('/404')
+---
+
+<Layout title={report.title}>
+  <h1>{slug}</h1>
+</Layout>
