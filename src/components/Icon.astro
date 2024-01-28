@@ -1,16 +1,29 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
 interface Props extends HTMLAttributes<'a'> {
-  href: string
+  href?: string
   translateOnHover?: boolean
 }
 
 const { href, translateOnHover, ...attrs } = Astro.props
 ---
 
-<a class='icon-wrapper' href={href} target='_blank' data-translate={translateOnHover} {...attrs}>
-  <slot />
-</a>
+{
+  href ? (
+    <a
+      class='icon-wrapper'
+      href={href}
+      target='_blank'
+      data-translate={translateOnHover}
+      {...attrs}>
+      <slot />
+    </a>
+  ) : (
+    <div class='icon-wrapper' target='_blank' data-translate={translateOnHover} {...attrs}>
+      <slot />
+    </div>
+  )
+}
 <script>
   // Astro should allow this entire script to run once
   // https://docs.astro.build/en/guides/client-side-scripts/#script-processing
