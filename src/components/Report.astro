@@ -34,7 +34,7 @@ dateComponents[2] = parseInt(dateComponents[2] as string)
 ---
 
 <li class='report-container'>
-  <a href='/reports/'>
+  <a href={'/reports/' + report.slug}>
     <div class='content'>
       <Icon style={{ pointerEvents: 'none', cursor: 'default' }}>
         <TbPencilCode className='icon' style={{ scale: '2', strokeWidth: '1.3' }} />

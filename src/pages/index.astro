@@ -14,7 +14,7 @@ import { fetchSanityData } from '@util'
 // Fetch Sanity data
 const query = `[
     *[_type == "project"] { ..., "image_url": thumbnail.asset->url },
-    *[_type == "report"] { ..., "image_url": thumbnail.asset->url },
+    *[_type == "report"] { ..., "image_url": thumbnail.asset->url, "slug": slug.current },
    ]`
 const data = await fetchSanityData(query)
 const projects: SanityResult<TProject> = data.result[0]
