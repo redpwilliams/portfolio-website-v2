@@ -1,6 +1,6 @@
 ---
 import { fetchSanityData } from '@util'
-import type { TReport } from '@schemas'
+import type { ReportType } from '@schemas'
 import { Layout } from '@layouts'
 import { Image } from 'astro:assets'
 import { PortableText } from 'astro-portabletext'
@@ -12,7 +12,7 @@ const query = `*[_type == "report" && slug.current == "${slug}"][0]
 { ..., "image_url": thumbnail.asset->url, "slug": slug.current }`
 
 const data = await fetchSanityData(query)
-const report = data.result as unknown as TReport
+const report = data.result as unknown as ReportType
 
 if (!report) return Astro.redirect('/404')
 ---

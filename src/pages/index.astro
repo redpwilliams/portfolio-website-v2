@@ -8,7 +8,7 @@ import { Image } from 'astro:assets'
 
 // Sanity functions and types
 import type { SanityResult } from '@types'
-import type { TProject, TReport } from '@schemas'
+import type { ProjectType, ReportType } from '@schemas'
 import { fetchSanityData } from '@util'
 
 // Fetch Sanity data
@@ -17,8 +17,8 @@ const query = `[
     *[_type == "report"] { ..., "image_url": thumbnail.asset->url, "slug": slug.current },
    ]`
 const data = await fetchSanityData(query)
-const projects: SanityResult<TProject> = data.result[0]
-const reports: SanityResult<TReport> = data.result[1]
+const projects: SanityResult<ProjectType> = data.result[0]
+const reports: SanityResult<ReportType> = data.result[1]
 ---
 
 <Layout title='Red Williams'>

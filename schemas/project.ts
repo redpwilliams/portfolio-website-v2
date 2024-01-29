@@ -85,7 +85,7 @@ export default defineType({
   ]
 })
 
-export type TProject = {
+export type ProjectType = {
   title: string
   image_url: string
   description: string

@@ -1,6 +1,6 @@
 ---
 import { FiGithub, FiExternalLink } from 'react-icons/fi'
-import type { TProject } from '@schemas'
+import type { ProjectType } from '@schemas'
 import Icon from './Icon.astro'
 import { Image } from 'astro:assets'
 
@@ -10,7 +10,7 @@ const isNonEmpty = (str: string | undefined) => {
 }
 
 interface Props {
-  project: TProject
+  project: ProjectType
 }
 const { project } = Astro.props
 ---

@@ -75,7 +75,7 @@ export default defineType({
   ]
 })
 
-export type TReport = {
+export type ReportType = {
   title: string
   slug: string
   image_url: string
