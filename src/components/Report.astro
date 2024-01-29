@@ -2,6 +2,7 @@
 import type { ReportType } from '@schemas'
 import { TbPencilCode } from 'react-icons/tb'
 import { Icon } from '@components'
+import { formatDate } from '@util'
 
 interface Props {
   report: ReportType
@@ -9,28 +10,8 @@ interface Props {
 
 const { report } = Astro.props
 
-const monthTable: Record<string, string> = {
-  '01': 'January',
-  '02': 'February',
-  '03': 'March',
-  '04': 'April',
-  '05': 'May',
-  '06': 'June',
-  '07': 'July',
-  '08': 'August',
-  '09': 'September',
-  '10': 'October',
-  '11': 'November',
-  '12': 'December'
-}
-
-const dateComponents: (string | number)[] = report.date_published.split('-')
-
-// Transform month
-dateComponents[1] = monthTable[dateComponents[1]]
-
-// Transform day
-dateComponents[2] = parseInt(dateComponents[2] as string)
+const { day, month, year } = formatDate(report.date_published)
+report.date_published = `${month} ${day}, ${year}`
 ---
 
 <li class='report-container'>
@@ -44,7 +25,7 @@ dateComponents[2] = parseInt(dateComponents[2] as string)
     </div>
     <div class='metadata'>
       <span>{report.read_time} min read</span>
-      <span>{dateComponents[1]} {dateComponents[2]}, {dateComponents[0]}</span>
+      <span>{report.date_published}</span>
     </div>
   </a>
 </li>

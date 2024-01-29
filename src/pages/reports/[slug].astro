@@ -1,10 +1,11 @@
 ---
-import { fetchSanityData } from '@util'
+import { fetchSanityData, formatDate } from '@util'
 import type { ReportType } from '@schemas'
 import { Layout } from '@layouts'
 import { Image } from 'astro:assets'
 import { PortableText } from 'astro-portabletext'
 import { PTBlock, PTList } from '@components'
+
 const { slug } = Astro.params
 
 // Fetch Sanity data
@@ -14,7 +15,11 @@ const query = `*[_type == "report" && slug.current == "${slug}"][0]
 const data = await fetchSanityData(query)
 const report = data.result as unknown as ReportType
 
+// Redirect if invalid URL/report not found
 if (!report) return Astro.redirect('/404')
+
+const { day, month, year } = formatDate(report.date_published)
+report.date_published = `${month} ${day}, ${year}`
 ---
 
 <Layout title={report.title}>

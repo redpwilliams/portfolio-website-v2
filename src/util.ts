@@ -56,3 +56,39 @@ export async function fetchSanityData(query: string) {
 
   return data
 }
+
+/**
+ * Extracts the day, month, and year of an ISO-8601 date
+ * into its textualized and numeric values, respectively.
+ * @param date - The date in ISO-8601 format
+ * @returns The textualized/numeric day, month, and year components of the date.
+ */
+export function formatDate(date: string) {
+  const monthTable: Record<string, string> = {
+    '01': 'January',
+    '02': 'February',
+    '03': 'March',
+    '04': 'April',
+    '05': 'May',
+    '06': 'June',
+    '07': 'July',
+    '08': 'August',
+    '09': 'September',
+    '10': 'October',
+    '11': 'November',
+    '12': 'December'
+  }
+
+  const dateComponents: (string | number)[] = date.split('-')
+
+  // Extract day
+  const day = parseInt(dateComponents[2] as string)
+
+  // Extract month
+  const month = monthTable[dateComponents[1]]
+
+  // Extract year
+  const year = dateComponents[0]
+
+  return { day, month, year }
+}

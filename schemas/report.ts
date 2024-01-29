@@ -83,5 +83,5 @@ export type ReportType = {
   description: string
   read_time: number
   date_published: string
-  content: PortableTextBlock
+  content: PortableTextBlock[]
 }
