@@ -6,13 +6,6 @@ export default defineType({
   name: 'report',
   type: 'document',
   fields: [
-    // Thumbnail
-    defineField({
-      title: 'Thumbnail',
-      name: 'thumbnail',
-      type: 'image',
-      description: 'Report thumbnail.'
-    }),
     // Title
     defineField({
       title: 'Title',
@@ -30,6 +23,20 @@ export default defineType({
         slugify: (input) => input.toLowerCase().replace(/\s+/g, '-').slice(0, 200)
       },
       validation: (Rule) => Rule.required()
+    }),
+    // Thumbnail
+    defineField({
+      title: 'Thumbnail',
+      name: 'thumbnail',
+      type: 'image',
+      description: 'Report thumbnail.'
+    }),
+    // Alt text
+    defineField({
+      title: 'Alt Text',
+      name: 'alt_text',
+      type: 'string',
+      description: 'Thumbnail alt text.'
     }),
     // Description
     defineField({
@@ -69,9 +76,10 @@ export default defineType({
 })
 
 export type TReport = {
-  image_url: string
   title: string
   slug: string
+  image_url: string
+  alt_text: string
   description: string
   read_time: number
   date_published: string

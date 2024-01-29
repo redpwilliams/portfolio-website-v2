@@ -20,7 +20,13 @@ if (!report) return Astro.redirect('/404')
 <Layout title={report.title}>
   <main>
     <h1 class='title'>{report.title}</h1>
-    <Image class='thumbnail' width={300} height={300} src={report.image_url} alt='Test' />
+    <Image
+      class='thumbnail'
+      width={300}
+      height={300}
+      src={report.image_url}
+      alt={report.alt_text}
+    />
     <PortableText value={report.content} />
   </main>
 </Layout>
