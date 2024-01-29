@@ -24,8 +24,24 @@ const props = Astro.props
     margin-bottom: 10px;
   }
 
-  p {
+  p,
+  blockquote {
     margin-bottom: 30px;
     color: var(--text-gray-light);
+  }
+
+  blockquote {
+    padding-left: 1em;
+    line-height: 1.6;
+    position: relative;
+
+    &::before {
+      position: absolute;
+      content: '';
+      height: 100%;
+      width: 3px;
+      background: var(--gradient);
+      left: 0;
+    }
   }
 </style>
