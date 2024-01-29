@@ -2,23 +2,41 @@
 import { fetchSanityData } from '@util'
 import type { TReport } from '@schemas'
 import { Layout } from '@layouts'
-// import { Image } from 'astro:assets'
+import { Image } from 'astro:assets'
 import { PortableText } from 'astro-portabletext'
 
 const { slug } = Astro.params
 
 // Fetch Sanity data
-const query = `*[_type == "report" && slug.current == "${slug}"][0] { ..., "slug": slug.current }`
+const query = `*[_type == "report" && slug.current == "${slug}"][0]
+{ ..., "image_url": thumbnail.asset->url, "slug": slug.current }`
+
 const data = await fetchSanityData(query)
 const report = data.result as unknown as TReport
-console.log(typeof PortableText)
 
 if (!report) return Astro.redirect('/404')
 ---
 
 <Layout title={report.title}>
   <main>
-    <h1>{slug}</h1>
+    <h1 class='title'>{report.title}</h1>
+    <Image class='thumbnail' width={300} height={300} src={report.image_url} alt='Test' />
     <PortableText value={report.content} />
   </main>
 </Layout>
+<style lang='scss'>
+  .title {
+    color: var(--text-main);
+    text-align: center;
+    max-width: 40rem;
+    margin: 0 auto;
+    font-weight: 400;
+  }
+
+  .thumbnail {
+    margin: 0 auto;
+    display: block;
+    width: 90%;
+    height: auto;
+  }
+</style>
