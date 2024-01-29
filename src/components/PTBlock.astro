@@ -45,3 +45,9 @@ const props = Astro.props
     }
   }
 </style>
+<script>
+  const headers = document.querySelectorAll('.content h1')
+  headers.forEach((h1) => {
+    h1.id = h1.innerHTML
+  })
+</script>
