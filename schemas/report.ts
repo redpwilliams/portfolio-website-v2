@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity'
+import type { PortableTextBlock } from '@portabletext/types'
 
 export default defineType({
   title: 'Reports',
@@ -74,4 +75,5 @@ export type TReport = {
   description: string
   read_time: number
   date_published: string
+  content: PortableTextBlock
 }

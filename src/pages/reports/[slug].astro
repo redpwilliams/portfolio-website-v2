@@ -2,6 +2,8 @@
 import { fetchSanityData } from '@util'
 import type { TReport } from '@schemas'
 import { Layout } from '@layouts'
+// import { Image } from 'astro:assets'
+import { PortableText } from 'astro-portabletext'
 
 const { slug } = Astro.params
 
@@ -9,6 +11,7 @@ const { slug } = Astro.params
 const query = `*[_type == "report" && slug.current == "${slug}"][0] { ..., "slug": slug.current }`
 const data = await fetchSanityData(query)
 const report = data.result as unknown as TReport
+console.log(typeof PortableText)
 
 if (!report) return Astro.redirect('/404')
 ---
@@ -16,5 +19,6 @@ if (!report) return Astro.redirect('/404')
 <Layout title={report.title}>
   <main>
     <h1>{slug}</h1>
+    <PortableText value={report.content} />
   </main>
 </Layout>
