@@ -4,7 +4,7 @@ import type { TReport } from '@schemas'
 import { Layout } from '@layouts'
 import { Image } from 'astro:assets'
 import { PortableText } from 'astro-portabletext'
-
+import PTBlock from '@components/PTBlock.astro'
 const { slug } = Astro.params
 
 // Fetch Sanity data
@@ -28,7 +28,7 @@ if (!report) return Astro.redirect('/404')
       alt={report.alt_text}
     />
     <div class='content'>
-      <PortableText value={report.content} />
+      <PortableText value={report.content} components={{ block: PTBlock }} />
     </div>
   </main>
 </Layout>
