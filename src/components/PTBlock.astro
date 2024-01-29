@@ -9,7 +9,23 @@ const props = Astro.props
 
 <Block class='sdfs' {...props}><slot /></Block>
 <style>
+  * {
+    color: var(--text-main);
+  }
   h1 {
-    color: white;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+  }
+
+  p {
+    margin-bottom: 30px;
+    color: var(--text-gray-light);
   }
 </style>

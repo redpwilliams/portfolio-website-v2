@@ -1,0 +1,16 @@
+---
+import type { Props as $, List as ListType } from 'astro-portabletext/types'
+import { List } from 'astro-portabletext/components'
+
+export type Props = $<ListType>
+
+const props = Astro.props
+---
+
+<List class='sdfs' {...props}><slot /></List>
+<style>
+  ul {
+    color: var(--text-gray-light);
+    list-style: disc inside;
+  }
+</style>
