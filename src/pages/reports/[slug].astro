@@ -27,18 +27,28 @@ if (!report) return Astro.redirect('/404')
       src={report.image_url}
       alt={report.alt_text}
     />
+    <div class='metadata'>
+      <p>{report.read_time} min read</p>
+      <p>{report.date_published}</p>
+    </div>
     <div class='content'>
       <PortableText value={report.content} components={{ block: PTBlock }} />
     </div>
   </main>
 </Layout>
 <style lang='scss'>
+  main {
+    margin: 0 5px;
+  }
   .title {
     color: var(--text-main);
-    text-align: center;
     max-width: 40rem;
     margin: 0 auto;
     font-weight: 400;
+    font-size: clamp(1.75rem, 20%, 3rem);
+    margin: 3rem 0;
+    line-height: 1.3em;
+    font-weight: 600;
   }
 
   .thumbnail {
@@ -48,5 +58,13 @@ if (!report) return Astro.redirect('/404')
     max-width: 100%;
     width: 100%;
     border-radius: 10px;
+  }
+
+  .metadata {
+    font-family: var(--font-mono);
+    color: var(--text-gray-light);
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0 20px 0;
   }
 </style>
