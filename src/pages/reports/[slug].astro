@@ -27,7 +27,9 @@ if (!report) return Astro.redirect('/404')
       src={report.image_url}
       alt={report.alt_text}
     />
-    <PortableText value={report.content} />
+    <div class='content'>
+      <PortableText value={report.content} />
+    </div>
   </main>
 </Layout>
 <style lang='scss'>
