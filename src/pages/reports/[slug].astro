@@ -4,7 +4,7 @@ import type { TReport } from '@schemas'
 import { Layout } from '@layouts'
 import { Image } from 'astro:assets'
 import { PortableText } from 'astro-portabletext'
-import PTBlock from '@components/PTBlock.astro'
+import { PTBlock } from '@components'
 const { slug } = Astro.params
 
 // Fetch Sanity data
@@ -47,5 +47,6 @@ if (!report) return Astro.redirect('/404')
     height: auto;
     max-width: 100%;
     width: 100%;
+    border-radius: 10px;
   }
 </style>
