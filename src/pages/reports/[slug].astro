@@ -24,7 +24,6 @@ report.date_published = `${month} ${day}, ${year}`
 const headers = report.content
   .filter((object) => object.style === 'h1')
   .map((h1) => h1.children[0].text)
-console.log(headers)
 ---
 
 <Layout title={report.title}>
@@ -46,7 +45,7 @@ console.log(headers)
         <ul>
           {
             headers.map((h1) => (
-              <li>
+              <li class='tab'>
                 <a href={'#' + h1}>{h1}</a>
               </li>
             ))
@@ -69,8 +68,6 @@ console.log(headers)
   .title {
     color: var(--text-main);
     max-width: 40rem;
-    margin: 0 auto;
-    font-weight: 400;
     font-size: clamp(1.75rem, 20%, 3rem);
     margin: 3rem 0;
     line-height: 1.3em;
@@ -125,8 +122,23 @@ console.log(headers)
 
     ul {
       margin-left: 20px;
+      position: relative;
+
+      &::before {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: -10px;
+        bottom: 0;
+        width: 4px;
+        height: var(--tab-height);
+        background: var(--gradient);
+        // scale: 1 0.175;
+        transform-origin: top;
+        transform: translateY(var(--tab-pos));
+      }
     }
-    li {
+    .tab {
       padding: 0.4em 0;
       margin: 1em 0;
 
