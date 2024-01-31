@@ -57,6 +57,7 @@ const headers = report.content
             const links = document.querySelectorAll('.tab')
             links.forEach((li) => {
               li.addEventListener('click', () => {
+                let pos = window.scrollY
                 window.addEventListener('scrollend', function onScroll() {
                   let rect = li.getBoundingClientRect()
                   let height = rect.height
@@ -64,13 +65,15 @@ const headers = report.content
                   document.documentElement.style.setProperty('--tab-pos', ypos + 'px')
                   document.documentElement.style.setProperty('--tab-height', height + 'px')
                   window.removeEventListener('scrollend', onScroll)
-                  console.log('finished')
+                  pos = window.scrollY
                 })
-                // let rect = li.getBoundingClientRect()
-                // let height = rect.height
-                // let ypos = rect.y
-                // document.documentElement.style.setProperty('--tab-pos', ypos + 'px')
-                // document.documentElement.style.setProperty('--tab-height', height + 'px')
+                if (pos === window.scrollY) {
+                  let rect = li.getBoundingClientRect()
+                  let height = rect.height
+                  let ypos = rect.y
+                  document.documentElement.style.setProperty('--tab-pos', ypos + 'px')
+                  document.documentElement.style.setProperty('--tab-height', height + 'px')
+                }
               })
             })
           </script>
