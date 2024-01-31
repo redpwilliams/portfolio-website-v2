@@ -47,11 +47,33 @@ const headers = report.content
         <ul>
           {
             headers.map((h1) => (
-              <li class='tab' id={h1}>
+              <li class='tab'>
                 <a href={'#' + h1}>{h1}</a>
               </li>
             ))
           }
+          <script>
+            const links = document.querySelectorAll('.tab')
+            links.forEach((li) => {
+              li.addEventListener('click', () => {
+                let rect = li.getBoundingClientRect()
+                let height = rect.height
+                let ypos = rect.y
+                window.addEventListener('scroll', function onScroll() {
+                  console.log(li)
+                  console.log('scrolling')
+                  let rect = li.getBoundingClientRect()
+                  let height = rect.height
+                  let ypos = rect.y
+                  document.documentElement.style.setProperty('--tab-pos', ypos + 'px')
+                  document.documentElement.style.setProperty('--tab-height', height + 'px')
+                  window.removeEventListener('scroll', onScroll)
+                })
+                document.documentElement.style.setProperty('--tab-pos', ypos + 'px')
+                document.documentElement.style.setProperty('--tab-height', height + 'px')
+              })
+            })
+          </script>
         </ul>
       </nav>
       <div class='content'>
@@ -114,9 +136,8 @@ const headers = report.content
       color: var(--text-main);
       font-size: 1rem;
       position: sticky;
-      top: 4rem;
+      top: 0px;
       height: 100vh;
-      align-self: start;
     }
 
     .content {
@@ -124,27 +145,27 @@ const headers = report.content
     }
 
     ul {
-      padding-left: 10px;
+      margin-left: 20px;
       position: relative;
-      box-shadow: #80808078 3px 0px 0px 0 inset;
+
+      &::before {
+        position: absolute;
+        content: '';
+        top: var(--tab-pos);
+        left: -10px;
+        bottom: 0;
+        width: 4px;
+        height: var(--tab-height);
+        background: var(--gradient);
+        // scale: 1 0.175;
+        transform-origin: top;
+        // transform: translateY(var(--tab-pos));
+        transition: top ease 0.25s;
+      }
     }
     .tab {
       padding: 0.4em 0;
       margin: 1em 0;
-      position: relative;
-
-      &::before {
-        display: none;
-        position: absolute;
-        content: '';
-        top: 0;
-        left: -10px;
-        bottom: 0;
-        width: 3px;
-        height: 100%;
-        background: var(--gradient);
-        transform-origin: top;
-      }
 
       &:first-of-type {
         margin-top: 0;
