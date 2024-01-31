@@ -44,6 +44,7 @@ const headers = report.content
     </div>
     <div class='article'>
       <nav class='navigation'>
+        <div id='div'></div>
         <ul>
           {
             headers.map((h1) => (
@@ -56,21 +57,20 @@ const headers = report.content
             const links = document.querySelectorAll('.tab')
             links.forEach((li) => {
               li.addEventListener('click', () => {
-                let rect = li.getBoundingClientRect()
-                let height = rect.height
-                let ypos = rect.y
-                window.addEventListener('scroll', function onScroll() {
-                  console.log(li)
-                  console.log('scrolling')
+                window.addEventListener('scrollend', function onScroll() {
                   let rect = li.getBoundingClientRect()
                   let height = rect.height
                   let ypos = rect.y
                   document.documentElement.style.setProperty('--tab-pos', ypos + 'px')
                   document.documentElement.style.setProperty('--tab-height', height + 'px')
-                  window.removeEventListener('scroll', onScroll)
+                  window.removeEventListener('scrollend', onScroll)
+                  console.log('finished')
                 })
-                document.documentElement.style.setProperty('--tab-pos', ypos + 'px')
-                document.documentElement.style.setProperty('--tab-height', height + 'px')
+                // let rect = li.getBoundingClientRect()
+                // let height = rect.height
+                // let ypos = rect.y
+                // document.documentElement.style.setProperty('--tab-pos', ypos + 'px')
+                // document.documentElement.style.setProperty('--tab-height', height + 'px')
               })
             })
           </script>
@@ -148,20 +148,22 @@ const headers = report.content
       margin-left: 20px;
       position: relative;
 
-      &::before {
-        position: absolute;
-        content: '';
-        top: var(--tab-pos);
-        left: -10px;
-        bottom: 0;
-        width: 4px;
-        height: var(--tab-height);
-        background: var(--gradient);
-        // scale: 1 0.175;
-        transform-origin: top;
-        // transform: translateY(var(--tab-pos));
-        transition: top ease 0.25s;
+      li {
+        position: relative;
       }
+    }
+    #div {
+      position: absolute;
+      content: '';
+      top: var(--tab-pos);
+      left: -10px;
+      bottom: 0;
+      width: 4px;
+      height: var(--tab-height);
+      background: var(--gradient);
+      transform-origin: top;
+      // transform: translateY(var(--tab-pos));
+      transition: top ease 0.25s;
     }
     .tab {
       padding: 0.4em 0;
