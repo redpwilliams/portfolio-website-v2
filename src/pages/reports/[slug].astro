@@ -134,7 +134,9 @@ const headers = report.content
     }
 
     .navigation {
-      display: block;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: start;
       grid-column: 1;
       color: var(--text-main);
       font-size: 1rem;
@@ -156,16 +158,15 @@ const headers = report.content
       }
     }
     #div {
-      position: absolute;
       content: '';
       top: var(--tab-pos);
       left: -10px;
       bottom: 0;
       width: 4px;
-      height: var(--tab-height);
+      height: var(--tab-height, 30px);
       background: var(--gradient);
       transform-origin: top;
-      // transform: translateY(var(--tab-pos));
+      transform: translateY(var(--tab-pos));
       transition: top ease 0.25s;
     }
     .tab {

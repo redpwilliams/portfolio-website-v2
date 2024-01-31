@@ -8,17 +8,21 @@ const props = Astro.props
 ---
 
 <List class='sdfs' {...props}><slot /></List>
-<style>
+<style lang='scss'>
   ul,
   ol {
     color: var(--text-gray-light);
-    list-style-position: inside;
     font-size: 1rem;
     line-height: 1.8;
     margin-bottom: 30px;
   }
 
+  ol {
+    list-style-position: inside;
+  }
   ul {
-    list-style: disc;
+    list-style: disc inside;
+    // display: none;
+    margin-left: 1em;
   }
 </style>
