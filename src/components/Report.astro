@@ -15,7 +15,7 @@ report.date_published = `${month} ${day}, ${year}`
 ---
 
 <li class='report-container'>
-  <a href={'/reports/' + report.slug}>
+  <a href={'/reports/' + report.slug} title={report.title}>
     <div class='content'>
       <Icon style={{ pointerEvents: 'none', cursor: 'default' }}>
         <TbPencilCode className='icon' style={{ scale: '2', strokeWidth: '1.3' }} />
