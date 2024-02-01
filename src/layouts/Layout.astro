@@ -84,14 +84,16 @@ const { title } = Astro.props
         {
           navHeaders.map((header) => (
             <li>
-              <a href={header.href}>{header.name}</a>
+              <a
+                href={header.href}
+                style={{
+                  color: Astro.url.pathname === header.href ? 'var(--text-main)' : ''
+                }}>
+                {header.name}
+              </a>
             </li>
           ))
         }
-        <!-- <li>Home</li>
-        <li>Projects</li>
-        <li>Reports</li>
-        <li>Resume</li> -->
       </ul>
     </nav>
     <slot />
