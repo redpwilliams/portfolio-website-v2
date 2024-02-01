@@ -44,30 +44,37 @@ const headers = report.content
     </div>
     <div class='article'>
       <nav class='navigation'>
-        <div id='div'></div>
+        <div id='scroll-tab'></div>
         <ul>
           {
             headers.map((h1) => (
-              <li class='tab'>
+              <li class='header-link'>
                 <a href={'#' + h1}>{h1}</a>
               </li>
             ))
           }
           <script>
-            const div = document.getElementById('div')
+            // Get scrolling tab
+            const tab = document.getElementById('scroll-tab')
+
+            // Get list of li's in nav panel
             const links = Array.from(
               // eslint-disable-next-line no-undef
-              document.getElementsByClassName('tab') as HTMLCollectionOf<HTMLElement>
+              document.getElementsByClassName('header-link') as HTMLCollectionOf<HTMLElement>
             )
 
             links.forEach((li) => {
               li.addEventListener('click', () => {
-                if (div === null || li === null) return
-                const oldPos = div.offsetTop
+                if (tab === null || li === null) return
+
+                // Calculate new position of tab
+                const oldPos = tab.offsetTop
                 const newPos = li.offsetTop
-                div.style.setProperty('--tab-pos', newPos - oldPos + 'px')
+                tab.style.setProperty('--tab-pos', newPos - oldPos + 'px')
+
+                // Adjust tab height depending on target's height
                 const height = li.getBoundingClientRect().height
-                div.style.setProperty('--tab-height', height + 'px')
+                tab.style.setProperty('--tab-height', height + 'px')
               })
             })
           </script>
@@ -114,6 +121,7 @@ const headers = report.content
 
   .navigation {
     display: none;
+    // --nav-offset: 4rem;
   }
 
   a,
@@ -135,40 +143,60 @@ const headers = report.content
       color: var(--text-main);
       font-size: 1rem;
       position: sticky;
-      top: 0px;
       height: 100vh;
+      // top: 4rem;
+      top: 0;
     }
 
     .content {
       grid-column: 2;
     }
 
-    ul {
-      margin-left: 20px;
-      position: relative;
-
-      li {
-        position: relative;
-      }
-    }
-    #div {
+    #scroll-tab {
       content: '';
-      top: var(--tab-pos);
-      left: -10px;
-      bottom: 0;
       width: 4px;
       height: var(--tab-height, 30px);
       background: var(--gradient);
       transform-origin: top;
       transform: translateY(var(--tab-pos));
       transition: all ease 0.25s;
+      position: absolute;
+      // top: var(--nav-offset, 4rem);
+      left: -4px;
     }
-    .tab {
+
+    ul {
+      padding-left: 20px;
+      position: relative;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      // top: var(--nav-offset, 4rem);
+
+      li {
+        position: relative;
+      }
+
+      &::before {
+        content: '';
+        background-color: rgba(230, 187, 168, 0.206);
+        width: 4px;
+        left: -4px;
+        height: 100%;
+        position: absolute;
+        z-index: -1;
+      }
+    }
+
+    .header-link {
       padding: 0.4em 0;
       margin: 1em 0;
 
       &:first-of-type {
         margin-top: 0;
+      }
+
+      &:last-of-type {
+        margin-bottom: 0;
       }
     }
   }
