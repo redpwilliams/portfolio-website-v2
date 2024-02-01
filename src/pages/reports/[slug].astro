@@ -58,8 +58,9 @@ const headers = report.content
             const links = document.querySelectorAll('.tab')
             links.forEach((li) => {
               li.addEventListener('click', () => {
-                // const topOffset = li.offsetTop
-                console.log(div, li)
+                const oldPos = div.offsetTop
+                const newPos = li.offsetTop
+                div.style.setProperty('--tab-pos', newPos - oldPos + 'px')
                 const height = li.getBoundingClientRect().height
                 div.style.setProperty('--tab-height', height + 'px')
               })
