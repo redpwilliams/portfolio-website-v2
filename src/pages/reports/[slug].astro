@@ -53,11 +53,16 @@ const headers = report.content
               </li>
             ))
           }
-          <script is:inline>
+          <script>
             const div = document.getElementById('div')
-            const links = document.querySelectorAll('.tab')
+            const links = Array.from(
+              // eslint-disable-next-line no-undef
+              document.getElementsByClassName('tab') as HTMLCollectionOf<HTMLElement>
+            )
+
             links.forEach((li) => {
               li.addEventListener('click', () => {
+                if (div === null || li === null) return
                 const oldPos = div.offsetTop
                 const newPos = li.offsetTop
                 div.style.setProperty('--tab-pos', newPos - oldPos + 'px')
@@ -156,7 +161,7 @@ const headers = report.content
       background: var(--gradient);
       transform-origin: top;
       transform: translateY(var(--tab-pos));
-      transition: top ease 0.25s;
+      transition: all ease 0.25s;
     }
     .tab {
       padding: 0.4em 0;
