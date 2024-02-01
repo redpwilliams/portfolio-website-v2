@@ -44,6 +44,7 @@ const headers = report.content
     </div>
     <div class='article'>
       <nav class='navigation'>
+        <!-- <div style='position: absolute; top:5rem'> -->
         <div id='scroll-tab'></div>
         <ul>
           {
@@ -79,6 +80,7 @@ const headers = report.content
             })
           </script>
         </ul>
+        <!-- </div> -->
       </nav>
       <div class='content'>
         <PortableText value={report.content} components={{ block: PTBlock, list: PTList }} />
@@ -121,7 +123,6 @@ const headers = report.content
 
   .navigation {
     display: none;
-    // --nav-offset: 4rem;
   }
 
   a,
@@ -143,9 +144,8 @@ const headers = report.content
       color: var(--text-main);
       font-size: 1rem;
       position: sticky;
-      height: 100vh;
-      // top: 4rem;
-      top: 0;
+      height: min-content;
+      top: 4rem;
     }
 
     .content {
@@ -161,7 +161,6 @@ const headers = report.content
       transform: translateY(var(--tab-pos));
       transition: all ease 0.25s;
       position: absolute;
-      // top: var(--nav-offset, 4rem);
       left: -4px;
     }
 
@@ -170,7 +169,6 @@ const headers = report.content
       position: relative;
       font-family: var(--font-mono);
       font-size: 0.9rem;
-      // top: var(--nav-offset, 4rem);
 
       li {
         position: relative;
