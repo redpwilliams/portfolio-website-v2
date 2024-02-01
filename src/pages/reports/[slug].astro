@@ -44,7 +44,6 @@ const headers = report.content
     </div>
     <div class='article'>
       <nav class='navigation'>
-        <!-- <div style='position: absolute; top:5rem'> -->
         <div id='scroll-tab'></div>
         <ul>
           {
@@ -80,7 +79,6 @@ const headers = report.content
             })
           </script>
         </ul>
-        <!-- </div> -->
       </nav>
       <div class='content'>
         <PortableText value={report.content} components={{ block: PTBlock, list: PTList }} />
