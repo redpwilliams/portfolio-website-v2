@@ -1,0 +1,94 @@
+---
+import { Layout } from '@layouts'
+
+// Sanity functions and types
+import type { SanityResult } from '@types'
+import type { ReportType } from '@schemas'
+import { fetchSanityData, formatDate } from '@util'
+
+// Fetch Sanity data
+const query = `*[_type == "report"] { ..., "image_url": thumbnail.asset->url, "slug": slug.current }`
+const data = await fetchSanityData(query)
+const reports: SanityResult<ReportType> = data.result
+
+reports.forEach((report) => {
+  const { day } = formatDate(report.date_published)
+  // month (2-digit) / day
+  report.date_published = `${report.date_published.substring(5, 7)}/${day}`
+})
+---
+
+<Layout title='Reports'>
+  <main class='content'>
+    <header class='front-matter'>
+      <h1 class='header'>Reports</h1>
+      <p>Successess, failures, and everything in between in making some of my favorite projects.</p>
+    </header>
+    <table class='report-list'>
+      {
+        reports.map((report) => (
+          <tr>
+            <th>
+              <a href={'/reports/' + report.slug}>{report.title}</a>
+            </th>
+            <td>{report.date_published}</td>
+          </tr>
+        ))
+      }
+    </table>
+  </main>
+</Layout>
+
+<style lang='scss'>
+  @use 'src/main' as *;
+  .content {
+    margin-top: 2rem;
+
+    h1 {
+      color: var(--text-main);
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin-bottom: 2rem;
+    }
+  }
+
+  @media (min-width: $breakpoint-main) {
+    .content {
+      display: grid;
+      grid-template-columns: 40% 60%;
+      column-gap: 1em;
+    }
+
+    .report-list tr {
+      margin-left: 1rem;
+    }
+  }
+
+  .report-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    tr {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      padding: 1rem 0;
+      border-bottom: 1px solid gray;
+      margin-bottom: 1rem;
+    }
+
+    th {
+      text-align: left;
+      color: var(--text-main);
+      font-weight: normal;
+    }
+
+    td {
+      text-align: right;
+      color: var(--text-gray-dark);
+    }
+  }
+</style>
