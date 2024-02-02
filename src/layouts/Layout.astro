@@ -50,6 +50,12 @@ const navHeaders: { name: string; href: string }[] = [
   { name: 'Resume', href: '/resume' }
 ]
 
+const isSubpath = (currentUrl: string, basePath: string): boolean => {
+  if (currentUrl === basePath) return true
+  if (basePath === '/') return false
+  return currentUrl.startsWith(basePath)
+}
+
 interface Props {
   title: string
 }
@@ -87,7 +93,7 @@ const { title } = Astro.props
               <a
                 href={header.href}
                 style={{
-                  color: Astro.url.pathname === header.href ? 'var(--text-main)' : ''
+                  color: isSubpath(Astro.url.pathname, header.href) ? 'var(--text-main)' : ''
                 }}>
                 {header.name}
               </a>
