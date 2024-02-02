@@ -5,6 +5,7 @@ import { Layout } from '@layouts'
 import type { SanityResult } from '@types'
 import type { ReportType } from '@schemas'
 import { fetchSanityData, formatDate } from '@util'
+import Logo from '@components/Logo.astro'
 
 // Fetch Sanity data
 const query = `*[_type == "report"] { ..., "image_url": thumbnail.asset->url, "slug": slug.current }`
@@ -23,6 +24,7 @@ reports.forEach((report) => {
     <header class='front-matter'>
       <h1 class='header'>Reports</h1>
       <p>Successess, failures, and everything in between in making some of my favorite projects.</p>
+      <Logo />
     </header>
     <table class='report-list'>
       {
