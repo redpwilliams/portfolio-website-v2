@@ -1,11 +1,11 @@
 ---
 import { Layout } from '@layouts'
+import { Logo } from '@components'
 
 // Sanity functions and types
 import type { SanityResult } from '@types'
 import type { ReportType } from '@schemas'
 import { fetchSanityData, formatDate } from '@util'
-import Logo from '@components/Logo.astro'
 
 // Fetch Sanity data
 const query = `*[_type == "report"] { ..., "image_url": thumbnail.asset->url, "slug": slug.current }`
