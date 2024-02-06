@@ -62,7 +62,7 @@ const { project } = Astro.props
 <style lang='scss'>
   @use 'src/main' as *;
 
-  $border-radius: 12px;
+  $border-radius: 10px;
 
   .project-container {
     position: relative;
@@ -106,6 +106,13 @@ const { project } = Astro.props
   }
 
   .content-wrapper {
-    padding: 26px;
+    padding: 20px;
+    .title {
+      font-size: 1.1rem;
+    }
+
+    .description {
+      font-size: 0.9rem;
+    }
   }
 </style>
