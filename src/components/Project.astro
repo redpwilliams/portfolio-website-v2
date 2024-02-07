@@ -19,10 +19,10 @@ const { project } = Astro.props
 <li class='project-container'>
   <div class='content-wrapper'>
     <p class='featured'>Featured</p>
-    <div class='project-header'>
-      <h3 class='title'>{project.title}</h3>
+    <h3 class='title'>
+      {project.title.split(' ').map((word) => <span>{word + ' '}</span>)}
       <div class='gradient-line'></div>
-    </div>
+    </h3>
     <p class='description'>{project.description}</p>
     <ul class='technologies'>
       {
@@ -121,10 +121,6 @@ const { project } = Astro.props
       font-size: 0.8rem;
     }
 
-    .project-header {
-      display: flex;
-    }
-
     .title {
       font-size: 1.1rem;
       margin-bottom: 1rem;
@@ -132,12 +128,18 @@ const { project } = Astro.props
       color: var(--text-main);
       display: inline-block;
       position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      white-space: pre;
     }
 
     .gradient-line {
+      flex-grow: 1;
+      align-self: flex-end;
       height: 4px;
       width: max-content;
       background: var(--gradient);
+      margin-bottom: 5px;
     }
 
     .description {
