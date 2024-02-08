@@ -17,6 +17,16 @@ const { project } = Astro.props
 ---
 
 <li class='project-container'>
+  <div class='thumbnail-wrapper'>
+    <div class='img-screen'></div>
+    <Image
+      src={project.image_url}
+      alt={`Thumbnail image describing the ${project.title} project `}
+      width={500}
+      height={500}
+      class='thumbnail'
+    />
+  </div>
   <div class='content-wrapper'>
     <p class='featured'>Featured</p>
     <h3 class='title'>
@@ -49,18 +59,6 @@ const { project } = Astro.props
       )
     }
   </div>
-
-  <div class='thumbnail-wrapper'>
-    <div class='img-screen'>
-      <Image
-        src={project.image_url}
-        alt={`Thumbnail image describing the ${project.title} project `}
-        width={500}
-        height={500}
-        class='thumbnail'
-      />
-    </div>
-  </div>
 </li>
 <style lang='scss'>
   @use 'src/main' as *;
@@ -68,43 +66,28 @@ const { project } = Astro.props
   $border-radius: 10px;
 
   .project-container {
-    position: relative;
+    width: 100%;
   }
-
   .thumbnail-wrapper {
-    position: absolute;
-    inset: 0;
-    max-width: 100%;
-
+    position: relative;
     .img-screen {
+      position: absolute;
       content: '';
-      position: absolute;
       width: 100%;
-      height: 100%;
-
-      &::before {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: var(--gradient);
-        mix-blend-mode: screen;
-        opacity: 0.1;
-        z-index: 1;
-        border-radius: $border-radius;
-        filter: grayscale(35%) contrast(1) brightness(100%);
-      }
-    }
-
-    img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
-      opacity: 0.2;
+      height: 98%; // Idk why it has to be 98, there is a strange shadow at the bottom of the image
+      background: var(--gradient);
       mix-blend-mode: screen;
+      z-index: 1;
+      opacity: 0.5;
+      border-radius: $border-radius;
+      filter: grayscale(50%) brightness(50%);
+    }
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      position: relative;
+      object-position: center center;
       border-radius: $border-radius;
     }
   }
@@ -139,7 +122,7 @@ const { project } = Astro.props
       height: 4px;
       width: max-content;
       background: var(--gradient);
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
 
     .description {
