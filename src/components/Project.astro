@@ -140,4 +140,36 @@ const { project } = Astro.props
       margin-bottom: 14px;
     }
   }
+
+  @media (min-width: $breakpoint-main) {
+    .project-container {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+
+      &:nth-of-type(2n) {
+        .thumbnail-wrapper {
+          grid-column: 1 / 4;
+        }
+
+        .content-wrapper {
+          grid-column: 4 / 8;
+        }
+      }
+
+      &:nth-of-type(2n - 1) {
+        .thumbnail-wrapper {
+          grid-column: 6 / 9;
+        }
+
+        .content-wrapper {
+          grid-row: 1;
+          grid-column: 2 / 6;
+        }
+      }
+    }
+
+    .content-wrapper {
+      align-self: center;
+    }
+  }
 </style>
