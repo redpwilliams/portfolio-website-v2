@@ -5,7 +5,7 @@ import { schemaTypes } from '@schemas/_index'
 
 export default defineConfig({
   name: 'default',
-  title: 'sanity',
+  title: 'Sanity Content Studio',
   projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID,
   dataset: 'production',
   plugins: [deskTool(), ...(isDev ? [visionTool()] : [])],
