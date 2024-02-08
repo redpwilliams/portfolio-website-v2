@@ -144,15 +144,16 @@ const { project } = Astro.props
   @media (min-width: $breakpoint-main) {
     .project-container {
       display: grid;
-      grid-template-columns: repeat(8, 1fr);
+      grid-template-columns: repeat(9, 1fr);
+      margin: 10rem 0;
 
       &:nth-of-type(2n) {
         .thumbnail-wrapper {
-          grid-column: 1 / 4;
+          grid-column: 2 / 5;
         }
 
         .content-wrapper {
-          grid-column: 4 / 8;
+          grid-column: 5 / 8;
         }
       }
 
@@ -163,7 +164,7 @@ const { project } = Astro.props
 
         .content-wrapper {
           grid-row: 1;
-          grid-column: 2 / 6;
+          grid-column: 3 / 6;
         }
       }
     }
