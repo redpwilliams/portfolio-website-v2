@@ -103,6 +103,7 @@ const { project } = Astro.props
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       font-size: 0.8rem;
+      display: inline;
     }
 
     .title {
@@ -165,6 +166,11 @@ const { project } = Astro.props
         .content-wrapper {
           grid-row: 1;
           grid-column: 3 / 6;
+          text-align: right;
+
+          .technologies {
+            justify-content: right;
+          }
         }
       }
     }
