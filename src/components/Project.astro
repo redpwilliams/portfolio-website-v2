@@ -14,6 +14,7 @@ interface Props {
 }
 
 const { project } = Astro.props
+// project.title += ' ' + project.title
 ---
 
 <li class='project-container'>
@@ -24,8 +25,30 @@ const { project } = Astro.props
       alt={`Thumbnail image describing the ${project.title} project `}
       width={500}
       height={500}
-      class='thumbnail'
+      class='fp-thumbnail'
     />
+    <script>
+      // Get all featured project images
+      const imgs = Array.from(
+        // eslint-disable-next-line no-undef
+        document.getElementsByClassName('fp-thumbnail') as HTMLCollectionOf<HTMLElement>
+      )
+
+      // Find the one witht he smallest height
+      const smallestImage = imgs.reduce((smallest, current) => {
+        const smallestHeight = smallest.getBoundingClientRect().height
+        const currentElementHeight = current.getBoundingClientRect().height
+        return currentElementHeight < smallestHeight ? current : smallest
+      })
+
+      // Get the smallest height
+      const smallestHeight = smallestImage.getBoundingClientRect().height
+
+      // And set
+      imgs.forEach((img) => {
+        img.style.setProperty('--smallest-img-height', smallestHeight + 'px')
+      })
+    </script>
   </div>
   <div class='content-wrapper'>
     <p class='featured'>Featured</p>
@@ -82,7 +105,7 @@ const { project } = Astro.props
       border-radius: $border-radius;
       filter: grayscale(50%) brightness(50%);
     }
-    .thumbnail {
+    .fp-thumbnail {
       width: 100%;
       height: auto;
       object-fit: cover;
@@ -150,27 +173,28 @@ const { project } = Astro.props
 
       &:nth-of-type(2n) {
         .thumbnail-wrapper {
-          grid-column: 2 / 5;
+          grid-column: 1 / 5;
+          img {
+            max-height: var(--smallest-img-height);
+          }
         }
 
         .content-wrapper {
-          grid-column: 5 / 8;
+          grid-column: 5 / 9;
         }
       }
 
       &:nth-of-type(2n - 1) {
         .thumbnail-wrapper {
-          grid-column: 6 / 9;
+          grid-column: 6 / 10;
+          img {
+            max-height: var(--smallest-img-height);
+          }
         }
 
         .content-wrapper {
           grid-row: 1;
-          grid-column: 3 / 6;
-          text-align: right;
-
-          .technologies {
-            justify-content: right;
-          }
+          grid-column: 2 / 6;
         }
       }
     }
