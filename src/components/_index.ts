@@ -1,4 +1,3 @@
----
 export { default as Button } from './Button.astro'
 export { default as SectionHeader } from './SectionHeader.astro'
 export { default as Icon } from './Icon.astro'
@@ -7,4 +6,3 @@ export { default as Report } from './Report.astro'
 export { default as PTBlock } from './PTBlock.astro'
 export { default as PTList } from './PTList.astro'
 export { default as Logo } from './Logo.astro'
----

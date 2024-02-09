@@ -13,8 +13,8 @@
 
       // Imports from index.astro files (idk why this works but we ball)
       "@pages": ["./src/pages/index.ts"],
-      "@layouts": ["./src/layouts/_index.astro"],
-      "@components": ["./src/components/_index.astro"],
+      "@layouts": ["./src/layouts/_index.ts"],
+      "@components": ["./src/components/_index.ts"],
       "@schemas": ["schemas/_index.ts"]
     },
     "target": "ES2017",
