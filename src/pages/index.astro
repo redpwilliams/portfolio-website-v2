@@ -116,7 +116,7 @@ const reports: SanityResult<ReportType> = data.result[1]
       </section>
       <section>
         <SectionHeader title='Academia' />
-        <div id='container'></div>
+        <div id='academia-container'></div>
         <script type='module'>
           import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7/+esm'
 
@@ -220,7 +220,7 @@ const reports: SanityResult<ReportType> = data.result[1]
               // invalidation.then(() => simulation.stop())
 
               // Append the SVG element.
-              document.getElementById('container')?.append(svg.node())
+              document.getElementById('academia-container')?.append(svg.node())
             })
         </script>
       </section>
