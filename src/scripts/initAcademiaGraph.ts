@@ -1,16 +1,16 @@
-import { drag } from 'd3-drag'
+import { drag, type D3DragEvent } from 'd3-drag'
 import { create } from 'd3-selection'
 import { scaleOrdinal } from 'd3-scale'
 import { schemeCategory10 } from 'd3-scale-chromatic'
 import { forceSimulation, forceLink, forceCenter, forceManyBody } from 'd3-force'
+
+import type { AcademiaNode, AcademiaLink } from '@types'
 
 export function initAcademiaGraph() {
   // https://observablehq.com/@d3/force-directed-graph/2?intent=fork
   fetch('/src/graph.json')
     .then((response) => response.json())
     .then((data) => {
-      console.log(data)
-
       // Specify the dimensions of the chart.
       const width = 928
       const height = 600
@@ -20,14 +20,14 @@ export function initAcademiaGraph() {
 
       // The force simulation mutates links and nodes, so create a copy
       // so that re-evaluating this cell produces the same result.
-      const links = data.links.map((d) => ({ ...d }))
-      const nodes = data.nodes.map((d) => ({ ...d }))
+      const nodes: AcademiaNode[] = data.nodes.map((d: AcademiaNode) => ({ ...d }))
+      const links: AcademiaLink[] = data.links.map((d: AcademiaLink) => ({ ...d }))
 
       // Create a simulation with several forces.
       const simulation = forceSimulation(nodes)
         .force(
           'link',
-          forceLink(links).id((d) => d.id)
+          forceLink(links).id((d) => (d as AcademiaNode).id)
         )
         .force('charge', forceManyBody())
         .force('center', forceCenter(width / 2, height / 2))
@@ -63,6 +63,7 @@ export function initAcademiaGraph() {
       node.append('title').text((d) => d.id)
 
       // Add a drag behavior.
+      // @ts-expect-error drag generic typing too confusing
       node.call(drag().on('start', dragstarted).on('drag', dragged).on('end', dragended))
 
       // Set the position attributes of links and nodes each time the simulation ticks.
@@ -77,21 +78,21 @@ export function initAcademiaGraph() {
       }
 
       // Reheat the simulation when drag starts, and fix the subject position.
-      function dragstarted(event) {
+      function dragstarted(event: D3DragEvent<Element, AcademiaNode, AcademiaNode>) {
         if (!event.active) simulation.alphaTarget(0.3).restart()
         event.subject.fx = event.subject.x
         event.subject.fy = event.subject.y
       }
 
       // Update the subject (dragged node) position during drag.
-      function dragged(event) {
+      function dragged(event: D3DragEvent<Element, AcademiaNode, AcademiaNode>) {
         event.subject.fx = event.x
         event.subject.fy = event.y
       }
 
       // Restore the target alpha so the simulation cools after dragging ends.
       // Unfix the subject position now that it’s no longer being dragged.
-      function dragended(event) {
+      function dragended(event: D3DragEvent<Element, AcademiaNode, AcademiaNode>) {
         if (!event.active) simulation.alphaTarget(0)
         event.subject.fx = null
         event.subject.fy = null
@@ -103,6 +104,6 @@ export function initAcademiaGraph() {
       // invalidation.then(() => simulation.stop())
 
       // Append the SVG element.
-      document.getElementById('academia-container')?.append(svg.node())
+      document.getElementById('academia-container')?.append(svg.node()!)
     })
 }

@@ -25,13 +25,18 @@ export type AcademiaData = {
 export interface AcademiaNode extends SimulationNodeDatum {
   id: string
   group: string
-  radius?: number
-  citing_patents_count?: number
+  x: number
+  y: number
 }
 
 export interface AcademiaLink extends SimulationLinkDatum<AcademiaNode> {
-  // id: string | number
-  // source: string
-  // target: string
+  source: {
+    x: number
+    y: number
+  }
+  target: {
+    x: number
+    y: number
+  }
   value: number
 }
