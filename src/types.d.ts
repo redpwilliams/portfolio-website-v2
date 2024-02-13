@@ -1,4 +1,4 @@
-import type { SimulationNodeDatum, SimulationLinkDatum } from 'd3'
+import type { SimulationNodeDatum, SimulationLinkDatum } from 'd3-force'
 import type { CSSProperties } from 'react'
 import type { IconType } from 'react-icons'
 

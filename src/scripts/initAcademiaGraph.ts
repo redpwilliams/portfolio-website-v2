@@ -1,6 +1,11 @@
-import d3 from 'd3'
+import { scaleOrdinal } from 'd3-scale'
+import { schemeCategory10 } from 'd3-scale-chromatic'
+import { drag, type D3DragEvent } from 'd3-drag'
+import { forceSimulation, forceLink, forceManyBody, forceX, forceY } from 'd3-force'
+import { create } from 'd3-selection'
+
+// Custom Node/Link type
 import type { AcademiaNode, AcademiaLink } from '@types'
-import type { D3DragEvent } from 'd3'
 
 export function initAcademiaGraph() {
   // https://observablehq.com/@d3/disjoint-force-directed-graph/2?intent=fork
@@ -12,7 +17,7 @@ export function initAcademiaGraph() {
       const height = 680
 
       // Specify the color scale.
-      const color = d3.scaleOrdinal(d3.schemeCategory10)
+      const color = scaleOrdinal(schemeCategory10)
 
       // The force simulation mutates links and nodes, so create a copy
       // so that re-evaluating this cell produces the same result.
@@ -20,19 +25,17 @@ export function initAcademiaGraph() {
       const nodes: AcademiaNode[] = data.nodes.map((d: AcademiaNode) => ({ ...d }))
 
       // Create a simulation with several forces.
-      const simulation = d3
-        .forceSimulation<AcademiaNode, AcademiaLink>(nodes)
+      const simulation = forceSimulation<AcademiaNode, AcademiaLink>(nodes)
         .force(
           'link',
-          d3.forceLink(links).id((d) => (d as AcademiaNode).id)
+          forceLink(links).id((d) => (d as AcademiaNode).id)
         )
-        .force('charge', d3.forceManyBody())
-        .force('x', d3.forceX())
-        .force('y', d3.forceY())
+        .force('charge', forceManyBody())
+        .force('x', forceX())
+        .force('y', forceY())
 
       // Create the SVG container.
-      const svg = d3
-        .create('svg')
+      const svg = create('svg')
         .attr('width', width)
         .attr('height', height)
         .attr('viewBox', [-width / 2, -height / 2, width, height])
@@ -62,7 +65,7 @@ export function initAcademiaGraph() {
 
       // Add a drag behavior.
       // @ts-expect-error drag generic typing too confusing
-      node.call(d3.drag().on('start', dragstarted).on('drag', dragged).on('end', dragended))
+      node.call(drag().on('start', dragstarted).on('drag', dragged).on('end', dragended))
 
       // Set the position attributes of links and nodes each time the simulation ticks.
       simulation.on('tick', () => {
