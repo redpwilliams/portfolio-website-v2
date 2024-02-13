@@ -1,4 +1,4 @@
-import * as d3 from 'd3'
+import d3 from 'd3'
 import type { AcademiaNode, AcademiaLink } from '@types'
 import type { D3DragEvent } from 'd3'
 
