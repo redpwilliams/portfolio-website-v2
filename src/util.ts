@@ -176,7 +176,6 @@ export function initAcademiaGraph() {
 
       // Reheat the simulation when drag starts, and fix the subject position.
       function dragstarted(event: D3DragEvent<Element, AcademiaNode, AcademiaNode>) {
-        console.log(event)
         if (!event.active) simulation.alphaTarget(0.3).restart()
         event.subject.fx = event.subject.x
         event.subject.fy = event.subject.y
