@@ -17,6 +17,7 @@
     "@sanity/astro": "^2.1.4",
     "@sanity/client": "^6.8.6",
     "@sanity/vision": "^3.20.1",
+    "@types/d3": "^7.4.3",
     "@types/react": "^18.2.38",
     "@types/react-dom": "^18.2.17",
     "astro": "^3.5.7",
