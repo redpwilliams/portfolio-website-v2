@@ -176,6 +176,8 @@ export function initAcademiaGraph() {
         node.attr('cx', (d) => d.x).attr('cy', (d) => d.y)
       }
 
+      // TODO - Cursor should change on hover (cursor: grab) and grab/drag (cursor: grabbed)
+
       // Reheat the simulation when drag starts, and fix the subject position.
       function dragstarted(event: D3DragEvent<Element, AcademiaNode, AcademiaNode>) {
         if (!event.active) simulation.alphaTarget(0.3).restart()
