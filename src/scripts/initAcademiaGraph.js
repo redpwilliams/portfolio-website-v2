@@ -1,4 +1,8 @@
-import * as d3 from 'd3'
+import { drag } from 'd3-drag'
+import { create } from 'd3-selection'
+import { scaleOrdinal } from 'd3-scale'
+import { schemeCategory10 } from 'd3-scale-chromatic'
+import { forceSimulation, forceLink, forceCenter, forceManyBody } from 'd3-force'
 
 export function initAcademiaGraph() {
   // https://observablehq.com/@d3/force-directed-graph/2?intent=fork
@@ -12,7 +16,7 @@ export function initAcademiaGraph() {
       const height = 600
 
       // Specify the color scale.
-      const color = d3.scaleOrdinal(d3.schemeCategory10)
+      const color = scaleOrdinal(schemeCategory10)
 
       // The force simulation mutates links and nodes, so create a copy
       // so that re-evaluating this cell produces the same result.
@@ -20,19 +24,17 @@ export function initAcademiaGraph() {
       const nodes = data.nodes.map((d) => ({ ...d }))
 
       // Create a simulation with several forces.
-      const simulation = d3
-        .forceSimulation(nodes)
+      const simulation = forceSimulation(nodes)
         .force(
           'link',
-          d3.forceLink(links).id((d) => d.id)
+          forceLink(links).id((d) => d.id)
         )
-        .force('charge', d3.forceManyBody())
-        .force('center', d3.forceCenter(width / 2, height / 2))
+        .force('charge', forceManyBody())
+        .force('center', forceCenter(width / 2, height / 2))
         .on('tick', ticked)
 
       // Create the SVG container.
-      const svg = d3
-        .create('svg')
+      const svg = create('svg')
         .attr('width', width)
         .attr('height', height)
         .attr('viewBox', [0, 0, width, height])
@@ -61,7 +63,7 @@ export function initAcademiaGraph() {
       node.append('title').text((d) => d.id)
 
       // Add a drag behavior.
-      node.call(d3.drag().on('start', dragstarted).on('drag', dragged).on('end', dragended))
+      node.call(drag().on('start', dragstarted).on('drag', dragged).on('end', dragended))
 
       // Set the position attributes of links and nodes each time the simulation ticks.
       function ticked() {
