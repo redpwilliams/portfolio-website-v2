@@ -137,7 +137,11 @@ export function initAcademiaGraph() {
         .attr('width', width)
         .attr('height', height)
         .attr('viewBox', [0, 0, width, height])
-        .attr('style', 'max-width: 100%; height: auto; margin: 0 auto;')
+        .attr('id', 'academia-svg')
+        .attr(
+          'style',
+          'max-width: 100%; height: auto; margin: 0 auto; display: block; cursor: grab'
+        )
 
       // Add a line for each link, and a circle for each node.
       const link = svg
@@ -183,6 +187,7 @@ export function initAcademiaGraph() {
         if (!event.active) simulation.alphaTarget(0.3).restart()
         event.subject.fx = event.subject.x
         event.subject.fy = event.subject.y
+        document.getElementById('academia-svg')!.style.cursor = 'grabbing'
       }
 
       // Update the subject (dragged node) position during drag.
@@ -197,6 +202,7 @@ export function initAcademiaGraph() {
         if (!event.active) simulation.alphaTarget(0)
         event.subject.fx = null
         event.subject.fy = null
+        document.getElementById('academia-svg')!.style.cursor = 'grab'
       }
 
       // When this cell is re-run, stop the previous simulation. (This doesn’t
