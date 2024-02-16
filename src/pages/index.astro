@@ -143,7 +143,7 @@ const reports: SanityResult<ReportType> = data.result[1]
                 'link',
                 d3.forceLink(links).id((d) => d.id)
               )
-              .force('charge', d3.forceManyBody())
+              .force('charge', d3.forceManyBody().strength(-300))
               .force('x', d3.forceX())
               .force('y', d3.forceY())
 
