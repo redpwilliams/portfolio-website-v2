@@ -19,6 +19,9 @@ const query = `[
 const data = await fetchSanityData(query)
 const projects: SanityResult<ProjectType> = data.result[0]
 const reports: SanityResult<ReportType> = data.result[1]
+
+// Show academia graph when development is finished
+const displayAcademiaGraph = false
 ---
 
 <Layout title='Red Williams'>
@@ -114,14 +117,18 @@ const reports: SanityResult<ReportType> = data.result[1]
           )
         }
       </section>
-      <section>
-        <SectionHeader title='Academia' />
-        <div id='academia-container'></div>
-        <script type='module'>
-          import { initAcademiaGraph } from './src/util.ts'
-          initAcademiaGraph()
-        </script>
-      </section>
+      {
+        displayAcademiaGraph && (
+          <section>
+            <SectionHeader title='Academia' />
+            <div id='academia-container' />
+          </section>
+        )
+      }
+      <script type='module'>
+        import { initAcademiaGraph } from './src/util.ts'
+        initAcademiaGraph()
+      </script>
       <section class='connect'>
         <h3>Let's Connect!</h3>
         <p>
