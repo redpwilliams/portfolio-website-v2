@@ -18,14 +18,10 @@ export type IconProps = {
   style?: CSSProperties
 }
 
-export type AcademiaData = {
-  nodes: AcademiaNode[]
-  links: AcademiaLink[]
-}
-
 export interface AcademiaNode extends SimulationNodeDatum {
   id: string
   group: string
+  completed: boolean
   x: number
   y: number
 }
