@@ -20,7 +20,6 @@ export type IconProps = {
 
 export interface AcademiaNode extends SimulationNodeDatum {
   id: string
-  group: string
   completed: boolean
   x: number
   y: number
