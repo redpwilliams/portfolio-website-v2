@@ -160,8 +160,11 @@ export function initAcademiaGraph() {
         .attr('r', 10)
         .attr('fill', (d) => ((d as AcademiaNode).completed ? 'rgba(255, 128, 97, 1)' : '#555'))
         .attr('class', 'academia-circle')
+        .attr('id', (d) => ((d as AcademiaNode).fixed ? 'center-node' : null))
 
       node.append('title').text((d) => d.id)
+
+      // TODO - Fix first node to center of the screen
 
       // Add a drag behavior.
       // @ts-expect-error drag generic typing too confusing
@@ -206,7 +209,23 @@ export function initAcademiaGraph() {
       // stop naturally, but it’s a good practice.)
       // invalidation.then(() => simulation.stop())
 
-      // Append the SVG element.
+      // Create extra styling.
+      const styles = document.createElement('style')
+      styles.innerHTML = `
+      @media (max-width: 60em) {
+        #academia-svg circle {
+          r: 20px;
+        }
+
+        #academia-svg line {
+          stroke-width: 8px;
+        }
+      `
+
+      // Apply to graph.
+      const graph = svg.node()!
+      graph.appendChild(styles)
+
       document.getElementById('academia-container')?.append(svg.node()!)
     })
 }

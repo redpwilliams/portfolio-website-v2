@@ -1,6 +1,6 @@
 {
   "nodes": [
-    { "id": "Introduction to ECE Concepts", "completed": true },
+    { "id": "Introduction to ECE Concepts", "completed": true, "fixed": true },
     { "id": "Circuits and Devices", "completed": true },
     { "id": "Computational Engineering", "completed": true },
     { "id": "Fundamentals of Digital Systems", "completed": true },
