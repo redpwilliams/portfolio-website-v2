@@ -128,7 +128,7 @@ export function initAcademiaGraph() {
           'link',
           forceLink(links).id((d) => (d as AcademiaNode).id)
         )
-        .force('charge', forceManyBody())
+        .force('charge', forceManyBody().strength(-300))
         .force('center', forceCenter(width / 2, height / 2))
         .on('tick', ticked)
 
