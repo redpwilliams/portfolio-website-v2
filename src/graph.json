@@ -1,129 +1,98 @@
 {
   "nodes": [
-    { "id": "Introduction to ECE Concepts", "group": 1 },
-    { "id": "Circuits and Devices", "group": 1 },
-    { "id": "Computational Engineering", "group": 1 },
-    { "id": "Fundamentals of Digital Systems", "group": 1 },
-    { "id": "Physical Electronics", "group": 1 },
-    { "id": "Embedded Systems", "group": 1 },
-    { "id": "Signals and Systems", "group": 1 },
-    { "id": "Integrated Design Project", "group": 1 },
-    { "id": "Computer Organization and Architecture", "group": 1 },
-    { "id": "Data Structures and Algorithms", "group": 1 },
-    { "id": "Probability and Statistics for Electrical Engineers", "group": 1 },
-    { "id": "Applied Software Design", "group": 1 },
-    { "id": "Large-Scale Software Development for Engineering Systems", "group": 1 },
-    { "id": "Computer Systems", "group": 1 },
-    { "id": "Artificial Intelligence and Engineering Applications", "group": 1 },
-    { "id": "Real-Time Systems", "group": 1 }
+    { "id": "Introduction to ECE Concepts", "completed": true },
+    { "id": "Circuits and Devices", "completed": true },
+    { "id": "Computational Engineering", "completed": true },
+    { "id": "Fundamentals of Digital Systems", "completed": true },
+    { "id": "Physical Electronics" },
+    { "id": "Embedded Systems" },
+    { "id": "Signals and Systems" },
+    { "id": "Integrated Design Project" },
+    { "id": "Computer Organization and Architecture" },
+    { "id": "Data Structures and Algorithms" },
+    { "id": "Probability and Statistics for Electrical Engineers" },
+    { "id": "Applied Software Design" },
+    { "id": "Large-Scale Software Development for Engineering Systems" },
+    { "id": "Computer Systems" },
+    { "id": "Artificial Intelligence and Engineering Applications" },
+    { "id": "Real-Time Systems" },
+    { "id": "Software Design and Data Structures", "completed": true },
+    { "id": "Introduction to Discrete Mathematics", "completed": true },
+    { "id": "Introduction to Computer Organization", "completed": true },
+    { "id": "Introduction to Differential Equations", "completed": true }
   ],
   "links": [
-    { "source": "Circuits and Devices", "target": "Introduction to ECE Concepts", "value": 1 },
-    { "source": "Computational Engineering", "target": "Introduction to ECE Concepts", "value": 1 },
+    { "source": "Circuits and Devices", "target": "Introduction to ECE Concepts" },
+    { "source": "Computational Engineering", "target": "Introduction to ECE Concepts" },
+    { "source": "Fundamentals of Digital Systems", "target": "Introduction to ECE Concepts" },
+    { "source": "Signals and Systems", "target": "Fundamentals of Digital Systems" },
+    { "source": "Signals and Systems", "target": "Circuits and Devices" },
+    { "source": "Signals and Systems", "target": "Computational Engineering" },
+    { "source": "Embedded Systems", "target": "Fundamentals of Digital Systems" },
+    { "source": "Embedded Systems", "target": "Computational Engineering" },
+    { "source": "Physical Electronics", "target": "Circuits and Devices" },
+    { "source": "Integrated Design Project", "target": "Circuits and Devices" },
+    { "source": "Integrated Design Project", "target": "Computational Engineering" },
+    { "source": "Integrated Design Project", "target": "Fundamentals of Digital Systems" },
     {
-      "source": "Fundamentals of Digital Systems",
-      "target": "Introduction to ECE Concepts",
-      "value": 1
-    },
-    {
-      "source": "Signals and Systems",
-      "target": "Fundamentals of Digital Systems",
-      "value": 1
-    },
-    {
-      "source": "Signals and Systems",
-      "target": "Circuits and Devices",
-      "value": 1
-    },
-    {
-      "source": "Signals and Systems",
-      "target": "Computational Engineering",
-      "value": 1
-    },
-    {
-      "source": "Embedded Systems",
-      "target": "Fundamentals of Digital Systems",
-      "value": 1
-    },
-    {
-      "source": "Embedded Systems",
-      "target": "Computational Engineering",
-      "value": 1
-    },
-    {
-      "source": "Physical Electronics",
-      "target": "Circuits and Devices",
-      "value": 1
-    },
-    {
-      "source": "Integrated Design Project",
-      "target": "Circuits and Devices",
-      "value": 1
-    },
-    {
-      "source": "Integrated Design Project",
-      "target": "Computational Engineering",
-      "value": 1
-    },
-    {
-      "source": "Integrated Design Project",
-      "target": "Fundamentals of Digital Systems",
-      "value": 1
+      "source": "Computer Organization and Architecture",
+      "target": "Fundamentals of Digital Systems"
     },
     {
       "source": "Computer Organization and Architecture",
-      "target": "Fundamentals of Digital Systems",
-      "value": 1
-    },
-    {
-      "source": "Computer Organization and Architecture",
-      "target": "Integrated Design Project",
-      "value": 1
+      "target": "Integrated Design Project"
     },
     {
       "source": "Data Structures and Algorithms",
-      "target": "Computational Engineering",
-      "value": 1
+      "target": "Computational Engineering"
     },
     {
       "source": "Data Structures and Algorithms",
-      "target": "Integrated Design Project",
-      "value": 1
+      "target": "Integrated Design Project"
     },
     {
       "source": "Applied Software Design",
-      "target": "Data Structures and Algorithms",
-      "value": 1
+      "target": "Data Structures and Algorithms"
     },
     {
       "source": "Large-Scale Software Development for Engineering Systems",
-      "target": "Applied Software Design",
-      "value": 1
+      "target": "Applied Software Design"
     },
     {
       "source": "Computer Systems",
-      "target": "Embedded Systems",
-      "value": 1
+      "target": "Embedded Systems"
     },
     {
       "source": "Computer Systems",
-      "target": "Applied Software Design",
-      "value": 1
+      "target": "Applied Software Design"
     },
     {
       "source": "Artificial Intelligence and Engineering Applications",
-      "target": "Data Structures and Algorithms",
-      "value": 1
+      "target": "Data Structures and Algorithms"
     },
     {
       "source": "Artificial Intelligence and Engineering Applications",
-      "target": "Probability and Statistics for Electrical Engineers",
-      "value": 1
+      "target": "Probability and Statistics for Electrical Engineers"
     },
     {
       "source": "Real-Time Systems",
-      "target": "Applied Software Design",
-      "value": 1
+      "target": "Applied Software Design"
+    },
+    {
+      "source": "Computer Systems",
+      "target": "Software Design and Data Structures"
+    },
+    {
+      "source": "Computer Systems",
+      "target": "Introduction to Discrete Mathematics"
+    },
+    {
+      "source": "Computer Systems",
+      "target": "Introduction to Computer Organization"
+    },
+    {
+      "source": "Circuits and Devices",
+      "target": "Introduction to Differential Equations"
     }
   ]
 }

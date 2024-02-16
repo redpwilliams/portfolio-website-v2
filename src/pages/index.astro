@@ -119,7 +119,7 @@ const reports: SanityResult<ReportType> = data.result[1]
         <div id='academia-container'></div>
         <script type='module'>
           import { initAcademiaGraph } from './src/util.ts'
-          initAcademiaGraph()
+          initAcademiaGraph().then((d) => console.log(d))
         </script>
       </section>
       <section class='connect'>

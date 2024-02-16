@@ -2,11 +2,9 @@
 import type { SanityResponse } from '@types'
 
 // D3 imports
-import { drag, type D3DragEvent } from 'd3-drag'
 import { create } from 'd3-selection'
-import { scaleOrdinal } from 'd3-scale'
-import { schemeCategory10 } from 'd3-scale-chromatic'
-import { forceSimulation, forceLink, forceCenter, forceManyBody } from 'd3-force'
+import { drag, type D3DragEvent } from 'd3-drag'
+import { forceSimulation, forceLink, forceCenter, forceCollide, forceManyBody } from 'd3-force'
 
 import type { AcademiaNode, AcademiaLink } from '@types'
 
@@ -114,9 +112,6 @@ export function initAcademiaGraph() {
       const width = 928
       const height = 600
 
-      // Specify the color scale.
-      const color = scaleOrdinal(schemeCategory10)
-
       // The force simulation mutates links and nodes, so create a copy
       // so that re-evaluating this cell produces the same result.
       const nodes: AcademiaNode[] = data.nodes.map((d: AcademiaNode) => ({ ...d }))
@@ -130,6 +125,8 @@ export function initAcademiaGraph() {
         )
         .force('charge', forceManyBody().strength(-300))
         .force('center', forceCenter(width / 2, height / 2))
+        .force('collide', forceCollide().radius(10)) // Add forceCollide with a small radius
+        .alphaDecay(0.02) // Reduce the alpha decay rate to keep the simulation going
         .on('tick', ticked)
 
       // Create the SVG container.
@@ -151,7 +148,7 @@ export function initAcademiaGraph() {
         .selectAll()
         .data(links)
         .join('line')
-        .attr('stroke-width', (d) => Math.sqrt(d.value))
+        .attr('stroke-width', Math.sqrt(8))
 
       const node = svg
         .append('g')
@@ -160,8 +157,9 @@ export function initAcademiaGraph() {
         .selectAll()
         .data(nodes)
         .join('circle')
-        .attr('r', 5)
-        .attr('fill', (d) => color(d.group))
+        .attr('r', 10)
+        .attr('fill', (d) => ((d as AcademiaNode).completed ? 'rgba(255, 128, 97, 1)' : '#555'))
+        .attr('class', 'academia-circle')
 
       node.append('title').text((d) => d.id)
 
@@ -179,8 +177,6 @@ export function initAcademiaGraph() {
 
         node.attr('cx', (d) => d.x).attr('cy', (d) => d.y)
       }
-
-      // TODO - Cursor should change on hover (cursor: grab) and grab/drag (cursor: grabbed)
 
       // Reheat the simulation when drag starts, and fix the subject position.
       function dragstarted(event: D3DragEvent<Element, AcademiaNode, AcademiaNode>) {
