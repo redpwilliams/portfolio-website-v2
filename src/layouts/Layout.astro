@@ -229,6 +229,8 @@ const { title } = Astro.props
     main {
       padding: 0 3rem;
       min-height: 30vh; // TODO - Use with Footer height variable (30vh as of right now)
+      max-width: 1600px;
+      margin: 0 auto;
     }
 
     aside {
@@ -245,11 +247,12 @@ const { title } = Astro.props
     %aside-positioned-element-before {
       content: '';
       display: inline-block;
-      width: 0.12rem;
-      height: 125px;
+      // width: 0.12rem;
+      width: 0.2vh;
+      height: 15vh;
       background-color: var(--text-gray-light);
       vertical-align: middle;
-      margin-bottom: 20px;
+      margin-bottom: 2vh;
     }
 
     .email {
@@ -257,7 +260,7 @@ const { title } = Astro.props
       right: auto;
       position: sticky;
       bottom: 0;
-      font-size: 0.9rem;
+      font-size: 1.6vh;
 
       & > div {
         display: block;
@@ -277,8 +280,6 @@ const { title } = Astro.props
     }
 
     .socials {
-      // right: 0;
-      // left: auto;
       position: sticky;
       top: 0;
       float: right;
