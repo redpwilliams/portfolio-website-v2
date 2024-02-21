@@ -84,7 +84,6 @@ const { title } = Astro.props
     />
   </head>
   <body>
-    <aside class='email'><div><a>{email}</a></div></aside>
     <nav class='main-nav'>
       <ul>
         {
@@ -102,7 +101,10 @@ const { title } = Astro.props
         }
       </ul>
     </nav>
-    <slot />
+    <div class='main-container'>
+      <slot />
+      <aside class='email'><div><a>{email}</a></div></aside>
+    </div>
     <aside class='socials'>
       <ul>
         {
@@ -116,6 +118,7 @@ const { title } = Astro.props
         }
       </ul>
     </aside>
+    <footer></footer>
   </body>
 </html>
 <style is:global lang='scss'>
@@ -157,7 +160,8 @@ const { title } = Astro.props
     margin: 0;
     padding: 0;
     font-family: var(--font-sans);
-    min-height: 100vh;
+    // min-height: 100vh;
+    height: 100%;
   }
 
   aside,
@@ -222,11 +226,12 @@ const { title } = Astro.props
   }
 
   @media (min-width: $breakpoint-main) {
-    body {
-      display: grid;
-      grid-template-columns: var(--aside-width) 1fr var(--aside-width);
-      grid-template-rows: min-content;
-    }
+    // .general-container {
+    //   display: grid;
+    //   grid-template-columns: var(--aside-width) 1fr var(--aside-width);
+    //   grid-template-rows: min-content;
+    //   position: relative;
+    // }
 
     main {
       grid-column: 2;
@@ -235,7 +240,7 @@ const { title } = Astro.props
 
     aside {
       position: fixed;
-      height: 100vh;
+      height: 100%;
       width: var(--aside-width);
       display: block;
       overflow-y: auto;
@@ -259,18 +264,20 @@ const { title } = Astro.props
     .email {
       left: 0;
       right: auto;
+      position: sticky;
+      bottom: 0;
 
       & > div {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: nowrap;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        font-size: 0.9rem;
+        display: block;
+        //   flex-direction: column;
+        //   justify-content: center;
+        //   align-items: center;
+        //   flex-wrap: nowrap;
+        //   position: absolute;
+        //   bottom: 0;
+        //   left: 0;
+        //   right: 0;
+        //   font-size: 0.9rem;
       }
 
       & > div > a {
@@ -308,6 +315,14 @@ const { title } = Astro.props
     .socials a,
     .socials a:visited {
       color: var(--text-gray-light);
+    }
+
+    footer {
+      height: 30vh;
+      grid-column: 1 / -1;
+      border: 3px solid blue;
+      bottom: 0;
+      background-color: paleturquoise;
     }
   }
 
