@@ -84,23 +84,6 @@ const { title } = Astro.props
     />
   </head>
   <body>
-    <nav class='main-nav'>
-      <ul>
-        {
-          navHeaders.map((header) => (
-            <li>
-              <a
-                href={header.href}
-                style={{
-                  color: isSubpath(Astro.url.pathname, header.href) ? 'var(--text-main)' : ''
-                }}>
-                {header.name}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
     <div class='main-container'>
       <aside class='socials'>
         <ul>
@@ -115,6 +98,23 @@ const { title } = Astro.props
           }
         </ul>
       </aside>
+      <nav class='main-nav'>
+        <ul>
+          {
+            navHeaders.map((header) => (
+              <li>
+                <a
+                  href={header.href}
+                  style={{
+                    color: isSubpath(Astro.url.pathname, header.href) ? 'var(--text-main)' : ''
+                  }}>
+                  {header.name}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
       <slot />
       <aside class='email'><div><a>{email}</a></div></aside>
     </div>
@@ -181,12 +181,10 @@ const { title } = Astro.props
   }
 
   .main-nav {
-    position: sticky;
-    top: 1rem;
+    position: fixed;
     width: 90%;
     max-width: 28rem;
     height: 3rem;
-    grid-column: 2;
     justify-self: center;
     margin: 1rem auto;
     border: 2px solid var(--text-gray-dark);
@@ -194,7 +192,9 @@ const { title } = Astro.props
     border-radius: 8px;
     background-clip: border-box;
     transition: border-color 0.2s ease;
-    z-index: 2;
+    z-index: 10;
+    left: 0;
+    right: 0;
 
     &:hover {
       border-color: var(--text-gray-light);
