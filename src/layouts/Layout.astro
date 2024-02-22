@@ -227,7 +227,7 @@ const { title } = Astro.props
 
   @media (min-width: $breakpoint-main) {
     main {
-      padding: 0 3rem;
+      padding: 0 150px;
       min-height: 30vh; // TODO - Use with Footer height variable (30vh as of right now)
       max-width: 1600px;
       margin: 0 auto;
@@ -247,7 +247,6 @@ const { title } = Astro.props
     %aside-positioned-element-before {
       content: '';
       display: inline-block;
-      // width: 0.12rem;
       width: 0.2vh;
       height: 15vh;
       background-color: var(--text-gray-light);
@@ -292,7 +291,7 @@ const { title } = Astro.props
         justify-content: start;
         align-items: center;
         flex-wrap: nowrap;
-        gap: 16px;
+        gap: 2vh;
       }
 
       & > ul::before {
