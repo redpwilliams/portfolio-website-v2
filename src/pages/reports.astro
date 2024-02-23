@@ -1,6 +1,5 @@
 ---
-import { Layout } from '@layouts'
-import { Logo } from '@components'
+import { Layout, PageTableLayout } from '@layouts'
 
 // Sanity functions and types
 import type { SanityResult } from '@types'
@@ -20,77 +19,19 @@ reports.forEach((report) => {
 ---
 
 <Layout title='Reports'>
-  <main class='content'>
-    <header class='front-matter'>
-      <h1 class='header'>Reports</h1>
-      <p>Successess, failures, and everything in between in making some of my favorite projects.</p>
-      <Logo />
-    </header>
-    <table class='report-list'>
-      {
-        reports.map((report) => (
-          <tr>
-            <th>
-              <a href={'/reports/' + report.slug}>{report.title}</a>
-            </th>
-            <td>{report.date_published}</td>
-          </tr>
-        ))
-      }
-    </table>
-  </main>
+  <PageTableLayout
+    title='Reports'
+    headerText='Successess, failures, and everything in between in making some of my favorite projects.'
+    tableClassName='report-list'>
+    {
+      reports.map((report) => (
+        <tr>
+          <th>
+            <a href={'/reports/' + report.slug}>{report.title}</a>
+          </th>
+          <td>{report.date_published}</td>
+        </tr>
+      ))
+    }
+  </PageTableLayout>
 </Layout>
-
-<style lang='scss'>
-  @use 'src/main' as *;
-  .content {
-    margin-top: 2rem;
-
-    h1 {
-      color: var(--text-main);
-      font-weight: 400;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      margin-bottom: 2rem;
-    }
-  }
-
-  @media (min-width: $breakpoint-main) {
-    .content {
-      display: grid;
-      grid-template-columns: 40% 60%;
-      column-gap: 1em;
-    }
-
-    .report-list tr {
-      margin-left: 1rem;
-    }
-  }
-
-  .report-list {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-
-    tr {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      padding: 1rem 0;
-      border-bottom: 1px solid gray;
-      margin-bottom: 1rem;
-    }
-
-    th {
-      text-align: left;
-      color: var(--text-main);
-      font-weight: normal;
-    }
-
-    td {
-      text-align: right;
-      color: var(--text-gray-dark);
-    }
-  }
-</style>

@@ -1,0 +1,67 @@
+---
+interface Props {
+  title: string
+  headerText: string
+  tableClassName: string
+}
+
+const { title, headerText, tableClassName } = Astro.props
+---
+
+<main class='ptl-content'>
+  <header class='front-matter'>
+    <h1 class='header'>{title}</h1>
+    <p>{headerText}</p>
+  </header>
+  <table data-tcn={tableClassName}>
+    <slot />
+  </table>
+</main>
+
+<style lang='scss' is:global>
+  @use 'src/main' as *;
+  .ptl-content {
+    margin-top: 2rem;
+
+    h1 {
+      color: var(--text-main);
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin-bottom: 2rem;
+    }
+  }
+
+  @media (min-width: $breakpoint-main) {
+    .ptl-content > table tr {
+      margin-left: 1rem;
+    }
+  }
+
+  .ptl-content > table {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    tr {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      padding: 1rem 0;
+      border-bottom: 1px solid gray;
+      margin-bottom: 1rem;
+    }
+
+    th {
+      text-align: left;
+      color: var(--text-main);
+      font-weight: normal;
+    }
+
+    td {
+      text-align: right;
+      color: var(--text-gray-dark);
+    }
+  }
+</style>
