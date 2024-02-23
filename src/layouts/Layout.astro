@@ -133,6 +133,7 @@ const { title } = Astro.props
     --text-gray-dark: #a3a3a3;
 
     --bg-color: #1e1e1e;
+    --bg-color-secondary: #171717;
 
     --gradient-start: rgba(255, 133, 64, 1);
     --gradient-end: rgba(255, 64, 64, 1);
@@ -155,10 +156,10 @@ const { title } = Astro.props
   html {
     height: 100%;
     scroll-behavior: smooth;
+    background-color: var(--bg-color-secondary);
   }
 
   body {
-    background-color: var(--bg-color);
     background-size: cover;
     margin: 0;
     padding: 0;
@@ -168,6 +169,10 @@ const { title } = Astro.props
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  .main-container {
+    background-color: var(--bg-color);
   }
 
   aside,
@@ -194,7 +199,7 @@ const { title } = Astro.props
     justify-self: center;
     margin: 1rem auto;
     border: 2px solid var(--text-gray-dark);
-    background-color: #171717;
+    background-color: var(--bg-color-secondary);
     border-radius: 8px;
     background-clip: border-box;
     transition: border-color 0.2s ease;
@@ -317,7 +322,7 @@ const { title } = Astro.props
   footer {
     min-height: 30vh;
     width: 100%;
-    background-color: #171717;
+    background-color: var(--bg-color-secondary);
 
     & > * {
       margin: 0 auto;
