@@ -305,7 +305,10 @@ const { title } = Astro.props
         justify-content: start;
         align-items: center;
         flex-wrap: nowrap;
-        gap: 2vh;
+
+        & > li {
+          margin: 1vh 0;
+        }
       }
 
       & > ul::before {
@@ -329,6 +332,13 @@ const { title } = Astro.props
       display: block;
       text-align: center;
       text-transform: uppercase;
+    }
+  }
+
+  footer:hover .logo rect {
+    height: 77px;
+    &.lower-level {
+      height: 90px;
     }
   }
 
