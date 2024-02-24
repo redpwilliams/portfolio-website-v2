@@ -121,6 +121,7 @@ const { title } = Astro.props
     <footer>
       <Logo />
       <p>Stay Connected</p>
+      <hr />
     </footer>
   </body>
 </html>
@@ -173,6 +174,7 @@ const { title } = Astro.props
 
   .main-container {
     background-color: var(--bg-color);
+    flex-grow: 1;
   }
 
   aside,
@@ -333,6 +335,22 @@ const { title } = Astro.props
       text-align: center;
       text-transform: uppercase;
     }
+
+    p {
+      font-size: 1.2rem;
+      letter-spacing: 4px;
+      margin-bottom: 2rem;
+    }
+
+    hr {
+      width: 100%;
+      margin: 1rem 0;
+    }
+  }
+
+  .logo {
+    margin: 2rem auto 1rem auto;
+    scale: 0.8;
   }
 
   footer:hover .logo rect {
