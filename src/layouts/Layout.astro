@@ -340,6 +340,7 @@ const { title } = Astro.props
       font-size: 1.2rem;
       letter-spacing: 4px;
       margin-bottom: 2rem;
+      color: var(--text-main);
     }
 
     hr {
@@ -353,7 +354,8 @@ const { title } = Astro.props
     scale: 0.8;
   }
 
-  footer:hover .logo rect {
+  footer:hover .logo rect,
+  footer:focus .logo rect {
     height: 77px;
     &.lower-level {
       height: 90px;
