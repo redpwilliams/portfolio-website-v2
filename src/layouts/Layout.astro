@@ -128,13 +128,28 @@ const { title } = Astro.props
           <span></span>
           <span></span>
           <span></span>
-          <p>Currently listening to —</p>
+          <p id='spotify-text'>Currently listening to —</p>
         </span>
-        <script>
+        <script type='module'>
           // const footerDatetime = document.getElementsByClassName('datetime').item(0)!
           // setInterval((i) => {
           //   footerDatetime.innerHTML = 'Blacksburg, VA, • Time: ' + i++
           // }, 1000)
+          // const spotify = document.getElementById('spotify-text')
+          // const data = fetch('https://redwilliams.dev/api/projects', {
+          //   method: 'POST',
+          //   headers: {
+          //     'Accept': 'application/json',
+          //     'Content-Type': 'application/json'
+          //   }
+          // }).then((d) => console.log(d))
+          function doFetch() {
+            fetch('/builtwithjson').then((response) => {
+              return response.json().then((data) => console.log(data))
+            })
+          }
+
+          setInterval(doFetch, 5000)
         </script>
       </div>
     </footer>
