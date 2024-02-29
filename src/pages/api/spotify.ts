@@ -2,7 +2,7 @@
 const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN
 const clientId = process.env.SPOTIFY_CLIENT_ID
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET
-let accessToken: string | null
+let accessToken: string | undefined
 
 export async function GET() {
   // Request access token if null
@@ -15,6 +15,11 @@ export async function GET() {
   return new Response(JSON.stringify({ access_token: accessToken ?? '' }))
 }
 
+/**
+ * Queries the Spotify Web API to get the currently playing track.
+ * @param accessToken - The access token required to access the Spotify Web API.
+ * @returns A Response object to be sent to the client
+ */
 const fetchSpotifyData = async (accessToken: string) => {
   const authOptions = {
     headers: { Authorization: 'Bearer ' + accessToken }
