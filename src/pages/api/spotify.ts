@@ -9,15 +9,20 @@ export async function GET() {
   accessToken = accessToken ?? (await fetchAccessToken()).access_token
   // const data = await fetchAccessToken()
   // console.log(data)
-  console.log(accessToken)
-  // const data = await fetchAccessToken()
-  // console.log(data.json())
+  // console.log(accessToken)
+  console.log(await fetchSpotifyData(accessToken!))
+  // const data = await console.log(data)
   return new Response(JSON.stringify({ access_token: accessToken ?? '' }))
 }
 
-// const fetchSpotifyData = async () => {
-
-// }
+const fetchSpotifyData = async (accessToken: string) => {
+  const authOptions = {
+    headers: { Authorization: 'Bearer ' + accessToken }
+  }
+  const f = await fetch('https://api.spotify.com/v1/me/player/currently-playing', authOptions)
+  const data = await f.json()
+  return data
+}
 
 // Using refresh token
 const fetchAccessToken = async () => {
@@ -30,7 +35,8 @@ const fetchAccessToken = async () => {
     body: new URLSearchParams({
       grant_type: 'refresh_token',
       refresh_token: refreshToken!,
-      client_id: clientId!
+      client_id: clientId!,
+      scope: 'user-read-currently-playing'
     })
   }
 
