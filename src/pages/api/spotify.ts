@@ -21,6 +21,8 @@ const fetchSpotifyData = async (accessToken: string) => {
   }
   const f = await fetch('https://api.spotify.com/v1/me/player/currently-playing', authOptions)
   const data = await f.json()
+  // ^^^ Only works when content is playing (status code 200 most likely, i didn't check)
+  // Else, it returns an empty body with status code 204
   return data
 }
 
