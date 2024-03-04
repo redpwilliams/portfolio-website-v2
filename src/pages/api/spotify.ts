@@ -10,6 +10,7 @@ let accessToken: string | undefined
 export const GET: APIRoute = async () => {
   // Request access token if null
   accessToken = accessToken ?? (await fetchAccessToken()).access_token
+  console.log('Access token used: ' + accessToken)
 
   const data = await fetchSpotifyData(accessToken!)
   const headers = new Headers()
