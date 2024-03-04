@@ -1,4 +1,4 @@
-import type { SpotifyAccessToken, SpotifyResponse, SpotifyData } from '@types'
+import type { SpotifyAccessToken, SpotifyResponse, SpotifyData, SpotifyDataFulfilled } from '@types'
 import type { APIRoute } from 'astro'
 
 // Refresh token, defined on ther server
@@ -12,11 +12,17 @@ export const GET: APIRoute = async () => {
   accessToken = accessToken ?? (await fetchAccessToken()).access_token
   console.log('Access token used: ' + accessToken)
 
+  // Fetch data
   const data = await fetchSpotifyData(accessToken!)
+
+  // Set headers
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
-  return new Response(JSON.stringify({ access_token: accessToken ?? '', data }), {
-    headers: { 'Content-Type': 'application/json' }
+
+  // Craft response
+  return new Response(JSON.stringify({ access_token: accessToken ?? '', ...data }), {
+    headers: { 'Content-Type': 'application/json' },
+    status: setStatusCode(data)
   })
 }
 
@@ -80,10 +86,11 @@ const fetchSpotifyData = async (
     }
     // ^^^ Only works when content is playing (status code 200 most likely, i didn't check)
     // Else, it returns an empty body with status code 204
-    return { message: 'Unexpected error with status code ' + res.status }
+    return { error: 'Unexpected error with status code ' + res.status }
   } catch (e) {
-    if (!(e instanceof SyntaxError)) return { error: e }
-    return { message: 'Most likely used .json() on a poor object' }
+    console.log(e)
+    if (!(e instanceof SyntaxError)) return { error: (e as Error).message }
+    return { error: 'Syntax error, most likely used .json() on a poor object. ' + e.message }
   }
 }
 
@@ -123,4 +130,14 @@ const fetchAccessToken = async (): Promise<SpotifyAccessToken> => {
     console.error('There was a problem with the fetch operation:', error)
     return { access_token: '' }
   }
+}
+
+const setStatusCode = (data: SpotifyResponse) => {
+  if (data === null) return 204
+  if (isSDF(data)) return 200
+  return 400
+}
+
+function isSDF(obj: SpotifyResponse): obj is SpotifyDataFulfilled {
+  return 'album' in obj! && 'artists' in obj! && 'track' in obj!
 }
