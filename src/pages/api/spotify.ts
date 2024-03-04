@@ -1,3 +1,4 @@
+import type { SpotifyAccessToken } from '@types'
 import type { APIRoute } from 'astro'
 
 // Refresh token, defined on ther server
@@ -23,7 +24,7 @@ export const GET: APIRoute = async () => {
  * @param accessToken - The access token required to access the Spotify Web API.
  * @returns A Promise to an object containing data obtained from Spotify.
  */
-const fetchSpotifyData = async (accessToken: string) => {
+const fetchSpotifyData = async (accessToken: SpotifyAccessToken['access_token']) => {
   try {
     const res = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
       headers: { Authorization: 'Bearer ' + accessToken }
@@ -81,37 +82,33 @@ const fetchSpotifyData = async (accessToken: string) => {
  * to make the secure request.
  * @returns A Promise to an object containing an access token for the Spotify API
  */
-const fetchAccessToken = async (): Promise<{ access_token: string }> => {
-  const authOptions = {
-    method: 'POST',
-    headers: {
-      'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret),
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: new URLSearchParams({
-      grant_type: 'refresh_token',
-      refresh_token: refreshToken!,
-      client_id: clientId!,
-      scope: 'user-read-currently-playing'
+const fetchAccessToken = async (): Promise<SpotifyAccessToken> => {
+  try {
+    // Send the authorization request
+    const res = await fetch('https://accounts.spotify.com/api/token', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret),
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken!,
+        client_id: clientId!,
+        scope: 'user-read-currently-playing'
+      })
     })
-  }
 
-  // Send the authorization request
-  const f = fetch('https://accounts.spotify.com/api/token', authOptions)
-    .then((response) => {
-      if (!response.ok) {
-        console.log(response)
-        throw new Error('Network response was not ok')
-      }
-      return response.json()
-    })
-    .then((data) => {
-      accessToken = data.acces_token
-      return data
-    })
-    .catch((error) => {
-      console.error('There was a problem with the fetch operation:', error)
-      return ''
-    })
-  return f
+    if (!res.ok) {
+      console.error('Network response was not ok.')
+      return { access_token: '' }
+    }
+
+    const data: SpotifyAccessToken = await res.json()
+    accessToken = data.access_token // TODO - Move to KV store
+    return { access_token: data.access_token }
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error)
+    return { access_token: '' }
+  }
 }
