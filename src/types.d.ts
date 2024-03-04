@@ -37,3 +37,5 @@ export interface AcademiaLink extends SimulationLinkDatum<AcademiaNode> {
   }
   value: number
 }
+
+export type SpotifyAccessToken = { access_token: string }
