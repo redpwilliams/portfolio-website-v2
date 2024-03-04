@@ -21,7 +21,7 @@ export const GET: APIRoute = async () => {
 /**
  * Queries the Spotify Web API to get the currently playing track.
  * @param accessToken - The access token required to access the Spotify Web API.
- * @returns A Response object to be sent to the client
+ * @returns A Promise to an object containing data obtained from Spotify.
  */
 const fetchSpotifyData = async (accessToken: string) => {
   try {
@@ -74,7 +74,13 @@ const fetchSpotifyData = async (accessToken: string) => {
   }
 }
 
-// Using refresh token
+/**
+ * Acquires and Access Token from Spotify to access the Spotify API.
+ * The Acess token has an expiry time of 1 hour (3600 seconds).
+ * This function uses a refresh token along standard client credentials
+ * to make the secure request.
+ * @returns A Promise to an object containing an access token for the Spotify API
+ */
 const fetchAccessToken = async (): Promise<{ access_token: string }> => {
   const authOptions = {
     method: 'POST',
