@@ -1,4 +1,4 @@
-import type { SpotifyAccessToken } from '@types'
+import type { SpotifyAccessToken, SpotifyResponse, SpotifyData } from '@types'
 import type { APIRoute } from 'astro'
 
 // Refresh token, defined on ther server
@@ -24,7 +24,9 @@ export const GET: APIRoute = async () => {
  * @param accessToken - The access token required to access the Spotify Web API.
  * @returns A Promise to an object containing data obtained from Spotify.
  */
-const fetchSpotifyData = async (accessToken: SpotifyAccessToken['access_token']) => {
+const fetchSpotifyData = async (
+  accessToken: SpotifyAccessToken['access_token']
+): Promise<SpotifyResponse> => {
   try {
     const res = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
       headers: { Authorization: 'Bearer ' + accessToken }
@@ -34,18 +36,27 @@ const fetchSpotifyData = async (accessToken: SpotifyAccessToken['access_token'])
     // I'd like to know how to format the error response for best practice and clarity
     if (!res.ok)
       return {
-        data: null,
         message: 'Unexpected error requesting data from Spotify, status code ' + res.status
       }
 
     // I should only get 200 and 204:
     // https://developer.spotify.com/documentation/web-api/concepts/api-calls
     if (res.status == 204) {
-      return {}
+      return null
     }
 
     if (res.status == 200) {
-      const data = await res.json()
+      const data: SpotifyData = await res.json()
+
+      // Handle possibility of `data.item` being null, as explained in the docs
+      if (data.item === null) return { message: 'Spotify `item` object is null.' }
+
+      // Handle possibility of the currently played object not being a track (like an ad or an episode)
+      if (data.currently_playing_type !== 'track')
+        return {
+          message: 'Currently playing ' + data.currently_playing_type + ' instead of a track.'
+        }
+
       return {
         // Object of track's album name and link
         album: {
@@ -53,7 +64,7 @@ const fetchSpotifyData = async (accessToken: SpotifyAccessToken['access_token'])
           href: `https://open.spotify.com/album/${data.item.album.id}`
         },
         // Array of artists for the track
-        artists: data.item.artists.map((artist: { name: string; href: string; id: string }) => {
+        artists: data.item.artists.map((artist) => {
           return {
             name: artist.name,
             href: `https://open.spotify.com/artist/${artist.id}`
@@ -68,10 +79,10 @@ const fetchSpotifyData = async (accessToken: SpotifyAccessToken['access_token'])
     }
     // ^^^ Only works when content is playing (status code 200 most likely, i didn't check)
     // Else, it returns an empty body with status code 204
-    return { data: null, message: 'Unexpected error with status code ' + res.status }
-  } catch (e: unknown) {
-    if (!(e instanceof SyntaxError)) return { data: null, error: e }
-    return { data: null, message: 'Most likely used .json() on a poor object' }
+    return { message: 'Unexpected error with status code ' + res.status }
+  } catch (e) {
+    if (!(e instanceof SyntaxError)) return { error: e }
+    return { message: 'Most likely used .json() on a poor object' }
   }
 }
 
