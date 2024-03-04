@@ -229,3 +229,8 @@ export function initAcademiaGraph() {
       document.getElementById('academia-container')?.append(svg.node()!)
     })
 }
+
+export function setSpotifyUI(element: HTMLAnchorElement, data: { name: string; href: string }) {
+  element.setAttribute('href', data.href)
+  element.innerText = data.name
+}

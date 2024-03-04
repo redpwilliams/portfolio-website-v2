@@ -127,36 +127,41 @@ const { title } = Astro.props
           <span></span>
           <span></span>
           <span></span>
-          <p class='spotify-listening-to'>Currently listening to —<a id='spotify-track'></a></p>
+          <p class='spotify-listening-to'>
+            Currently listening to — <a id='spotify-track'></a> • <a id='spotify-artist'></a>
+          </p>
         </span>
         <span class='api-span datetime'></span>
         <script>
           import type { SpotifyDataFulfilled } from '@types'
-          async function updateSpotifyInfo() {
+          import { setSpotifyUI } from '@util'
+
+          async function intervalAction() {
             const spotifyTrack = document.getElementById('spotify-track') as HTMLAnchorElement
-
-            // Ensure the span element exists
-            if (spotifyTrack) {
-              let count = 1
-
-              // Update the content of the span every second
-              setInterval(async () => {
-                try {
-                  const response = await fetch('/api/spotify')
-                  if (!response.ok) throw new Error('Bad response of code ' + response.status)
-                  const data: SpotifyDataFulfilled = await response.json()
-                  console.log(data)
-                  spotifyTrack.setAttribute('href', data!.track.href)
-                  spotifyTrack.innerText = `${count++}`
-                } catch (e) {
-                  console.log((e as Error).message)
-                }
-              }, 1000 * 30)
-            } else {
-              console.error('Span element with id "spotify-info" not found.')
+            const spotifyArtist = document.getElementById('spotify-artist') as HTMLAnchorElement
+            if (!spotifyTrack || !spotifyArtist) return
+            try {
+              const response = await fetch('/api/spotify')
+              if (!response.ok) throw new Error('Bad response of code ' + response.status)
+              const data: SpotifyDataFulfilled = await response.json()
+              if (!data) return
+              setSpotifyUI(spotifyTrack, data.track)
+              setSpotifyUI(spotifyArtist, data.artists[0])
+            } catch (e) {
+              console.log((e as Error).message)
             }
           }
 
+          async function updateSpotifyInfo() {
+            // Ensure the span element exists
+
+            // Update the content of the span every second
+            setInterval(async () => {
+              intervalAction()
+            }, 1000 * 30)
+          }
+
+          intervalAction()
           // Call the function when the DOM content is loaded
           document.addEventListener('DOMContentLoaded', updateSpotifyInfo)
         </script>
