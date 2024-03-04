@@ -123,33 +123,32 @@ const { title } = Astro.props
       <p>Stay Connected</p>
       <hr />
       <div class='footer-api-wrapper'>
-        <span class='api-span datetime'></span>
         <span class='api-span spotify-api'>
           <span></span>
           <span></span>
           <span></span>
-          <p id='spotify-text'>Currently listening to —</p>
+          <p>Currently listening to —<span id='spotify-text'></span></p>
         </span>
+        <span class='api-span datetime'></span>
         <script type='module'>
-          // const footerDatetime = document.getElementsByClassName('datetime').item(0)!
-          // setInterval((i) => {
-          //   footerDatetime.innerHTML = 'Blacksburg, VA, • Time: ' + i++
-          // }, 1000)
-          // const spotify = document.getElementById('spotify-text')
-          // const data = fetch('https://redwilliams.dev/api/projects', {
-          //   method: 'POST',
-          //   headers: {
-          //     'Accept': 'application/json',
-          //     'Content-Type': 'application/json'
-          //   }
-          // }).then((d) => console.log(d))
-          function doFetch() {
-            fetch('/builtwithjson').then((response) => {
-              return response.json().then((data) => console.log(data))
-            })
+          function updateSpotifyInfo() {
+            const spotifyInfo = document.getElementById('spotify-text')
+
+            // Ensure the span element exists
+            if (spotifyInfo) {
+              let count = 1
+
+              // Update the content of the span every second
+              setInterval(() => {
+                spotifyInfo.textContent = count++
+              }, 1000)
+            } else {
+              console.error('Span element with id "spotify-info" not found.')
+            }
           }
 
-          setInterval(doFetch, 5000)
+          // Call the function when the DOM content is loaded
+          document.addEventListener('DOMContentLoaded', updateSpotifyInfo)
         </script>
       </div>
     </footer>
@@ -375,7 +374,6 @@ const { title } = Astro.props
 
     hr {
       width: 100%;
-      margin: 1rem 0;
     }
   }
 
@@ -394,7 +392,8 @@ const { title } = Astro.props
 
   .footer-api-wrapper {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin: 1rem 0;
   }
 
   .spotify-api {
@@ -402,6 +401,7 @@ const { title } = Astro.props
     align-items: center;
     font-family: var(--font-sans);
     text-transform: none;
+    margin-left: 10vw;
 
     @keyframes spotify-playing {
       0% {
