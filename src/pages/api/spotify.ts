@@ -1,21 +1,18 @@
+import type { APIRoute } from 'astro'
+
 // Refresh token, defined on ther server
 const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN
 const clientId = process.env.SPOTIFY_CLIENT_ID
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET
 let accessToken: string | undefined
 
-export async function GET() {
+export const GET: APIRoute = async () => {
   // Request access token if null
   accessToken = accessToken ?? (await fetchAccessToken()).access_token
 
   const data = await fetchSpotifyData(accessToken!)
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
-  // return new Response(buffer.toString('binary'), {
-  //   headers: {
-  //     'Content-Type': 'application/pdf'
-  //   }
-  // })
   return new Response(JSON.stringify({ access_token: accessToken ?? '', data }), {
     headers: { 'Content-Type': 'application/json' }
   })
@@ -43,9 +40,7 @@ const fetchSpotifyData = async (accessToken: string) => {
     // I should only get 200 and 204:
     // https://developer.spotify.com/documentation/web-api/concepts/api-calls
     if (res.status == 204) {
-      return {
-        data: {}
-      }
+      return {}
     }
 
     if (res.status == 200) {
@@ -57,7 +52,7 @@ const fetchSpotifyData = async (accessToken: string) => {
           href: `https://open.spotify.com/album/${data.item.album.id}`
         },
         // Array of artists for the track
-        artists: data.item.artists.map((artist: { name: string; href: string }) => {
+        artists: data.item.artists.map((artist: { name: string; href: string; id: string }) => {
           return {
             name: artist.name,
             href: `https://open.spotify.com/artist/${artist.id}`
@@ -105,23 +100,12 @@ const fetchAccessToken = async (): Promise<{ access_token: string }> => {
       return response.json()
     })
     .then((data) => {
-      // const token = data.access_token // Access the access token from the response body
-      // const token_type = data.token_type // Access the token type from the response body
-      // const expires_in = data.expires_in // Access the expiration time from the response body
-
       accessToken = data.acces_token
-
-      // Use the obtained token for subsequent calls to Spotify Web API services
-      // console.log('Access Token:', token)
-      // console.log('Token Type:', token_type)
-      // console.log('Expires In:', expires_in, 'seconds')
       return data
-      // return new Response(JSON.stringify(data))
     })
     .catch((error) => {
       console.error('There was a problem with the fetch operation:', error)
       return ''
-      // return new Response()
     })
   return f
 }
