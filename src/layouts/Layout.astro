@@ -136,12 +136,12 @@ const { title } = Astro.props
           import type { SpotifyDataFulfilled } from '@types'
           import { setSpotifyUI } from '@util'
 
+          // NOTE - Boolean flag to turn on/off spotify request ping
+          const SPOTIFY_REQUEST_FLAG = true
+
           // Get UI elements
           const spotifyTrack = document.getElementById('spotify-track') as HTMLAnchorElement
           const spotifyArtist = document.getElementById('spotify-artists') as HTMLSpanElement
-
-          // Handle no such elements
-          // if (!spotifyTrack || !spotifyArtist) return
 
           // Loop to request data from Spotify and populate the UI with
           async function updateSpotifyInfo() {
@@ -151,11 +151,14 @@ const { title } = Astro.props
               // See /api/spotify for defined codes
               if (!response.ok) throw new Error('Bad response of code ' + response.status)
 
+              // Response is good so data shows if spotify is playing or not (null)
               const data: SpotifyDataFulfilled = await response.json()
-              if (!data) return // Handle no data?
+              if (data === null) {
+                // TODO - Handle empty data. Response is 200 either way, but data = null when empty
+                return
+              }
 
               setSpotifyUI(spotifyTrack, data.track)
-              // TODO - Add Underline on hover
               spotifyArtist.innerHTML = ''
               data.artists.forEach((artist, i) => {
                 spotifyArtist.insertAdjacentHTML(
@@ -171,7 +174,7 @@ const { title } = Astro.props
           }
 
           // Call the function when the DOM content is loaded
-          if (spotifyTrack && spotifyArtist) {
+          if (spotifyTrack && spotifyArtist && SPOTIFY_REQUEST_FLAG) {
             document.addEventListener('DOMContentLoaded', updateSpotifyInfo)
             setInterval(updateSpotifyInfo, 1000 * 30)
           }
@@ -467,6 +470,8 @@ const { title } = Astro.props
 
   .spotify-listening-to {
     font-size: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
     & > * {
       display: inline;
     }
