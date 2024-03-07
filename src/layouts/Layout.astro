@@ -128,7 +128,9 @@ const { title } = Astro.props
           <span></span>
           <span></span>
           <p class='spotify-listening-to'>
-            Currently vibing to — <a id='spotify-track'></a> • <span id='spotify-artists'></span>
+            <span id='spotify-vibing'>Currently vibing to —&nbsp;</span><a id='spotify-track'
+            ></a><span id='spotify-dot-separator'>&nbsp;•&nbsp</span><span id='spotify-artists'
+            ></span>
           </p>
         </span>
         <span class='api-span datetime'></span>
@@ -176,7 +178,7 @@ const { title } = Astro.props
           // Call the function when the DOM content is loaded
           if (spotifyTrack && spotifyArtist && SPOTIFY_REQUEST_FLAG) {
             document.addEventListener('DOMContentLoaded', updateSpotifyInfo)
-            setInterval(updateSpotifyInfo, 1000 * 30)
+            setInterval(updateSpotifyInfo, 1000 * 30) // 30 seconds
           }
         </script>
       </div>
@@ -227,6 +229,43 @@ const { title } = Astro.props
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  h2 {
+    color: var(--text-main);
+    font-size: 1rem;
+  }
+
+  h3 {
+    color: var(--text-main);
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  p {
+    color: var(--text-gray-light);
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  code {
+    font-family:
+      Menlo,
+      Monaco,
+      Lucida Console,
+      Liberation Mono,
+      DejaVu Sans Mono,
+      Bitstream Vera Sans Mono,
+      Courier New,
+      monospace;
   }
 
   .main-container {
@@ -429,14 +468,13 @@ const { title } = Astro.props
     align-items: center;
     font-family: var(--font-sans);
     text-transform: none;
-    margin-left: 10vw;
 
     @keyframes spotify-playing {
       0% {
         height: 3px;
       }
       50% {
-        height: 16px;
+        height: 13px;
       }
       to {
         height: 3px;
@@ -444,27 +482,27 @@ const { title } = Astro.props
     }
 
     & > span {
-      width: 4px;
-      height: 16px;
+      width: 3px;
+      height: 13px;
       border-radius: 4px;
       background: var(--gradient);
       margin: 0 3px;
 
       &:nth-child(1) {
-        animation: spotify-playing 0.85s infinite ease;
+        animation: spotify-playing 0.85s infinite linear;
       }
 
       &:nth-child(2) {
-        animation: spotify-playing 1.26s infinite ease;
+        animation: spotify-playing 1s infinite linear;
       }
 
       &:nth-child(3) {
-        animation: spotify-playing 1s infinite ease;
+        animation: spotify-playing 1.15s infinite linear;
       }
     }
 
     & > p {
-      margin-left: 1rem;
+      margin-left: 0.5rem;
     }
   }
 
@@ -477,51 +515,35 @@ const { title } = Astro.props
     }
   }
 
-  #spotify-artists {
-    .spotify-artist:hover,
-    .spotify-artist:focus {
-      // TODO - Make gradient
-      text-decoration: underline 3px red;
-    }
-    pre {
+  #spotify-artists,
+  #spotify-vibing,
+  #spotify-dot-separator {
+    display: none;
+  }
+
+  .spotify-artist:hover,
+  .spotify-artist:focus {
+    // TODO - Make gradient
+    text-decoration: underline 3px red;
+  }
+
+  @media (min-width: 30em) {
+    // Midsize, display "Currently vibing to" and track name
+    #spotify-vibing {
       display: inline;
     }
+
+    #spotify-artists pre {
+      display: inline; // This is for the comma separated list
+      // Underline only happens under the text, not the comma
+    }
   }
 
-  h2 {
-    color: var(--text-main);
-    font-size: 1rem;
-  }
-
-  h3 {
-    color: var(--text-main);
-    font-size: 2rem;
-    font-weight: 500;
-  }
-
-  p {
-    color: var(--text-gray-light);
-    font-size: 1rem;
-    line-height: 1.8;
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  ul {
-    list-style: none;
-  }
-
-  code {
-    font-family:
-      Menlo,
-      Monaco,
-      Lucida Console,
-      Liberation Mono,
-      DejaVu Sans Mono,
-      Bitstream Vera Sans Mono,
-      Courier New,
-      monospace;
+  @media (min-width: 60em) {
+    // Desktop, display everything
+    #spotify-artists,
+    #spotify-dot-separator {
+      display: inline;
+    }
   }
 </style>
