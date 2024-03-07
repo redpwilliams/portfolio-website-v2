@@ -97,242 +97,243 @@ const displayAcademiaGraph = false
           </>
         )
       }
-      <section>
-        <SectionHeader title='Reports' />
-        {
-          // If there are no reports that were fetched . . .
-          // FIXME - Separate into projects specifically, not just entire data object
-          data.result.length === 0 ? (
-            // . . . Display an empty message
-            <>
-              <h4>Nothing to See right now!</h4>
-            </>
-          ) : (
-            // . . . Else display reports as normal
-            <ul id='reports'>
-              {reports.map((report) => {
-                return <Report {...{ report }} />
-              })}
-            </ul>
-          )
-        }
-      </section>
+    </section>
+
+    <section>
+      <SectionHeader title='Reports' />
       {
-        displayAcademiaGraph && (
-          <section>
-            <SectionHeader title='Academia' />
-            <div id='academia-container' />
-          </section>
+        // If there are no reports that were fetched . . .
+        // FIXME - Separate into projects specifically, not just entire data object
+        data.result.length === 0 ? (
+          // . . . Display an empty message
+          <>
+            <h4>Nothing to See right now!</h4>
+          </>
+        ) : (
+          // . . . Else display reports as normal
+          <ul id='reports'>
+            {reports.map((report) => {
+              return <Report {...{ report }} />
+            })}
+          </ul>
         )
       }
-      <script type='module'>
-        import { initAcademiaGraph } from './src/util.ts'
-        initAcademiaGraph()
-      </script>
-      <section class='connect'>
-        <h3>Let's Connect!</h3>
-        <p>
-          I am currently looking for Internships around Summer 2024. I would love the opportunity to
-          work and learn from you! Please reach out if you have any questions, or would like to hear
-          from me.
-          <br />
-           Thanks!
-        </p>
-        <Button text='Get in touch' href='#' style={{ margin: '10px auto' }} />
-      </section>
+    </section>
+    {
+      displayAcademiaGraph && (
+        <section>
+          <SectionHeader title='Academia' />
+          <div id='academia-container' />
+        </section>
+      )
+    }
+    <script type='module'>
+      import { initAcademiaGraph } from './src/util.ts'
+      initAcademiaGraph()
+    </script>
+    <section class='connect'>
+      <h3>Let's Connect!</h3>
+      <p>
+        I am currently looking for Internships around Summer 2024. I would love the opportunity to
+        work and learn from you! Please reach out if you have any questions, or would like to hear
+        from me.
+        <br />
+         Thanks!
+      </p>
+      <Button text='Get in touch' href='#' style={{ margin: '10px auto' }} />
     </section>
   </main>
-  <style lang='scss'>
-    @use 'src/main' as *;
+</Layout>
+<style lang='scss'>
+  @use 'src/main' as *;
 
-    section {
-      margin: 5rem 0;
-      max-width: 100%;
-    }
+  section {
+    margin: 5rem 0;
+    max-width: 100%;
+  }
 
-    .hero {
-      padding-top: 6rem;
-      margin-top: 0;
-    }
+  .hero {
+    padding-top: 6rem;
+    margin-top: 0;
+  }
 
-    #hey {
-      color: var(--text-gray-dark);
-      font-family: var(--font-mono);
-      font-weight: 700;
-      margin-left: 9px;
-      font-size: clamp(1.1rem, 2vw, 1.6rem);
-    }
+  #hey {
+    color: var(--text-gray-dark);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    margin-left: 9px;
+    font-size: clamp(1.1rem, 2vw, 1.6rem);
+  }
 
-    h1 {
-      margin-bottom: -5px;
-      font-weight: 500;
-      color: var(--text-main);
-      font-size: clamp(3rem, 5vw, 6rem);
-    }
+  h1 {
+    margin-bottom: -5px;
+    font-weight: 500;
+    color: var(--text-main);
+    font-size: clamp(3rem, 5vw, 6rem);
+  }
 
-    h2 {
+  h2 {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: clamp(1rem, 3vw, 1.6rem);
+    text-transform: capitalize;
+    position: relative;
+
+    &::before {
+      content: '';
+      background-image: var(--gradient);
+      width: clamp(8rem, 18vw, 20rem);
+      height: 15px;
+      margin-right: 10px;
       display: inline-block;
-      font-family: var(--font-mono);
-      font-weight: 400;
-      font-size: clamp(1rem, 3vw, 1.6rem);
-      text-transform: capitalize;
-      position: relative;
+      vertical-align: middle;
+    }
+  }
 
-      &::before {
-        content: '';
-        background-image: var(--gradient);
-        width: clamp(8rem, 18vw, 20rem);
-        height: 15px;
-        margin-right: 10px;
-        display: inline-block;
-        vertical-align: middle;
-      }
+  .intro {
+    font-size: 1.5rem;
+    margin: 2rem 0;
+    line-height: 1.8;
+    font-size: clamp(1rem, 1.4vw, 1.3rem);
+  }
+
+  #img-wrapper {
+    width: fit-content;
+    height: fit-content;
+    margin: 0 auto;
+    position: relative;
+    --x-offset: 6px;
+    --y-offset: 7px;
+    --translation-factor: 2;
+    --transition-duration-rotation: 0.2s;
+    --transition-duration-translate: 0.4s;
+  }
+
+  img,
+  .stroke-wrapper {
+    height: auto;
+    margin: 1rem auto;
+    display: block;
+  }
+
+  .pfp {
+    width: 55%;
+    position: relative;
+    z-index: 2;
+    transform: translate(calc(-1 * (var(--x-offset))), calc(-1 * (var(--y-offset))));
+    /* 
+     * On mouse out, wait for rotation undo animation, then translate back into position */
+    transition: transform var(--transition-duration-translate) ease
+      var(--transition-duration-rotation);
+  }
+
+  .stroke {
+    width: 45%;
+  }
+
+  .stroke-wrapper {
+    height: auto;
+    position: absolute;
+    margin: auto;
+    inset: 0;
+  }
+
+  .translate {
+    transform: translate(var(--x-offset), var(--y-offset));
+    opacity: 0.5;
+    /* 
+     * On mouse out, wait for rotation animation to finish, then translate and  reduce opacity
+     */
+    transition:
+      opacity var(--transition-duration-translate) ease var(--transition-duration-rotation),
+      transform var(--transition-duration-translate) ease var(--transition-duration-rotation);
+  }
+
+  .rotate {
+    /* Undo rotation immediately after hover off */
+    transition: transform var(--transition-duration-rotation) ease;
+  }
+
+  .pfp:hover {
+    transform: translate(
+      calc(-1 * var(--translation-factor) * (var(--x-offset))),
+      calc(-1 * var(--translation-factor) * (var(--y-offset)))
+    );
+
+    & + .translate {
+      opacity: 1;
+      transform: translate(
+        calc(var(--translation-factor) * (var(--x-offset))),
+        calc(var(--translation-factor) * (var(--y-offset)))
+      );
     }
 
+    & ~ .stroke-wrapper .rotate {
+      transform: rotate(60deg);
+    }
+  }
+
+  .connect {
+    text-align: center;
+    max-width: 40rem;
+    margin: 0 auto;
+
+    & h3 {
+      margin-bottom: 10px;
+    }
+
+    & p {
+      padding: 15px 0;
+    }
+  }
+
+  @media (min-width: $breakpoint-main) {
+    .hero {
+      margin: 0;
+    }
     .intro {
-      font-size: 1.5rem;
-      margin: 2rem 0;
-      line-height: 1.8;
-      font-size: clamp(1rem, 1.4vw, 1.3rem);
+      width: 80%;
+    }
+
+    .essence-grid {
+      display: grid;
+      grid-template-columns: 70% 30%;
+      place-items: center;
     }
 
     #img-wrapper {
-      width: fit-content;
-      height: fit-content;
-      margin: 0 auto;
-      position: relative;
-      --x-offset: 6px;
-      --y-offset: 7px;
-      --translation-factor: 2;
-      --transition-duration-rotation: 0.2s;
-      --transition-duration-translate: 0.4s;
-    }
-
-    img,
-    .stroke-wrapper {
-      height: auto;
-      margin: 1rem auto;
-      display: block;
+      min-width: 16rem;
+      --x-offset: 8px;
+      --y-offset: 14px;
+      --translation-factor: 1.7;
     }
 
     .pfp {
-      width: 55%;
-      position: relative;
-      z-index: 2;
-      transform: translate(calc(-1 * (var(--x-offset))), calc(-1 * (var(--y-offset))));
-      /* 
-     * On mouse out, wait for rotation undo animation, then translate back into position */
-      transition: transform var(--transition-duration-translate) ease
-        var(--transition-duration-rotation);
+      width: 65%;
     }
 
     .stroke {
-      width: 45%;
+      width: 55%;
     }
+  }
 
-    .stroke-wrapper {
-      height: auto;
-      position: absolute;
-      margin: auto;
-      inset: 0;
-    }
+  #projects {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
+    gap: 30px 15px;
+  }
 
-    .translate {
-      transform: translate(var(--x-offset), var(--y-offset));
-      opacity: 0.5;
-      /* 
-     * On mouse out, wait for rotation animation to finish, then translate and  reduce opacity
-     */
-      transition:
-        opacity var(--transition-duration-translate) ease var(--transition-duration-rotation),
-        transform var(--transition-duration-translate) ease var(--transition-duration-rotation);
-    }
+  #reports {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap: 15px;
+  }
 
-    .rotate {
-      /* Undo rotation immediately after hover off */
-      transition: transform var(--transition-duration-rotation) ease;
-    }
-
-    .pfp:hover {
-      transform: translate(
-        calc(-1 * var(--translation-factor) * (var(--x-offset))),
-        calc(-1 * var(--translation-factor) * (var(--y-offset)))
-      );
-
-      & + .translate {
-        opacity: 1;
-        transform: translate(
-          calc(var(--translation-factor) * (var(--x-offset))),
-          calc(var(--translation-factor) * (var(--y-offset)))
-        );
-      }
-
-      & ~ .stroke-wrapper .rotate {
-        transform: rotate(60deg);
-      }
-    }
-
-    .connect {
-      text-align: center;
-      max-width: 40rem;
-      margin: 0 auto;
-
-      & h3 {
-        margin-bottom: 10px;
-      }
-
-      & p {
-        padding: 15px 0;
-      }
-    }
-
-    @media (min-width: $breakpoint-main) {
-      .hero {
-        margin: 0;
-      }
-      .intro {
-        width: 80%;
-      }
-
-      .essence-grid {
-        display: grid;
-        grid-template-columns: 70% 30%;
-        place-items: center;
-      }
-
-      #img-wrapper {
-        min-width: 16rem;
-        --x-offset: 8px;
-        --y-offset: 14px;
-        --translation-factor: 1.7;
-      }
-
-      .pfp {
-        width: 65%;
-      }
-
-      .stroke {
-        width: 55%;
-      }
-    }
-
+  @media (min-width: $breakpoint-main) {
     #projects {
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
-      gap: 30px 15px;
+      display: block;
     }
-
-    #reports {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-      gap: 15px;
-    }
-
-    @media (min-width: $breakpoint-main) {
-      #projects {
-        display: block;
-      }
-    }
-  </style>
-</Layout>
+  }
+</style>

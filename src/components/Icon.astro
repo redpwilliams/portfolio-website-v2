@@ -8,22 +8,10 @@ interface Props extends HTMLAttributes<'a'> {
 const { href, translateOnHover, ...attrs } = Astro.props
 ---
 
-{
-  href ? (
-    <a
-      class='icon-wrapper'
-      href={href}
-      target='_blank'
-      data-translate={translateOnHover}
-      {...attrs}>
-      <slot />
-    </a>
-  ) : (
-    <div class='icon-wrapper' target='_blank' data-translate={translateOnHover} {...attrs}>
-      <slot />
-    </div>
-  )
-}
+<a class='icon-wrapper' href={href} target='_blank' data-translate={translateOnHover} {...attrs}>
+  <slot />
+</a>
+
 <script>
   // Astro should allow this entire script to run once
   // https://docs.astro.build/en/guides/client-side-scripts/#script-processing
@@ -67,11 +55,13 @@ const { href, translateOnHover, ...attrs } = Astro.props
         transition: stop-color 0.25s ease;
       }
 
-      .icon-wrapper:hover #${icon.id} stop:first-child {
+      .icon-wrapper:hover #${icon.id} stop:first-child,
+      .icon-wrapper:focus #${icon.id} stop:first-child {
         stop-color: var(--gradient-start);
       }
 
-      .icon-wrapper:hover #${icon.id} stop:last-child {
+      .icon-wrapper:hover #${icon.id} stop:last-child,
+      .icon-wrapper:focus #${icon.id} stop:last-child {
         stop-color: var(--gradient-end);
       }
     `
@@ -86,7 +76,8 @@ const { href, translateOnHover, ...attrs } = Astro.props
     transition: transform 0.25s ease;
   }
 
-  .icon-wrapper[data-translate]:hover {
+  .icon-wrapper[data-translate]:hover,
+  .icon-wrapper[data-translate]:focus {
     transition: transform 0.3s ease;
     transform: translateX(-3px);
   }
