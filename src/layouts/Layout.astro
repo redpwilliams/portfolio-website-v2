@@ -6,7 +6,7 @@ import { Icon, Logo } from '@components'
 import { FiGithub, FiInstagram, FiLinkedin } from 'react-icons/fi'
 import { FaDiscord } from 'react-icons/fa'
 import { LiaSpotify } from 'react-icons/lia'
-import { FaXTwitter } from 'react-icons/fa6'
+import { FaXTwitter, FaThreads } from 'react-icons/fa6'
 
 // Types
 import type { IconProps } from '@types'
@@ -29,7 +29,7 @@ const socials: IconProps[] = [
   },
   {
     icon: FiLinkedin,
-    href: ''
+    href: 'https://www.linkedin.com/in/redwilliams18/'
   },
   {
     icon: FaXTwitter,
@@ -38,6 +38,10 @@ const socials: IconProps[] = [
   {
     icon: FaDiscord,
     href: ''
+  },
+  {
+    icon: FaThreads,
+    href: 'https://www.threads.net/@red.williams18'
   }
 ]
 
@@ -128,9 +132,12 @@ const { title } = Astro.props
           <span></span>
           <span></span>
           <p class='spotify-listening-to'>
-            <span id='spotify-vibing'>Currently vibing to —&nbsp;</span><a id='spotify-track'
-            ></a><span id='spotify-dot-separator'>&nbsp;•&nbsp</span><span id='spotify-artists'
-            ></span>
+            <a
+              id='spotify-vibing'
+              href='https://open.spotify.com/user/jpw918?si=9641a1c3c57b4e04'
+              target='_blank'>Currently vibing to —&nbsp;</a
+            ><a id='spotify-track'></a><span id='spotify-dot-separator'>&nbsp;•&nbsp</span><span
+              id='spotify-artists'></span>
           </p>
         </span>
         <span class='api-span datetime'></span>
@@ -142,7 +149,9 @@ const { title } = Astro.props
           const SPOTIFY_REQUEST_FLAG = true
 
           // Get UI elements
+          const spotifyVibing = document.getElementById('spotify-vibing') as HTMLAnchorElement
           const spotifyTrack = document.getElementById('spotify-track') as HTMLAnchorElement
+          const spotifyDot = document.getElementById('spotify-dot-separator') as HTMLSpanElement
           const spotifyArtist = document.getElementById('spotify-artists') as HTMLSpanElement
 
           // Loop to request data from Spotify and populate the UI with
@@ -155,10 +164,7 @@ const { title } = Astro.props
 
               // Response is good so data shows if spotify is playing or not (null)
               const data: SpotifyDataFulfilled = await response.json()
-              if (data === null) {
-                // TODO - Handle empty data. Response is 200 either way, but data = null when empty
-                return
-              }
+              if (data === null) throw new Error('Empty data object')
 
               setSpotifyUI(spotifyTrack, data.track)
               spotifyArtist.innerHTML = ''
@@ -172,6 +178,13 @@ const { title } = Astro.props
               })
             } catch (e) {
               console.log((e as Error).message)
+
+              // Remove inactive elements
+              spotifyDot.style.display = 'none'
+              spotifyTrack.style.display = 'none'
+              spotifyArtist.style.display = 'none'
+              spotifyVibing.innerText = 'Offline'
+              return
             }
           }
 
@@ -465,7 +478,7 @@ const { title } = Astro.props
 
   .spotify-api {
     display: flex;
-    align-items: center;
+    align-items: end;
     font-family: var(--font-sans);
     text-transform: none;
 
@@ -486,7 +499,8 @@ const { title } = Astro.props
       height: 13px;
       border-radius: 4px;
       background: var(--gradient);
-      margin: 0 3px;
+      margin: 0 3px 6px 3px;
+      transform-origin: bottom;
 
       &:nth-child(1) {
         animation: spotify-playing 0.65s infinite linear;
