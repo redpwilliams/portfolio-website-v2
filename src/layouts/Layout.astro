@@ -135,15 +135,14 @@ const { title } = Astro.props
             <a
               id='spotify-vibing'
               href='https://open.spotify.com/user/jpw918?si=9641a1c3c57b4e04'
-              target='_blank'>Currently vibing to —&nbsp;</a
-            ><a id='spotify-track'></a><span id='spotify-dot-separator'>&nbsp;•&nbsp</span><span
+              target='_blank'>Offline</a
+            ><a id='spotify-track'></a><span id='spotify-dot-separator'></span><span
               id='spotify-artists'></span>
           </p>
         </span>
         <span class='api-span datetime'></span>
         <script>
           import type { SpotifyDataFulfilled } from '@types'
-          import { setSpotifyUI } from '@util'
 
           // NOTE - Boolean flag to turn on/off spotify request ping
           const SPOTIFY_REQUEST_FLAG = true
@@ -152,7 +151,7 @@ const { title } = Astro.props
           const spotifyVibing = document.getElementById('spotify-vibing') as HTMLAnchorElement
           const spotifyTrack = document.getElementById('spotify-track') as HTMLAnchorElement
           const spotifyDot = document.getElementById('spotify-dot-separator') as HTMLSpanElement
-          const spotifyArtist = document.getElementById('spotify-artists') as HTMLSpanElement
+          const spotifyArtists = document.getElementById('spotify-artists') as HTMLSpanElement
 
           // Loop to request data from Spotify and populate the UI with
           async function updateSpotifyInfo() {
@@ -166,30 +165,40 @@ const { title } = Astro.props
               const data: SpotifyDataFulfilled = await response.json()
               if (data === null) throw new Error('Empty data object')
 
-              setSpotifyUI(spotifyTrack, data.track)
-              spotifyArtist.innerHTML = ''
+              // Set spotify vibing text
+              spotifyVibing.innerHTML = 'Currently vibing to —&nbsp;'
+
+              // Set track text (name and href)
+              spotifyTrack.setAttribute('href', data.track.href)
+              spotifyTrack.innerText = data.track.name
+
+              // Show spotify dot seperator
+              spotifyDot.innerHTML = '&nbsp;•&nbsp'
+
+              // Set artists texts
+              spotifyArtists.innerHTML = '' // Removes nested artist anchor tags
               data.artists.forEach((artist, i) => {
-                spotifyArtist.insertAdjacentHTML(
-                  'beforeend',
+                spotifyArtists.insertAdjacentHTML(
+                  'beforeend', // Inserts the artists' names in the order the appear on spotify
                   `<a href='${artist.href}' target='_blank' class='spotify-artist'>${
                     artist.name
                   }</a>${i !== data.artists.length - 1 ? '<pre>, </pre>' : ''}`
                 )
               })
             } catch (e) {
-              console.log((e as Error).message)
+              console.warn((e as Error).message)
 
               // Remove inactive elements
-              spotifyDot.style.display = 'none'
-              spotifyTrack.style.display = 'none'
-              spotifyArtist.style.display = 'none'
               spotifyVibing.innerText = 'Offline'
+              spotifyTrack.style.display = 'none'
+              spotifyDot.style.display = 'none'
+              spotifyArtists.style.display = 'none'
               return
             }
           }
 
           // Call the function when the DOM content is loaded
-          if (spotifyTrack && spotifyArtist && SPOTIFY_REQUEST_FLAG) {
+          if (spotifyTrack && spotifyArtists && SPOTIFY_REQUEST_FLAG) {
             document.addEventListener('DOMContentLoaded', updateSpotifyInfo)
             setInterval(updateSpotifyInfo, 1000 * 30) // 30 seconds
           }

@@ -40,10 +40,12 @@ const fetchSpotifyData = async (
 
     // TODO - See what response I get when I try to do a 404,
     // I'd like to know how to format the error response for best practice and clarity
-    if (!res.ok)
+    if (!res.ok) {
+      console.error(await res.json())
       return {
         message: 'Unexpected error requesting data from Spotify, status code ' + res.status
       }
+    }
 
     // I should only get 200 and 204:
     // https://developer.spotify.com/documentation/web-api/concepts/api-calls
