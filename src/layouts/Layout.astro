@@ -128,7 +128,7 @@ const { title } = Astro.props
           <span></span>
           <span></span>
           <p class='spotify-listening-to'>
-            Currently listening to — <a id='spotify-track'></a> • <a id='spotify-artist'></a>
+            Currently vibing to — <a id='spotify-track'></a> • <span id='spotify-artists'></span>
           </p>
         </span>
         <span class='api-span datetime'></span>
@@ -136,34 +136,45 @@ const { title } = Astro.props
           import type { SpotifyDataFulfilled } from '@types'
           import { setSpotifyUI } from '@util'
 
-          async function intervalAction() {
-            const spotifyTrack = document.getElementById('spotify-track') as HTMLAnchorElement
-            const spotifyArtist = document.getElementById('spotify-artist') as HTMLAnchorElement
-            if (!spotifyTrack || !spotifyArtist) return
+          // Get UI elements
+          const spotifyTrack = document.getElementById('spotify-track') as HTMLAnchorElement
+          const spotifyArtist = document.getElementById('spotify-artists') as HTMLSpanElement
+
+          // Handle no such elements
+          // if (!spotifyTrack || !spotifyArtist) return
+
+          // Loop to request data from Spotify and populate the UI with
+          async function updateSpotifyInfo() {
             try {
               const response = await fetch('/api/spotify')
+
+              // See /api/spotify for defined codes
               if (!response.ok) throw new Error('Bad response of code ' + response.status)
+
               const data: SpotifyDataFulfilled = await response.json()
-              if (!data) return
+              if (!data) return // Handle no data?
+
               setSpotifyUI(spotifyTrack, data.track)
-              setSpotifyUI(spotifyArtist, data.artists[0])
+              // TODO - Add Underline on hover
+              spotifyArtist.innerHTML = ''
+              data.artists.forEach((artist, i) => {
+                spotifyArtist.insertAdjacentHTML(
+                  'beforeend',
+                  `<a href='${artist.href}' target='_blank' class='spotify-artist'>${
+                    artist.name
+                  }</a>${i !== data.artists.length - 1 && '<pre>, </pre>'}`
+                )
+              })
             } catch (e) {
               console.log((e as Error).message)
             }
           }
 
-          async function updateSpotifyInfo() {
-            // Ensure the span element exists
-
-            // Update the content of the span every second
-            setInterval(async () => {
-              intervalAction()
-            }, 1000 * 30)
-          }
-
-          intervalAction()
           // Call the function when the DOM content is loaded
-          document.addEventListener('DOMContentLoaded', updateSpotifyInfo)
+          if (spotifyTrack && spotifyArtist) {
+            document.addEventListener('DOMContentLoaded', updateSpotifyInfo)
+            setInterval(updateSpotifyInfo, 1000 * 30)
+          }
         </script>
       </div>
     </footer>
@@ -457,6 +468,16 @@ const { title } = Astro.props
 
   .spotify-listening-to > * {
     display: inline;
+  }
+
+  #spotify-artists {
+    .spotify-artist {
+      // TODO - Make gradient
+      text-decoration: underline 3px red;
+    }
+    pre {
+      display: inline;
+    }
   }
 
   h2 {
