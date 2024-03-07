@@ -25,7 +25,7 @@ const socials: IconProps[] = [
   },
   {
     icon: FiInstagram,
-    href: ''
+    href: 'https://www.instagram.com/red.williams18/'
   },
   {
     icon: FiLinkedin,
@@ -33,7 +33,7 @@ const socials: IconProps[] = [
   },
   {
     icon: FaXTwitter,
-    href: ''
+    href: 'https://twitter.com/redpw_'
   },
   {
     icon: FaDiscord,
@@ -162,7 +162,7 @@ const { title } = Astro.props
                   'beforeend',
                   `<a href='${artist.href}' target='_blank' class='spotify-artist'>${
                     artist.name
-                  }</a>${i !== data.artists.length - 1 && '<pre>, </pre>'}`
+                  }</a>${i !== data.artists.length - 1 ? '<pre>, </pre>' : ''}`
                 )
               })
             } catch (e) {
@@ -466,12 +466,16 @@ const { title } = Astro.props
     }
   }
 
-  .spotify-listening-to > * {
-    display: inline;
+  .spotify-listening-to {
+    font-size: 0.75rem;
+    & > * {
+      display: inline;
+    }
   }
 
   #spotify-artists {
-    .spotify-artist {
+    .spotify-artist:hover,
+    .spotify-artist:focus {
       // TODO - Make gradient
       text-decoration: underline 3px red;
     }
