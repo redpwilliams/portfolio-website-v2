@@ -132,8 +132,7 @@ const fetchAccessToken = async (): Promise<SpotifyAccessToken> => {
 }
 
 const setStatusCode = (data: SpotifyResponse) => {
-  if (data === null) return 204
-  if (isSDF(data)) return 200
+  if (data === null || isSDF(data)) return 200
   return 400
 }
 
