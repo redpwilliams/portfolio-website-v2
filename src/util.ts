@@ -16,7 +16,7 @@ import type { AcademiaNode, AcademiaLink } from '@types'
  * @param index - The index of the linear gradient.
  * @param id - The ID to be assigned to the linear gradient.
  */
-export function createLinearGradient(icon: HTMLElement, index: number, id: string) {
+export function createLinearGradient(id: string) {
   const linearGradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient')
   linearGradient.setAttribute('id', id)
   linearGradient.setAttribute('x1', '0%')

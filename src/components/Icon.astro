@@ -28,7 +28,7 @@ const { href, translateOnHover, ...attrs } = Astro.props
     // Add linear gradient to <defs> definition tag
     const gradientID = 'gradient-' + index // each svg's gradient needs a unique id
     const defsElement = document.createElementNS('http://www.w3.org/2000/svg', 'defs')
-    const linearGradient = createLinearGradient(icon, index, gradientID)
+    const linearGradient = createLinearGradient(gradientID)
     defsElement.append(linearGradient)
 
     // Add <defs> tag to icon svg
