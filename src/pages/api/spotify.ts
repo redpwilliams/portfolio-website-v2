@@ -10,7 +10,8 @@ let lastRequestTime: number = 0
 
 export const GET: APIRoute = async () => {
   const currentTime = Date.now()
-  if (currentTime - lastRequestTime < 45000) {
+  if (currentTime - lastRequestTime < 25000) {
+    // 25 seconds
     console.log('Rate limited!')
     return new Response(JSON.stringify({ error: 'Rate limit exceeded. Please try again later.' }), {
       headers: { 'Content-Type': 'application/json' },

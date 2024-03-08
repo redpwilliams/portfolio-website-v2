@@ -156,6 +156,9 @@ const { title } = Astro.props
           const spotifyDot = document.getElementById('spotify-dot-separator') as HTMLSpanElement
           const spotifyArtists = document.getElementById('spotify-artists') as HTMLSpanElement
 
+          // Create reusable data object
+          let data: SpotifyDataFulfilled = null
+
           // Loop to request data from Spotify and populate the UI with
           async function updateSpotifyInfo() {
             try {
@@ -163,9 +166,11 @@ const { title } = Astro.props
 
               // See /api/spotify for defined codes
               if (!response.ok) throw new Error('Bad response of code ' + response.status)
+              // TODO - Pass error code to error object? Handle rate limit, don't show offline
 
               // Response is good so data shows if spotify is playing or not (null)
-              const data: SpotifyDataFulfilled = await response.json()
+              data = await response.json() // TODO - Do check for new data = old data
+
               if (data === null) throw new Error('Empty data object')
 
               // Disable offline gradient
@@ -194,7 +199,7 @@ const { title } = Astro.props
                   'beforeend', // Inserts the artists' names in the order the appear on spotify
                   `<a href='${artist.href}' target='_blank' class='spotify-artist'>${
                     artist.name
-                  }</a>${i !== data.artists.length - 1 ? '<pre>, </pre>' : ''}`
+                  }</a>${i !== data!.artists.length - 1 ? '<pre>, </pre>' : ''}`
                 )
               })
             } catch (e) {
