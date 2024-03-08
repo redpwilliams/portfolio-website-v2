@@ -41,6 +41,14 @@ const fetchSpotifyData = async (
     // TODO - See what response I get when I try to do a 404,
     // I'd like to know how to format the error response for best practice and clarity
     if (!res.ok) {
+      // Handle possible access token expiration
+      if (res.status === 401) {
+        console.error('Access token expired. Fetching a new one . . .')
+        accessToken = (await fetchAccessToken()).access_token
+        return {
+          message: 'Access token expired, fetched a new one'
+        }
+      }
       console.error(await res.json())
       return {
         message: 'Unexpected error requesting data from Spotify, status code ' + res.status
