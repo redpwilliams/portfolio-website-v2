@@ -2,10 +2,12 @@ import 'dotenv/config'
 import { defineConfig } from 'astro/config'
 import { sanityIntegration as sanity } from '@sanity/astro'
 import react from '@astrojs/react'
+import vercel from '@astrojs/vercel/serverless'
 
 // https://astro.build/config
 export default defineConfig({
   output: 'server',
+  adapter: vercel(),
   integrations: [
     sanity({
       // eslint-disable-next-line no-undef
