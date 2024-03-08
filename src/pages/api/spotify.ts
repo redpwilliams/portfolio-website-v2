@@ -13,6 +13,7 @@ export const GET: APIRoute = async () => {
   if (currentTime - lastRequestTime < 25000) {
     // 25 seconds
     console.log('Rate limited!')
+    // FIXME - It appears that the rate limit occurs right as the server starts
     return new Response(JSON.stringify({ error: 'Rate limit exceeded. Please try again later.' }), {
       headers: { 'Content-Type': 'application/json' },
       status: 429 // Too Many Requests
