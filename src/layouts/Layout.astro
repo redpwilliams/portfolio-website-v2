@@ -176,6 +176,7 @@ const { title } = Astro.props
 
               // Set spotify vibing text
               spotifyVibing.innerHTML = 'Currently vibing to —&nbsp;'
+              spotifyVibing.style.setProperty('--vibing-style-default', null)
 
               // Set track text (name and href)
               spotifyTrack.setAttribute('href', data.track.href)
@@ -207,6 +208,7 @@ const { title } = Astro.props
 
               // Remove inactive elements
               spotifyVibing.innerText = 'Offline'
+              spotifyVibing.style.setProperty('--vibing-style-default', 'normal')
               spotifyTrack.style.setProperty('--offline-display', 'none')
               spotifyDot.style.setProperty('--offline-display', 'none')
               spotifyArtists.style.setProperty('--offline-display', 'none')
@@ -558,7 +560,7 @@ const { title } = Astro.props
 
   #spotify-vibing {
     color: var(--text-light-dark);
-    font-style: italic;
+    font-style: var(--vibing-style-default, italic);
   }
 
   #spotify-track {
