@@ -528,8 +528,15 @@ const { title } = Astro.props
 
   .footer-api-wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: 1rem 0;
+  }
+
+  @media (max-width: 30em) {
+    .footer-api-wrapper {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
   }
 
   .spotify-api {
@@ -538,6 +545,7 @@ const { title } = Astro.props
     font-family: var(--font-sans);
     text-transform: none;
     margin-left: 20px;
+    padding-right: 30px;
 
     @keyframes spotify-playing {
       0% {
@@ -660,5 +668,7 @@ const { title } = Astro.props
     color: var(--text-gray-light);
     margin-right: 10px;
     text-align: left;
+    align-self: center;
+    padding-left: 30px;
   }
 </style>
