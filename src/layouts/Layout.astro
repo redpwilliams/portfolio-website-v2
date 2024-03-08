@@ -528,6 +528,8 @@ const { title } = Astro.props
 
   .footer-api-wrapper {
     display: flex;
+    // NOTE - This affects the amount of "movement" the flex items have after each tick
+    // Tick being when the datetime changes every second, or when a spotify song changes
     justify-content: space-around;
     margin: 1rem 0;
   }
