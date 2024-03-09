@@ -6,20 +6,10 @@ const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN
 const clientId = process.env.SPOTIFY_CLIENT_ID
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET
 let accessToken: string | undefined
-let lastRequestTime: number = 0
+
+// TODO - Implement better rate limiting setup
 
 export const GET: APIRoute = async () => {
-  const currentTime = Date.now()
-  if (currentTime - lastRequestTime < 25000) {
-    // 25 seconds
-    console.log('Rate limited!')
-    // FIXME - It appears that the rate limit occurs right as the server starts
-    return new Response(JSON.stringify({ error: 'Rate limit exceeded. Please try again later.' }), {
-      headers: { 'Content-Type': 'application/json' },
-      status: 429 // Too Many Requests
-    })
-  }
-  lastRequestTime = currentTime
   // Request access token if null
   accessToken = accessToken ?? (await fetchAccessToken()).access_token
 
