@@ -17,15 +17,7 @@ export default defineConfig({
       useCdn: false,
       studioBasePath: '/studio'
     }),
-    react(),
-    {
-      name: 'Academia data hot reload',
-      hooks: {
-        'astro:config:setup': ({ addWatchFile }) => {
-          addWatchFile('./src/graph.json')
-        }
-      }
-    }
+    react()
   ],
   server: { port: 3000, host: false }
 })
