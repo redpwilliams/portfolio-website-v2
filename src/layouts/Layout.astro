@@ -2,13 +2,15 @@
 // Icon component
 import { Icon, Logo } from '@components'
 
-// Icons
-import { FiGithub, FiInstagram, FiLinkedin } from 'react-icons/fi'
-import { LiaSpotify } from 'react-icons/lia'
+// Icons (CommonJS modules)
+import fi from 'react-icons/fi'
+const { FiGithub, FiInstagram, FiLinkedin } = fi
 
-// Fa6 is weird
-import pkg from 'react-icons/fa6'
-const { FaXTwitter, FaThreads } = pkg
+import lia from 'react-icons/lia'
+const { LiaSpotify } = lia
+
+import fa6 from 'react-icons/fa6'
+const { FaXTwitter, FaThreads } = fa6
 
 // Types
 import type { IconProps } from '@types'
