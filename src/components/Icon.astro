@@ -8,9 +8,22 @@ interface Props extends HTMLAttributes<'a'> {
 const { href, translateOnHover, ...attrs } = Astro.props
 ---
 
-<a class='icon-wrapper' href={href} target='_blank' data-translate={translateOnHover} {...attrs}>
-  <slot />
-</a>
+{
+  href ? (
+    <a
+      class='icon-wrapper'
+      href={href}
+      target='_blank'
+      data-translate={translateOnHover}
+      {...attrs}>
+      <slot />
+    </a>
+  ) : (
+    <div class='icon-wrapper' target='_blank' data-translate={translateOnHover} {...attrs}>
+      <slot />
+    </div>
+  )
+}
 
 <script>
   // Astro should allow this entire script to run once
