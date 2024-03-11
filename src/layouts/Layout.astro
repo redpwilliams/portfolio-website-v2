@@ -550,6 +550,7 @@ const { title } = Astro.props
     font-family: var(--font-sans);
     text-transform: none;
     margin-left: 20px;
+    min-height: 1.75rem; // Has to at least be higher than height of the bars
 
     @keyframes spotify-playing {
       0% {
@@ -570,6 +571,7 @@ const { title } = Astro.props
       background: var(--offline-bars, var(--gradient));
       margin: 0 3px 6px 3px;
       transform-origin: bottom;
+      display: inline-block;
 
       &:nth-child(1) {
         animation: spotify-playing 0.65s infinite linear;
