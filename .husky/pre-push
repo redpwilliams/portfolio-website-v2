@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Prevent commits directly on prod
+branch="$(git rev-parse --abbrev-ref HEAD)"
+
+if [ "$branch" = "prod" ] || [ "$branch" = "preview" ]; then
+  echo "Building project before push . . ."
+  npm run build
+fi
