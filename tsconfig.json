@@ -10,6 +10,7 @@
       "@layouts*": ["./src/layouts/*"],
       "@components*": ["./src/components/*"],
       "@schemas/*": ["schemas/*"],
+      "@img/*": ["public/img/*"],
 
       // Imports from index.astro files (idk why this works but we ball)
       "@pages": ["./src/pages/index.ts"],
