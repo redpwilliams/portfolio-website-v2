@@ -4,7 +4,7 @@
 # Prevent commits directly on prod
 branch="$(git rev-parse --abbrev-ref HEAD)"
 
-if [ "$branch" = "prod" ] || ["$branch" = "preview"]; then
+if [ "$branch" = "prod" ] || [ "$branch" = "preview" ]; then
   echo "You can't commit directly to $branch branch."
   echo "Merge changes directly from another branch to $branch instead."
   exit 1
