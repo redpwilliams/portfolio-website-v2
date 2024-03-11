@@ -1,5 +1,15 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+# Prevent commits directly on prod
+branch="$(git rev-parse --abbrev-ref HEAD)"
+
+if [ "$branch" = "prod" ] || ["$branch" = "preview"]; then
+  echo "You can't commit directly to $branch branch."
+  echo "Merge changes directly from another branch to $branch instead."
+  exit 1
+fi
+
+# Lint Staged
 if sh -c ": >/dev/tty" >/dev/null 2>/dev/null; then exec >/dev/tty 2>&1; fi
 npx lint-staged --verbose
