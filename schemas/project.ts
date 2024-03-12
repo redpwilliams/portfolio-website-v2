@@ -30,7 +30,8 @@ export default defineType({
       title: 'Thumbnail',
       name: 'thumbnail',
       type: 'image',
-      description: 'Project thumbnail.'
+      description: 'Project thumbnail.',
+      hidden: ({ document }) => !document?.featured
     }),
     // Description
     defineField({
