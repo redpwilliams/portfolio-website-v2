@@ -1,11 +1,28 @@
 ---
 import { Layout, PageTableLayout } from '@layouts'
+// Sanity functions and types
+import type { SanityResult } from '@types'
+import type { ProjectType } from '@schemas'
+import { fetchSanityData } from '@util'
+
+// Fetch Sanity data
+const query = `*[_type == "project"]`
+const data = await fetchSanityData(query)
+const projects: SanityResult<ProjectType> = data.result
 ---
 
 <Layout title='Projects'>
   <PageTableLayout
     title='Projects'
-    headerText="Some of the cool things I've been working on, from niche ideas to large applications."
-  />
+    headerText="Some of the cool things I've been working on, from niche ideas to large applications.">
+    {
+      projects.map((project) => (
+        <tr>
+          <th>{project.title}</th>
+          <td>{project.description}</td>
+        </tr>
+      ))
+    }
+  </PageTableLayout>
   <!-- TODO - Fill with actual data -->
 </Layout>
