@@ -21,8 +21,7 @@ reports.forEach((report) => {
 <Layout title='Reports'>
   <PageTableLayout
     title='Reports'
-    headerText='Successess, failures, and everything in between in making some of my favorite projects.'
-    tableClassName='report-list'>
+    headerText='Successess, failures, and everything in between in making some of my favorite projects.'>
     {
       reports.map((report) => (
         <tr>
@@ -35,3 +34,19 @@ reports.forEach((report) => {
     }
   </PageTableLayout>
 </Layout>
+<style lang='scss'>
+  tr {
+    grid-template-columns: 1fr auto;
+  }
+
+  th {
+    text-align: left;
+    color: var(--text-main);
+    font-weight: normal;
+  }
+
+  td {
+    text-align: right;
+    color: var(--text-gray-dark);
+  }
+</style>

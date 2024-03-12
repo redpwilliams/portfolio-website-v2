@@ -2,10 +2,9 @@
 interface Props {
   title: string
   headerText: string
-  tableClassName: string
 }
 
-const { title, headerText, tableClassName } = Astro.props
+const { title, headerText } = Astro.props
 ---
 
 <main class='ptl-content'>
@@ -13,7 +12,7 @@ const { title, headerText, tableClassName } = Astro.props
     <h1 class='header'>{title}</h1>
     <p>{headerText}</p>
   </header>
-  <table data-tcn={tableClassName}>
+  <table>
     <slot />
   </table>
 </main>
@@ -46,21 +45,9 @@ const { title, headerText, tableClassName } = Astro.props
 
     tr {
       display: grid;
-      grid-template-columns: 1fr auto;
       padding: 1rem 0;
       border-bottom: 1px solid gray;
       margin-bottom: 1rem;
-    }
-
-    th {
-      text-align: left;
-      color: var(--text-main);
-      font-weight: normal;
-    }
-
-    td {
-      text-align: right;
-      color: var(--text-gray-dark);
     }
   }
 </style>
