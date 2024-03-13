@@ -22,31 +22,62 @@ reports.forEach((report) => {
   <PageTableLayout
     title='Reports'
     headerText='Successess, failures, and everything in between in making some of my favorite projects.'>
-    {
-      reports.map((report) => (
-        <tr>
-          <th>
-            <a href={'/reports/' + report.slug}>{report.title}</a>
-          </th>
-          <td>{report.date_published}</td>
-        </tr>
-      ))
-    }
+    <thead>
+      <tr class='head-row'>
+        <th class='head-title'>Title</th>
+        <!-- TODO - Add subtitle field to Sanity schema -->
+        <th class='head-subtitle'>Subtitle</th>
+        <th class='head-date'>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        reports.map((report) => (
+          <tr class='body-row'>
+            <td class='body-heading'>
+              <a href={'/reports/' + report.slug}>{report.title}</a>
+            </td>
+            <td class='subtitle'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur doloribus eius
+              architecto delectus dolore modi, quis vel nihil aut quibusdam omnis incidunt a eum
+              laborum totam vero veritatis amet perferendis.
+            </td>
+            <td class='date'>{report.date_published}</td>
+          </tr>
+        ))
+      }
+    </tbody>
   </PageTableLayout>
 </Layout>
 <style lang='scss'>
-  tr {
-    grid-template-columns: 1fr auto;
-  }
+  tr.head-row {
+    .head-title {
+      width: 40%;
+    }
+    .head-subtitle {
+      width: 55%;
+    }
 
-  th {
+    .head-date {
+      width: 5%;
+    }
+
     text-align: left;
-    color: var(--text-main);
-    font-weight: normal;
   }
 
-  td {
+  .subtitle {
+    white-space: nowrap;
+    overflow: hidden;
+    word-break: break-all;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    color: var(--text-gray-light);
+  }
+
+  .date {
+    color: var(--text-gray-light);
+    font-family: var(--font-mono);
+    width: 10%;
     text-align: right;
-    color: var(--text-gray-dark);
   }
 </style>

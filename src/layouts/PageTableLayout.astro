@@ -30,6 +30,12 @@ const { title, headerText } = Astro.props
     p {
       margin-bottom: 2rem;
     }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      table-layout: fixed;
+    }
   }
 
   @media (min-width: $breakpoint-main) {
@@ -39,12 +45,8 @@ const { title, headerText } = Astro.props
   }
 
   .ptl-content > table {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-
     tr {
-      display: grid;
+      // display: grid;
       padding: 1rem 0;
       border-bottom: 1px solid gray;
       margin-bottom: 1rem;
