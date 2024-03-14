@@ -50,19 +50,41 @@ reports.forEach((report) => {
   </PageTableLayout>
 </Layout>
 <style lang='scss'>
+  @use 'src/main' as *;
+
   tr.head-row {
     .head-title {
-      width: 40%;
+      width: auto;
+      color: var(--text-main);
+      text-align: left;
     }
     .head-subtitle {
-      width: 55%;
+      display: none;
     }
 
     .head-date {
-      width: 5%;
+      text-align: left;
+      color: var(--text-main);
+      width: 70px;
     }
+  }
 
-    text-align: left;
+  @media (min-width: $breakpoint-main) {
+    tr.head-row {
+      .head-title {
+        width: 40%;
+      }
+      .head-subtitle {
+        display: table-cell;
+        width: 55%;
+      }
+
+      .head-date {
+        width: 5%;
+      }
+
+      text-align: left;
+    }
   }
 
   .subtitle {
@@ -72,12 +94,18 @@ reports.forEach((report) => {
     word-wrap: break-word;
     text-overflow: ellipsis;
     color: var(--text-gray-light);
+    display: none;
   }
 
   .date {
     color: var(--text-gray-light);
     font-family: var(--font-mono);
-    width: 10%;
-    text-align: right;
+    text-align: left;
+    width: 70px;
+  }
+  @media (min-width: $breakpoint-main) {
+    .subtitle {
+      display: table-cell;
+    }
   }
 </style>
