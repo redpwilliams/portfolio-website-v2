@@ -40,8 +40,6 @@ const fetchSpotifyData = async (
       headers: { Authorization: 'Bearer ' + accessToken }
     })
 
-    // TODO - See what response I get when I try to do a 404,
-    // I'd like to know how to format the error response for best practice and clarity
     if (!res.ok) {
       // Handle possible access token expiration
       if (res.status === 401) {
@@ -59,49 +57,13 @@ const fetchSpotifyData = async (
 
     // I should only get 200 and 204:
     // https://developer.spotify.com/documentation/web-api/concepts/api-calls
-    if (res.status == 204) {
-      return null
-    }
+    if (res.status == 204) return Spotify204()
+    if (res.status == 200) return await Spotify200(res)
 
-    if (res.status == 200) {
-      const data: SpotifyData = await res.json()
-
-      // Handle possibility of `data.item` being null, as explained in the docs
-      if (data.item === null) return { message: 'Spotify `item` object is null.' }
-
-      // Handle possibility of the currently played object not being a track (like an ad or an episode)
-      if (data.currently_playing_type !== 'track')
-        return {
-          message: 'Currently playing ' + data.currently_playing_type + ' instead of a track.'
-        }
-
-      return {
-        // Object of track's album name and link
-        album: {
-          name: data.item.album.name,
-          href: `https://open.spotify.com/album/${data.item.album.id}`
-        },
-        // Array of artists for the track
-        artists: data.item.artists.map((artist) => {
-          return {
-            name: artist.name,
-            href: `https://open.spotify.com/artist/${artist.id}`
-          }
-        }),
-        // Track name and link
-        track: {
-          name: data.item.name,
-          href: `https://open.spotify.com/track/${data.item.id}`
-        }
-      }
-    }
-    // ^^^ Only works when content is playing (status code 200 most likely, i didn't check)
     // Else, it returns an empty body with status code 204
-    return { error: 'Unexpected error with status code ' + res.status }
+    return SpotifyServerError(res)
   } catch (e) {
-    console.log(e)
-    if (!(e instanceof SyntaxError)) return { error: (e as Error).message }
-    return { error: 'Syntax error, most likely used .json() on a poor object. ' + e.message }
+    return SpotifyClientError(e)
   }
 }
 
@@ -141,6 +103,55 @@ const fetchAccessToken = async (): Promise<SpotifyAccessToken> => {
     console.error('There was a problem with the fetch operation:', error)
     return { access_token: '' }
   }
+}
+
+const Spotify204 = () => {
+  return null
+}
+
+const Spotify200 = async (res: Response) => {
+  {
+    const data: SpotifyData = await res.json()
+
+    // Handle possibility of `data.item` being null, as explained in the docs
+    if (data.item === null) return { message: 'Spotify `item` object is null.' }
+
+    // Handle possibility of the currently played object not being a track (like an ad or an episode)
+    if (data.currently_playing_type !== 'track')
+      return {
+        message: 'Currently playing ' + data.currently_playing_type + ' instead of a track.'
+      }
+
+    return {
+      // Object of track's album name and link
+      album: {
+        name: data.item.album.name,
+        href: `https://open.spotify.com/album/${data.item.album.id}`
+      },
+      // Array of artists for the track
+      artists: data.item.artists.map((artist) => {
+        return {
+          name: artist.name,
+          href: `https://open.spotify.com/artist/${artist.id}`
+        }
+      }),
+      // Track name and link
+      track: {
+        name: data.item.name,
+        href: `https://open.spotify.com/track/${data.item.id}`
+      }
+    }
+  }
+}
+
+const SpotifyServerError = (res: Response) => {
+  return { error: 'Unexpected error with status code ' + res.status }
+}
+
+const SpotifyClientError = (e: unknown) => {
+  console.log(e)
+  if (!(e instanceof SyntaxError)) return { error: (e as Error).message }
+  return { error: 'Syntax error, most likely used .json() on a poor object. ' + e.message }
 }
 
 const setStatusCode = (data: SpotifyResponse) => {
