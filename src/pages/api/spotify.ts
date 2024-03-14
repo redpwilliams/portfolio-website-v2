@@ -1,17 +1,19 @@
 import type { SpotifyAccessToken, SpotifyResponse, SpotifyData, SpotifyDataFulfilled } from '@types'
 import type { APIRoute } from 'astro'
+import { kv } from '@vercel/kv'
 
 // Refresh token, defined on ther server
 const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN
 const clientId = process.env.SPOTIFY_CLIENT_ID
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET
-let accessToken: string | undefined
+let accessToken: string | null | undefined
 
 export const GET: APIRoute = async () => {
-  // Request access token if null
-  accessToken = accessToken ?? (await FetchAccessToken()).access_token
+  // Get access token from db
+  accessToken = await kv.hget('spotify', 'access_token')
+  console.log(accessToken)
 
-  // Fetch data
+  // Fetch data (assuming a.t. is fine, code handles it in another function)
   const data = await FetchSpotifyData(accessToken!)
 
   // Set headers
@@ -98,10 +100,13 @@ const FetchAccessToken = async (): Promise<SpotifyAccessToken> => {
 }
 
 const RevalidateAccessToken = async () => {
-  console.error('Access token expired. Fetching a new one . . .')
-  accessToken = (await FetchAccessToken()).access_token
+  console.warn('Access token expired. Fetching a new one . . .')
+  accessToken = (await FetchAccessToken()).access_token // REVIEW - Handle null?
+  await kv.hset('spotify', { access_token: accessToken })
+  /* REVIEW - Return without re-requesting allows the server enough downtime after fetching the new access token
+     Before making a new request (instead of calling FetchSpotifyData immediately) */
   return {
-    message: 'Access token expired, fetched a new one'
+    message: 'Access token expired, stored the new one in db'
   }
 }
 
