@@ -15,13 +15,16 @@ interface Props extends HTMLAttributes<'button'> {
 const { href, text, ...attrs } = Astro.props
 ---
 
-<button {...attrs}>
-  <a href={href} target='_blank' referrerpolicy='no-referrer'>{text}</a>
-</button>
-<style>
+<div class='button-container' {...attrs}>
+  <button>
+    <a href={href} target='_blank' referrerpolicy='no-referrer'>{text}</a>
+  </button>
+</div>
+<style lang='scss'>
   button {
+    width: fit-content;
     cursor: pointer;
-    border: double 2px transparent;
+    border: solid 1px transparent;
     background-image: linear-gradient(var(--bg-color), var(--bg-color)), var(--gradient);
     border-image-slice: 1;
     border-radius: 4px;
@@ -33,15 +36,29 @@ const { href, text, ...attrs } = Astro.props
     font-size: 1rem;
     text-transform: uppercase;
     display: block;
-    /* transition: all 0.3s ease-in-out;
-
-    &:hover {
-      transform: translateY(-4px) translateX(-2px);
-      box-shadow: inset 12px 12px 0 0 white;
-      background: var(--gradient);
-    } */
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    z-index: 1;
   }
 
+  .button-container {
+    position: relative;
+    width: fit-content;
+
+    &:hover button {
+      transform: translate(-4px, -4px);
+    }
+  }
+
+  .button-container::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient);
+    inset: 0 0 0 0;
+    border-radius: 4px;
+  }
   a {
     color: var(--text-main);
   }
