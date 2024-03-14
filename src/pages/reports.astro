@@ -26,7 +26,7 @@ reports.forEach((report) => {
       <tr class='head-row'>
         <th class='head-title'>Title</th>
         <!-- TODO - Add subtitle field to Sanity schema -->
-        <th class='head-subtitle'>Subtitle</th>
+        <th class='head-subtitle'>Caption</th>
         <th class='head-date'>Date</th>
       </tr>
     </thead>
@@ -52,10 +52,11 @@ reports.forEach((report) => {
 <style lang='scss'>
   @use 'src/main' as *;
 
+  $cell-padding: 10px;
+
   tr.head-row {
     .head-title {
       width: auto;
-      color: var(--text-main);
       text-align: left;
     }
     .head-subtitle {
@@ -63,10 +64,19 @@ reports.forEach((report) => {
     }
 
     .head-date {
-      text-align: left;
-      color: var(--text-main);
+      text-align: right;
       width: 70px;
     }
+
+    & > * {
+      padding: $cell-padding;
+      letter-spacing: 0.05em;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+    }
+
+    color: var(--text-gray-light);
+    border-bottom: 1px solid var(--text-gray-light);
   }
 
   @media (min-width: $breakpoint-main) {
@@ -80,7 +90,7 @@ reports.forEach((report) => {
       }
 
       .head-date {
-        width: 5%;
+        width: 7%;
       }
 
       text-align: left;
@@ -102,10 +112,19 @@ reports.forEach((report) => {
     font-family: var(--font-mono);
     text-align: left;
     width: 70px;
+    text-align: right;
   }
+
   @media (min-width: $breakpoint-main) {
     .subtitle {
       display: table-cell;
+    }
+  }
+
+  .body-row {
+    border-bottom: 1px solid #3f3f3f;
+    & > * {
+      padding: $cell-padding;
     }
   }
 </style>
