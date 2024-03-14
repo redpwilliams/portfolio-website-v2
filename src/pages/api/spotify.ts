@@ -9,10 +9,10 @@ let accessToken: string | undefined
 
 export const GET: APIRoute = async () => {
   // Request access token if null
-  accessToken = accessToken ?? (await fetchAccessToken()).access_token
+  accessToken = accessToken ?? (await FetchAccessToken()).access_token
 
   // Fetch data
-  const data = await fetchSpotifyData(accessToken!)
+  const data = await FetchSpotifyData(accessToken!)
 
   // Set headers
   const headers = new Headers()
@@ -33,7 +33,7 @@ export const GET: APIRoute = async () => {
  * @param accessToken - The access token required to access the Spotify Web API.
  * @returns A Promise to an object containing data obtained from Spotify.
  */
-const fetchSpotifyData = async (
+const FetchSpotifyData = async (
   accessToken: SpotifyAccessToken['access_token']
 ): Promise<SpotifyResponse> => {
   try {
@@ -66,7 +66,7 @@ const fetchSpotifyData = async (
  * to make the secure request.
  * @returns A Promise to an object containing an access token for the Spotify API
  */
-const fetchAccessToken = async (): Promise<SpotifyAccessToken> => {
+const FetchAccessToken = async (): Promise<SpotifyAccessToken> => {
   try {
     // Send the authorization request
     const res = await fetch('https://accounts.spotify.com/api/token', {
@@ -99,7 +99,7 @@ const fetchAccessToken = async (): Promise<SpotifyAccessToken> => {
 
 const RevalidateAccessToken = async () => {
   console.error('Access token expired. Fetching a new one . . .')
-  accessToken = (await fetchAccessToken()).access_token
+  accessToken = (await FetchAccessToken()).access_token
   return {
     message: 'Access token expired, fetched a new one'
   }
