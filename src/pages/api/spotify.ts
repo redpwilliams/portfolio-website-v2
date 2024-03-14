@@ -7,8 +7,6 @@ const clientId = process.env.SPOTIFY_CLIENT_ID
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET
 let accessToken: string | undefined
 
-// TODO - Implement better rate limiting setup
-
 export const GET: APIRoute = async () => {
   // Request access token if null
   accessToken = accessToken ?? (await fetchAccessToken()).access_token
@@ -40,20 +38,11 @@ const fetchSpotifyData = async (
       headers: { Authorization: 'Bearer ' + accessToken }
     })
 
-    if (!res.ok) {
-      // Handle possible access token expiration
-      if (res.status === 401) {
-        console.error('Access token expired. Fetching a new one . . .')
-        accessToken = (await fetchAccessToken()).access_token
-        return {
-          message: 'Access token expired, fetched a new one'
-        }
-      }
-      console.error(await res.json())
-      return {
-        message: 'Unexpected error requesting data from Spotify, status code ' + res.status
-      }
-    }
+    // Handle possible access token expiration
+    if (!res.ok && res.status === 401) return RevalidateAccessToken()
+
+    // Handle unexpected revalidation error
+    if (!res.ok) return HandleRevalidationError(res)
 
     // I should only get 200 and 204:
     // https://developer.spotify.com/documentation/web-api/concepts/api-calls
@@ -102,6 +91,21 @@ const fetchAccessToken = async (): Promise<SpotifyAccessToken> => {
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error)
     return { access_token: '' }
+  }
+}
+
+const RevalidateAccessToken = async () => {
+  console.error('Access token expired. Fetching a new one . . .')
+  accessToken = (await fetchAccessToken()).access_token
+  return {
+    message: 'Access token expired, fetched a new one'
+  }
+}
+
+const HandleRevalidationError = async (res: Response) => {
+  console.error(await res.json())
+  return {
+    message: 'Unexpected error requesting data from Spotify, status code ' + res.status
   }
 }
 
