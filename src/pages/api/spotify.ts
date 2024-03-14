@@ -27,6 +27,9 @@ export const GET: APIRoute = async () => {
 
 /**
  * Queries the Spotify Web API to get the currently playing track.
+ * Handles all API type responses.
+ * If met with a bad response, it returns a 200 or 400 for the client.
+ * @see {@link setStatusCode}
  * @param accessToken - The access token required to access the Spotify Web API.
  * @returns A Promise to an object containing data obtained from Spotify.
  */
