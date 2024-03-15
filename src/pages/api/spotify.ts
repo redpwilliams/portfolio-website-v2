@@ -15,10 +15,9 @@ export const GET: APIRoute = async () => {
 
   // Handle too many requests
   if (thisRequestTime - lastRequestTime < 25 * 1000) {
-    return new Response(JSON.stringify({ error: 'Rate limit exceeded. Please try again later.' }), {
-      headers: { 'Content-Type': 'application/json' },
-      status: 429 // Too Many Requests
-    })
+    // Return last listened to
+    const lastSpotifyData = await kv.hget('spotify', 'last-data')
+    return new Response(lastSpotifyData)
   }
 
   // Save latest request time
@@ -30,6 +29,9 @@ export const GET: APIRoute = async () => {
 
   // Fetch data (assuming a.t. is fine, code handles it in another function)
   const data = await FetchSpotifyData(accessToken!)
+
+  // Set spotify data as last listened to in db
+  kv.hset('spotify', { last_data: JSON.stringify(data) })
 
   // Set headers
   const headers = new Headers()
