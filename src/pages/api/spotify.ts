@@ -9,9 +9,26 @@ const clientSecret = process.env.SPOTIFY_CLIENT_SECRET
 let accessToken: string | null | undefined
 
 export const GET: APIRoute = async () => {
+  // Log request times
+  const thisRequestTime = Date.now()
+  const lastRequestTime: number = Number(await kv.hget('spotify', 'last_request_time'))
+
+  // Handle too many requests
+  if (thisRequestTime - lastRequestTime < 25 * 1000) {
+    console.log('Rate limited!')
+    // TODO - Pass old data as new data, so no more 429
+    return new Response(JSON.stringify({ error: 'Rate limit exceeded. Please try again later.' }), {
+      headers: { 'Content-Type': 'application/json' },
+      status: 429 // Too Many Requests
+    })
+  }
+
+  // Save latest request time
+  await kv.hset('spotify', { last_request_time: Date.now().toString() })
+  // REVIEW - Saving the new request time here instead of closer to the actual spotify request
+
   // Get access token from db
   accessToken = await kv.hget('spotify', 'access_token')
-  console.log(accessToken)
 
   // Fetch data (assuming a.t. is fine, code handles it in another function)
   const data = await FetchSpotifyData(accessToken!)
