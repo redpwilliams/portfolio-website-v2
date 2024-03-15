@@ -15,8 +15,6 @@ export const GET: APIRoute = async () => {
 
   // Handle too many requests
   if (thisRequestTime - lastRequestTime < 25 * 1000) {
-    console.log('Rate limited!')
-    // TODO - Pass old data as new data, so no more 429
     return new Response(JSON.stringify({ error: 'Rate limit exceeded. Please try again later.' }), {
       headers: { 'Content-Type': 'application/json' },
       status: 429 // Too Many Requests
