@@ -10,7 +10,7 @@ export default defineConfig({
       '@components': path.resolve(__dirname, './src/components'),
       '@pages': path.resolve(__dirname, './src/pages'),
       '@schemas': path.resolve(__dirname, './schemas'),
-      '@img': path.resolve(__dirname, './public/img')
+      '@img': path.resolve(__dirname, './src/img')
     }
   }
 })
