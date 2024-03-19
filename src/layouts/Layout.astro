@@ -248,7 +248,8 @@ const { title } = Astro.props
 
           // Call the function when the DOM content is loaded
           if (spotifyTrack && spotifyArtists && SPOTIFY_REQUEST_FLAG) {
-            document.addEventListener('DOMContentLoaded', updateSpotifyInfo)
+            // document.addEventListener('DOMContentLoaded', updateSpotifyInfo)
+            updateSpotifyInfo()
             setInterval(updateSpotifyInfo, 1000 * 30) // 30 seconds
           }
         </script>

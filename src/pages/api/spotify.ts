@@ -13,11 +13,13 @@ export const GET: APIRoute = async () => {
   const thisRequestTime = Date.now()
   const lastRequestTime: number = Number(await kv.hget('spotify', 'last_request_time'))
 
-  // Handle too many requests
-  if (thisRequestTime - lastRequestTime < 25 * 1000) {
-    // Return last listened to
-    const lastSpotifyData = await kv.hget('spotify', 'last-data')
-    return new Response(lastSpotifyData)
+  // Handle too many requests (5 second time-out)
+  if (thisRequestTime - lastRequestTime < 5 * 1000) {
+    // TODO - Use application/problem+json
+    return new Response('', {
+      headers: { 'Content-Type': 'application/problem+json' },
+      status: 400
+    })
   }
 
   // Save latest request time
