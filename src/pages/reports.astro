@@ -37,11 +37,7 @@ reports.forEach((report) => {
             <td class='body-heading'>
               <a href={'/reports/' + report.slug}>{report.title}</a>
             </td>
-            <td class='subtitle'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur doloribus eius
-              architecto delectus dolore modi, quis vel nihil aut quibusdam omnis incidunt a eum
-              laborum totam vero veritatis amet perferendis.
-            </td>
+            <td class='subtitle'>{report.caption}</td>
             <td class='date'>{report.date_published}</td>
           </tr>
         ))
