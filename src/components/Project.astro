@@ -28,28 +28,6 @@ const { project } = Astro.props
       height={500}
       class='fp-thumbnail'
     />
-    <script>
-      // Get all featured project images
-      const imgs = Array.from(
-        // eslint-disable-next-line no-undef
-        document.getElementsByClassName('fp-thumbnail') as HTMLCollectionOf<HTMLElement>
-      )
-
-      // Find the one witht he smallest height
-      const smallestImage = imgs.reduce((smallest, current) => {
-        const smallestHeight = smallest.getBoundingClientRect().height
-        const currentElementHeight = current.getBoundingClientRect().height
-        return currentElementHeight < smallestHeight ? current : smallest
-      })
-
-      // Get the smallest height
-      const smallestHeight = smallestImage.getBoundingClientRect().height
-
-      // And set
-      imgs.forEach((img) => {
-        img.style.setProperty('--smallest-img-height', smallestHeight + 'px')
-      })
-    </script>
   </div>
   <div class='content-wrapper'>
     <p class='featured'>Featured</p>
@@ -97,8 +75,10 @@ const { project } = Astro.props
     .img-screen {
       position: absolute;
       content: '';
-      width: 100%;
+      width: 90%;
       height: 100%;
+      left: 5%;
+      right: 5%;
       background: var(--gradient);
       mix-blend-mode: screen;
       z-index: 1;
@@ -107,13 +87,14 @@ const { project } = Astro.props
       filter: grayscale(50%) brightness(50%);
     }
     .fp-thumbnail {
-      width: 100%;
       height: auto;
       object-fit: cover;
       position: relative;
       object-position: center center;
       border-radius: $border-radius;
       display: block; // Gets rid of the 4px on bottom
+      margin: 0 auto;
+      width: 90%;
     }
   }
 
@@ -175,6 +156,7 @@ const { project } = Astro.props
       &:nth-of-type(2n) {
         .thumbnail-wrapper {
           grid-column: 1 / 5;
+          align-self: center;
           img {
             max-height: var(--smallest-img-height);
           }
@@ -188,6 +170,7 @@ const { project } = Astro.props
       &:nth-of-type(2n - 1) {
         .thumbnail-wrapper {
           grid-column: 6 / 10;
+          align-self: center;
           img {
             max-height: var(--smallest-img-height);
           }
@@ -197,6 +180,17 @@ const { project } = Astro.props
           grid-row: 1;
           grid-column: 2 / 6;
         }
+      }
+
+      .fp-thumbnail {
+        width: 80%;
+        margin: 0 auto;
+      }
+
+      .img-screen {
+        width: 80%;
+        left: 10%;
+        right: 10%;
       }
     }
 
