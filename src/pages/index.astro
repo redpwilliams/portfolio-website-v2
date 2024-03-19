@@ -35,7 +35,7 @@ const displayAcademiaGraph = false
         Science, with an expected graduation date of Winter 2025. I&apos;m always seeking to learn
         from others and expand my skillset!
       </p>
-      <Button text={"Let's Chat!"} href={'#'} />
+      <Button text={"Let's Chat!"} href={'mailto:redpwilliams@gmail.com'} />
     </section>
     <section>
       <SectionHeader title='Essence' />
@@ -82,7 +82,7 @@ const displayAcademiaGraph = false
       <SectionHeader title='Projects' />
       {
         // If there are no projects that were fetched . . .
-        // FIXME - Separate into projects specifically, not just entire data object
+        // REVIEW - Separate into projects specifically, not just entire data object
         data.result.length === 0 ? (
           // . . . Display an empty message
           <>
@@ -99,7 +99,12 @@ const displayAcademiaGraph = false
                 return <Project {...{ project }} />
               })}
             </ul>
-            <Button text='View the Archive' href='#' style='margin: 0 auto;' />
+            <Button
+              text='View the Archive'
+              href='/projects'
+              target='_self'
+              style='margin: 0 auto;'
+            />
           </>
         )
       }
@@ -109,7 +114,7 @@ const displayAcademiaGraph = false
       <SectionHeader title='Reports' />
       {
         // If there are no reports that were fetched . . .
-        // FIXME - Separate into projects specifically, not just entire data object
+        // REVIEW - Separate into projects specifically, not just entire data object
         data.result.length === 0 ? (
           // . . . Display an empty message
           <>
@@ -146,7 +151,11 @@ const displayAcademiaGraph = false
         <br />
          Thanks!
       </p>
-      <Button text='Get in touch' href='#' style={{ margin: '10px auto' }} />
+      <Button
+        text='Get in touch'
+        href='mailto:redpwilliams@gmail.com'
+        style={{ margin: '10px auto' }}
+      />
     </section>
   </main>
 </Layout>

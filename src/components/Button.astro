@@ -1,5 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
+import type { HTMLAttributeAnchorTarget } from 'react'
 /* 
   TODO - Review on hover/focus button styles at https://uiverse.io/buttons
   I like: 
@@ -10,14 +11,15 @@ import type { HTMLAttributes } from 'astro/types'
 interface Props extends HTMLAttributes<'button'> {
   href: string
   text: string
+  target?: HTMLAttributeAnchorTarget
 }
 
-const { href, text, ...attrs } = Astro.props
+const { href, text, target, ...attrs } = Astro.props
 ---
 
 <div class='button-container' {...attrs}>
   <button>
-    <a href={href} target='_blank' referrerpolicy='no-referrer'>{text}</a>
+    <a href={href} target={target ?? '_blank'} referrerpolicy='no-referrer'>{text}</a>
   </button>
 </div>
 <style lang='scss'>
