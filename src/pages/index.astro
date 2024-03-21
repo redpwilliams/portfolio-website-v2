@@ -29,7 +29,7 @@ const displayAcademiaGraph = false
     <section class='hero'>
       <p id='hey'>Hey! I&apos;m</p>
       <h1>Red Williams</h1>
-      <h2>student</h2>
+      <h2 class='typewriter-container'><span class='typewriter-word'>student</span></h2>
       <p class='intro'>
         I&apos;m a student at Virginia Tech studying Software Systems with a minor in Computer
         Science, facing an expected graduation date of Winter 2025. I&apos;m always seeking to learn
@@ -40,18 +40,6 @@ const displayAcademiaGraph = false
     <section>
       <SectionHeader title='Essence' />
       <div class='essence-grid'>
-        <!-- <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum
-          est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin
-          lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet
-          feugiat lectus.
-          <br />
-          <br />
-           Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-          himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar. Donec
-          ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem.
-          Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.
-        </p> -->
         <p>
           In addition to being a student, I prioritize continuous learning and a commitment. Outside
           of my academic responsibilities, I actively seek out new challenges and projects to expand
@@ -218,6 +206,7 @@ const displayAcademiaGraph = false
     text-transform: capitalize;
     position: relative;
 
+    // typewriter-word
     &::before {
       content: '';
       background-image: var(--gradient);
@@ -226,6 +215,50 @@ const displayAcademiaGraph = false
       margin-right: 10px;
       display: inline-block;
       vertical-align: middle;
+    }
+  }
+
+  .typewriter-word {
+    --typewriter-speed: 1s;
+    --typewriter-delay: 1s;
+    --typewriter-characters: 7;
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
+
+    &::before {
+      background: var(--bg-color);
+      animation: typewriter var(--typewriter-speed) steps(var(--typewriter-characters))
+        var(--typewriter-delay) forwards;
+    }
+
+    &::after {
+      width: 0.1em;
+      height: 90%;
+      top: 5%;
+      bottom: 5%;
+      background: var(--gradient);
+      animation:
+        typewriter var(--typewriter-speed) steps(var(--typewriter-characters))
+          var(--typewriter-delay) forwards,
+        blink 600ms ease infinite;
+    }
+  }
+
+  @keyframes typewriter {
+    to {
+      left: 100%;
+    }
+  }
+
+  @keyframes blink {
+    to {
+      opacity: 0;
     }
   }
 
