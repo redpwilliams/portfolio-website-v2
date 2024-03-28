@@ -29,7 +29,7 @@ const displayAcademiaGraph = false
     <section class='hero'>
       <p id='hey'>Hey! I&apos;m</p>
       <h1>Red Williams</h1>
-      <h2 class='typewriter-container'><span class='typewriter-word'>student</span></h2>
+      <h2 class='typewriter-container'><span class='typewriter-word forwards'>student</span></h2>
       <p class='intro'>
         I&apos;m a student at Virginia Tech studying Software Systems with a minor in Computer
         Science, facing an expected graduation date of Winter 2025. I&apos;m always seeking to learn
@@ -233,8 +233,6 @@ const displayAcademiaGraph = false
 
     &::before {
       background: var(--bg-color);
-      animation: typewriter var(--typewriter-speed) steps(var(--typewriter-characters))
-        var(--typewriter-delay) forwards;
     }
 
     &::after {
@@ -243,10 +241,20 @@ const displayAcademiaGraph = false
       top: 5%;
       bottom: 5%;
       background: var(--gradient);
-      animation:
-        typewriter var(--typewriter-speed) steps(var(--typewriter-characters))
-          var(--typewriter-delay) forwards,
-        blink 600ms ease infinite;
+    }
+
+    // Handle forwrads/reverse animation movement
+    &.forwards {
+      &::before {
+        animation: typewriter var(--typewriter-speed) steps(var(--typewriter-characters))
+          var(--typewriter-delay) forwards;
+      }
+      &::after {
+        animation:
+          typewriter var(--typewriter-speed) steps(var(--typewriter-characters))
+            var(--typewriter-delay) forwards,
+          blink 600ms ease infinite;
+      }
     }
   }
 
