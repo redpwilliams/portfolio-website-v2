@@ -31,14 +31,27 @@ const displayAcademiaGraph = false
       <h1>Red Williams</h1>
       <h2 class='typewriter-container'><span class='typewriter-word forward'>student</span></h2>
       <script>
+        // Get typewriter element
         const typed = document
           .getElementsByClassName('typewriter-word forward')
           .item(0) as HTMLSpanElement
-        typed.innerText = 'developer'
+
+        // Role list
+        const roles = ['developer', 'writer', 'friend', 'student']
+        let index = 0
+
+        typed.innerText = roles[index]
         typed.style.setProperty('--typewriter-characters', typed.innerText.length.toString())
+
+        // Typewriter loop
         setInterval(() => {
           typed.classList.toggle('forward')
           typed.classList.toggle('reverse')
+
+          if (typed.classList.contains('forward')) {
+            typed.innerText = roles[++index % roles.length]
+            typed.style.setProperty('--typewriter-characters', typed.innerText.length.toString())
+          }
         }, 5000)
       </script>
       <p class='intro'>
