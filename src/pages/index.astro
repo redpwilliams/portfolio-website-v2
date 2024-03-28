@@ -278,19 +278,18 @@ const displayAcademiaGraph = false
       &::after {
         animation:
           typewriter-forward var(--typewriter-speed) steps(var(--typewriter-characters)) forwards,
-          blink 600ms ease infinite;
+          blink 800ms ease infinite;
       }
     }
 
     &.reverse {
       &::before {
-        animation: typewriter-reverse var(--typewriter-speed) steps(var(--typewriter-characters))
-          forwards;
+        animation: typewriter-reverse 0.5s steps(var(--typewriter-characters)) forwards;
       }
       &::after {
         animation:
-          typewriter-reverse var(--typewriter-speed) steps(var(--typewriter-characters)) forwards,
-          blink 600ms ease infinite;
+          typewriter-reverse 0.5s steps(var(--typewriter-characters)) forwards,
+          blink 800ms ease infinite;
       }
     }
   }
@@ -311,8 +310,14 @@ const displayAcademiaGraph = false
   }
 
   @keyframes blink {
-    to {
+    0% {
+      opacity: 1;
+    }
+    50% {
       opacity: 0;
+    }
+    0% {
+      opacity: 1;
     }
   }
 
