@@ -30,31 +30,48 @@ const displayAcademiaGraph = false
       <p id='hey'>Hey! I&apos;m</p>
       <h1>Red Williams</h1>
       <h2 class='typewriter-container'>
-        <span class='typewriter-word forward blink'>student</span>
+        <span class='typewriter-word'>student</span>
       </h2>
       <script>
         // Get typewriter element
-        const typed = document
-          .getElementsByClassName('typewriter-word forward')
-          .item(0) as HTMLSpanElement
+        const typed = document.getElementsByClassName('typewriter-word').item(0) as HTMLSpanElement
 
         // Role list
         const roles = ['student', 'developer', 'writer', 'friend']
         let index = 0
 
+        // Set first role
         typed.innerText = roles[index]
         typed.style.setProperty('--typewriter-characters', typed.innerText.length.toString())
 
-        // Typewriter loop
-        setInterval(() => {
-          typed.classList.toggle('forward')
-          typed.classList.toggle('reverse')
+        const forwardDuration = 10000
+        const reverseDuration = 2000
 
-          if (typed.classList.contains('forward')) {
-            typed.innerText = roles[index++ % roles.length]
-            typed.style.setProperty('--typewriter-characters', typed.innerText.length.toString())
-          }
-        }, 5000)
+        // Typewriter loop
+        async function typewriter() {
+          // Start forward motion animation
+          typed.classList.add('forward')
+          typed.classList.remove('reverse')
+
+          // Wait for `forwardDuration` seconds before reversing
+          await new Promise((resolve) => setTimeout(resolve, forwardDuration))
+
+          // Switch classes/direction
+          typed.classList.remove('forward')
+          typed.classList.add('reverse')
+
+          // Wait for `reverseDuration` seconds before going forward again
+          await new Promise((resolve) => setTimeout(resolve, reverseDuration))
+
+          // Set new text
+          typed.innerText = roles[++index % roles.length]
+          typed.style.setProperty('--typewriter-characters', typed.innerText.length.toString())
+
+          // Continue loop
+          typewriter()
+        }
+
+        document.addEventListener('DOMContentLoaded', typewriter)
       </script>
       <p class='intro'>
         I&apos;m a student at Virginia Tech studying Software Systems with a minor in Computer
@@ -267,6 +284,7 @@ const displayAcademiaGraph = false
       top: 5%;
       bottom: 5%;
       background: var(--gradient);
+      margin-left: 2px;
     }
 
     // Handle forwrads/reverse animation movement
