@@ -29,7 +29,7 @@ const displayAcademiaGraph = false
     <section class='hero'>
       <p id='hey'>Hey! I&apos;m</p>
       <h1>Red Williams</h1>
-      <h2 class='typewriter-container'><span class='typewriter-word forwards'>student</span></h2>
+      <h2 class='typewriter-container'><span class='typewriter-word forward'>student</span></h2>
       <p class='intro'>
         I&apos;m a student at Virginia Tech studying Software Systems with a minor in Computer
         Science, facing an expected graduation date of Winter 2025. I&apos;m always seeking to learn
@@ -244,23 +244,42 @@ const displayAcademiaGraph = false
     }
 
     // Handle forwrads/reverse animation movement
-    &.forwards {
+    &.forward {
       &::before {
-        animation: typewriter var(--typewriter-speed) steps(var(--typewriter-characters))
+        animation: typewriter-forward var(--typewriter-speed) steps(var(--typewriter-characters))
           var(--typewriter-delay) forwards;
       }
       &::after {
         animation:
-          typewriter var(--typewriter-speed) steps(var(--typewriter-characters))
+          typewriter-forward var(--typewriter-speed) steps(var(--typewriter-characters))
+            var(--typewriter-delay) forwards,
+          blink 600ms ease infinite;
+      }
+    }
+
+    &.reverse {
+      &::before {
+        animation: typewriter-reverse var(--typewriter-speed) steps(var(--typewriter-characters))
+          var(--typewriter-delay) forwards;
+      }
+      &::after {
+        animation:
+          typewriter-reverse var(--typewriter-speed) steps(var(--typewriter-characters))
             var(--typewriter-delay) forwards,
           blink 600ms ease infinite;
       }
     }
   }
 
-  @keyframes typewriter {
+  @keyframes typewriter-forward {
     to {
       left: 100%;
+    }
+  }
+
+  @keyframes typewriter-reverse {
+    to {
+      left: 0%;
     }
   }
 
