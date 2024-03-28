@@ -34,6 +34,8 @@ const displayAcademiaGraph = false
         const typed = document
           .getElementsByClassName('typewriter-word forward')
           .item(0) as HTMLSpanElement
+        typed.innerText = 'developer'
+        typed.style.setProperty('--typewriter-characters', typed.innerText.length.toString())
         setInterval(() => {
           typed.classList.toggle('forward')
           typed.classList.toggle('reverse')
