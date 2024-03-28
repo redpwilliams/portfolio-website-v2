@@ -232,11 +232,8 @@ const displayAcademiaGraph = false
     }
 
     &::before {
-      // background: var(--bg-color);
-      background: teal;
+      background: var(--bg-color);
       animation: typewriter var(--typewriter-speed) steps(var(--typewriter-characters))
-        var(--typewriter-delay) forwards;
-      animation: reverse var(--typewriter-speed) steps(var(--typewriter-characters))
         var(--typewriter-delay) forwards;
     }
 
@@ -262,12 +259,6 @@ const displayAcademiaGraph = false
   @keyframes blink {
     to {
       opacity: 0;
-    }
-  }
-
-  @keyframes reverse {
-    to {
-      left: 0;
     }
   }
 
