@@ -23,6 +23,7 @@ export const GET: APIRoute = async () => {
   }
 
   // Save latest request time
+  // FIXME - Handle request timeout
   await kv.hset('spotify', { last_request_time: Date.now().toString() })
   // REVIEW - Saving the new request time here instead of closer to the actual spotify request
 
