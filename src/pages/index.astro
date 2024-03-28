@@ -39,7 +39,7 @@ const displayAcademiaGraph = false
           .item(0) as HTMLSpanElement
 
         // Role list
-        const roles = ['developer', 'writer', 'friend', 'student']
+        const roles = ['student', 'developer', 'writer', 'friend']
         let index = 0
 
         typed.innerText = roles[index]
@@ -51,7 +51,7 @@ const displayAcademiaGraph = false
           typed.classList.toggle('reverse')
 
           if (typed.classList.contains('forward')) {
-            typed.innerText = roles[++index % roles.length]
+            typed.innerText = roles[index++ % roles.length]
             typed.style.setProperty('--typewriter-characters', typed.innerText.length.toString())
           }
         }, 5000)
