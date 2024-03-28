@@ -229,7 +229,6 @@ const displayAcademiaGraph = false
 
   .typewriter-word {
     --typewriter-speed: 1s;
-    --typewriter-delay: 1s;
     --typewriter-characters: 7;
     position: relative;
 
@@ -256,12 +255,11 @@ const displayAcademiaGraph = false
     &.forward {
       &::before {
         animation: typewriter-forward var(--typewriter-speed) steps(var(--typewriter-characters))
-          var(--typewriter-delay) forwards;
+          forwards;
       }
       &::after {
         animation:
-          typewriter-forward var(--typewriter-speed) steps(var(--typewriter-characters))
-            var(--typewriter-delay) forwards,
+          typewriter-forward var(--typewriter-speed) steps(var(--typewriter-characters)) forwards,
           blink 600ms ease infinite;
       }
     }
