@@ -29,7 +29,9 @@ const displayAcademiaGraph = false
     <section class='hero'>
       <p id='hey'>Hey! I&apos;m</p>
       <h1>Red Williams</h1>
-      <h2 class='typewriter-container'><span class='typewriter-word forward'>student</span></h2>
+      <h2 class='typewriter-container'>
+        <span class='typewriter-word forward blink'>student</span>
+      </h2>
       <script>
         // Get typewriter element
         const typed = document
@@ -246,6 +248,7 @@ const displayAcademiaGraph = false
     --typewriter-speed: 1s;
     --typewriter-characters: 7;
     position: relative;
+    float: right;
 
     &::before,
     &::after {
