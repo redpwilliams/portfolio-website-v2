@@ -30,6 +30,15 @@ const displayAcademiaGraph = false
       <p id='hey'>Hey! I&apos;m</p>
       <h1>Red Williams</h1>
       <h2 class='typewriter-container'><span class='typewriter-word forward'>student</span></h2>
+      <script>
+        const typed = document
+          .getElementsByClassName('typewriter-word forward')
+          .item(0) as HTMLSpanElement
+        setInterval(() => {
+          typed.classList.toggle('forward')
+          typed.classList.toggle('reverse')
+        }, 5000)
+      </script>
       <p class='intro'>
         I&apos;m a student at Virginia Tech studying Software Systems with a minor in Computer
         Science, facing an expected graduation date of Winter 2025. I&apos;m always seeking to learn
@@ -260,12 +269,11 @@ const displayAcademiaGraph = false
     &.reverse {
       &::before {
         animation: typewriter-reverse var(--typewriter-speed) steps(var(--typewriter-characters))
-          var(--typewriter-delay) forwards;
+          forwards;
       }
       &::after {
         animation:
-          typewriter-reverse var(--typewriter-speed) steps(var(--typewriter-characters))
-            var(--typewriter-delay) forwards,
+          typewriter-reverse var(--typewriter-speed) steps(var(--typewriter-characters)) forwards,
           blink 600ms ease infinite;
       }
     }
@@ -278,6 +286,9 @@ const displayAcademiaGraph = false
   }
 
   @keyframes typewriter-reverse {
+    from {
+      left: 100%;
+    }
     to {
       left: 0%;
     }
