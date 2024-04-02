@@ -11,6 +11,7 @@
       "@components*": ["./src/components/*"],
       "@schemas/*": ["schemas/*"],
       "@img/*": ["./src/img/*"],
+      "@favicon/*": ["./public/img/favicon"],
 
       // Imports from index.astro files (idk why this works but we ball)
       "@pages": ["./src/pages/index.ts"],
