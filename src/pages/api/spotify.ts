@@ -9,6 +9,14 @@ const clientSecret = process.env.SPOTIFY_CLIENT_SECRET
 let accessToken: string | null | undefined
 
 export const GET: APIRoute = async () => {
+  const SPOTIFY_REQUEST_FLAG = false
+
+  if (!SPOTIFY_REQUEST_FLAG) {
+    return new Response('', {
+      headers: { 'Content-Type': 'application/problem+json' },
+      status: 400
+    })
+  }
   // Log request times
   const thisRequestTime = Date.now()
   const lastRequestTime: number = Number(await kv.hget('spotify', 'last_request_time'))
