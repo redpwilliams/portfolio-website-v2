@@ -20,7 +20,8 @@ const { project } = Astro.props
 
 <li class='project-container'>
   <div class='thumbnail-wrapper'>
-    <div class='img-screen'></div>
+    <a href={project.links.project_url ?? project.links.github} target='_blank' class='img-screen'
+    ></a>
     <Image
       src={project.image_url}
       alt={`Thumbnail image describing the ${project.title} project `}
@@ -61,154 +62,150 @@ const { project } = Astro.props
       )
     }
   </div>
-</li>
-<style lang='scss'>
-  @use 'src/main' as *;
 
-  $border-radius: 10px;
+  <style lang='scss'>
+    @use 'src/main' as *;
 
-  .project-container {
-    width: 100%;
-  }
-  .thumbnail-wrapper {
-    position: relative;
-    .img-screen {
-      position: absolute;
-      content: '';
-      width: 90%;
-      height: 100%;
-      left: 5%;
-      right: 5%;
-      background: var(--gradient);
-      mix-blend-mode: screen;
-      z-index: 1;
-      opacity: 0.5;
-      border-radius: $border-radius;
-      filter: grayscale(50%) brightness(50%);
-      transition: opacity 0.1s ease;
-    }
-    .fp-thumbnail {
-      height: auto;
-      object-fit: cover;
-      position: relative;
-      object-position: center center;
-      border-radius: $border-radius;
-      display: block; // Gets rid of the 4px on bottom
-      margin: 0 auto;
-      width: 90%;
-      border: solid 2px transparent;
-      background-image: linear-gradient(45deg, var(--bg-color), var(--bg-color)),
-        linear-gradient(45deg, rgba(255, 133, 64, 0.6), rgba(255, 64, 64, 0.6));
-      border-image-slice: 1;
-      border-radius: $border-radius;
-      background-origin: border-box;
-      background-clip: padding-box, border-box;
-    }
+    $border-radius: 10px;
 
-    .img-screen:hover,
-    .img-screen:focus-visible {
-      opacity: 0;
-    }
-  }
-
-  .content-wrapper {
-    padding: 20px;
-
-    .featured {
-      font-family: var(--font-mono);
-      color: var(--text-gray-light);
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-size: 0.8rem;
-      display: inline;
-    }
-
-    .title {
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-      font-weight: 500;
-      color: var(--text-main);
-      display: inline-block;
-      position: relative;
-      display: flex;
-      flex-wrap: wrap;
-      white-space: pre;
-    }
-
-    .gradient-line {
-      flex-grow: 1;
-      align-self: flex-end;
-      height: 4px;
-      width: max-content;
-      background: var(--gradient);
-      margin-bottom: 4px;
-    }
-
-    .description {
-      font-size: 0.9rem;
-      margin-bottom: 7px;
-      line-height: 1.8;
-    }
-
-    .technologies {
-      display: flex;
-      color: var(--text-gray-dark);
-      column-gap: 1rem;
-      font-size: 0.9rem;
-      margin-bottom: 14px;
-    }
-  }
-
-  @media (min-width: $breakpoint-main) {
     .project-container {
-      display: grid;
-      grid-template-columns: repeat(9, 1fr);
-      margin: 10rem 0;
-
-      &:nth-of-type(2n) {
-        .thumbnail-wrapper {
-          grid-column: 1 / 5;
-          align-self: center;
-          img {
-            max-height: var(--smallest-img-height);
-          }
-        }
-
-        .content-wrapper {
-          grid-column: 5 / 9;
-        }
-      }
-
-      &:nth-of-type(2n - 1) {
-        .thumbnail-wrapper {
-          grid-column: 6 / 10;
-          align-self: center;
-          img {
-            max-height: var(--smallest-img-height);
-          }
-        }
-
-        .content-wrapper {
-          grid-row: 1;
-          grid-column: 2 / 6;
-        }
-      }
-
-      .fp-thumbnail {
-        width: 80%;
-        margin: 0 auto;
-      }
-
+      width: 100%;
+    }
+    .thumbnail-wrapper {
+      position: relative;
       .img-screen {
-        width: 80%;
-        left: 10%;
-        right: 10%;
+        position: absolute;
+        content: '';
+        width: 90%;
+        height: 100%;
+        left: 5%;
+        right: 5%;
+        background: var(--gradient);
+        mix-blend-mode: screen;
+        z-index: 1;
+        opacity: 0.5;
+        border-radius: $border-radius;
+        filter: grayscale(50%) brightness(50%);
+        transition: opacity 0.1s ease;
+      }
+      .fp-thumbnail {
+        height: auto;
+        object-fit: cover;
+        position: relative;
+        object-position: center center;
+        border-radius: $border-radius;
+        display: block; // Gets rid of the 4px on bottom
+        margin: 0 auto;
+        width: 90%;
+        border: solid 2px #373737;
+        pointer-events: auto;
+      }
+
+      a:hover,
+      a:focus-visible {
+        opacity: 0;
       }
     }
 
     .content-wrapper {
-      align-self: center;
+      padding: 20px;
+
+      .featured {
+        font-family: var(--font-mono);
+        color: var(--text-gray-light);
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 0.8rem;
+        display: inline;
+      }
+
+      .title {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        font-weight: 500;
+        color: var(--text-main);
+        display: inline-block;
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        white-space: pre;
+      }
+
+      .gradient-line {
+        flex-grow: 1;
+        align-self: flex-end;
+        height: 4px;
+        width: max-content;
+        background: var(--gradient);
+        margin-bottom: 4px;
+      }
+
+      .description {
+        font-size: 0.9rem;
+        margin-bottom: 7px;
+        line-height: 1.8;
+      }
+
+      .technologies {
+        display: flex;
+        color: var(--text-gray-dark);
+        column-gap: 1rem;
+        font-size: 0.9rem;
+        margin-bottom: 14px;
+      }
     }
-  }
-</style>
+
+    @media (min-width: $breakpoint-main) {
+      .project-container {
+        display: grid;
+        grid-template-columns: repeat(9, 1fr);
+        margin: 10rem 0;
+
+        &:nth-of-type(2n) {
+          .thumbnail-wrapper {
+            grid-column: 1 / 5;
+            align-self: center;
+            img {
+              max-height: var(--smallest-img-height);
+            }
+          }
+
+          .content-wrapper {
+            grid-column: 5 / 9;
+          }
+        }
+
+        &:nth-of-type(2n - 1) {
+          .thumbnail-wrapper {
+            grid-column: 6 / 10;
+            align-self: center;
+            img {
+              max-height: var(--smallest-img-height);
+            }
+          }
+
+          .content-wrapper {
+            grid-row: 1;
+            grid-column: 2 / 6;
+          }
+        }
+
+        .fp-thumbnail {
+          width: 80%;
+          margin: 0 auto;
+        }
+
+        .img-screen {
+          width: 80%;
+          left: 10%;
+          right: 10%;
+        }
+      }
+
+      .content-wrapper {
+        align-self: center;
+      }
+    }
+  </style>
+</li>
