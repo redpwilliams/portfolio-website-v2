@@ -15,14 +15,106 @@ const projects: SanityResult<ProjectType> = data.result
   <PageTableLayout
     title='Projects'
     headerText="Some of the cool things I've been working on, from niche ideas to large applications.">
-    {
-      projects.map((project) => (
-        <tr>
-          <th>{project.title}</th>
-          <td>{project.description}</td>
-        </tr>
-      ))
-    }
+    <thead>
+      <tr class='head-row'>
+        <th class='head-name'>Name</th>
+        <th class='head-description'>Description</th>
+        <th class='head-links'>Links</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        projects.map((project) => (
+          <tr class='body-row'>
+            <td class='title'>{project.title}</td>
+            <td class='desc'>{project.description}</td>
+            <tr class='links'>{project.links}</tr>
+          </tr>
+        ))
+      }
+    </tbody>
   </PageTableLayout>
-  <!-- TODO - Fill with actual data -->
 </Layout>
+<style lang='scss'>
+  @use 'src/main' as *;
+
+  $cell-padding: 10px;
+
+  tr.head-row {
+    .head-name {
+      width: auto;
+      text-align: left;
+    }
+    .head-description {
+      display: none;
+    }
+
+    .head-links {
+      text-align: right;
+      width: 70px;
+    }
+
+    & > * {
+      padding: $cell-padding;
+      letter-spacing: 0.05em;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+    }
+
+    color: var(--text-gray-light);
+    border-bottom: 1px solid var(--text-gray-light);
+  }
+
+  @media (min-width: $breakpoint-main) {
+    tr.head-row {
+      .head-name {
+        width: 40%;
+      }
+      .head-description {
+        display: table-cell;
+        width: 55%;
+      }
+
+      .head-links {
+        width: 7%;
+      }
+
+      text-align: left;
+    }
+  }
+
+  .title {
+    color: var(--text-main);
+  }
+
+  .desc {
+    white-space: nowrap;
+    overflow: hidden;
+    word-break: break-all;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    color: var(--text-gray-light);
+    display: none;
+  }
+
+  .links {
+    color: var(--text-gray-light);
+    font-family: var(--font-mono);
+    text-align: left;
+    width: 70px;
+    text-align: right;
+  }
+
+  @media (min-width: $breakpoint-main) {
+    .desc {
+      display: table-cell;
+    }
+  }
+
+  .body-row {
+    border-bottom: 1px solid #3f3f3f;
+    & > * {
+      padding: $cell-padding;
+    }
+  }
+</style>
