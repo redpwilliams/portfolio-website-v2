@@ -1,9 +1,11 @@
 ---
 import { Layout, PageTableLayout } from '@layouts'
+import { Icon } from '@components'
+import { FiGithub, FiExternalLink } from 'react-icons/fi'
 // Sanity functions and types
 import type { SanityResult } from '@types'
 import type { ProjectType } from '@schemas'
-import { fetchSanityData } from '@util'
+import { fetchSanityData, isNonEmpty } from '@util'
 
 // Fetch Sanity data
 const query = `*[_type == "project"]`
@@ -28,7 +30,16 @@ const projects: SanityResult<ProjectType> = data.result
           <tr class='body-row'>
             <td class='title'>{project.title}</td>
             <td class='desc'>{project.description}</td>
-            <tr class='links'>{project.links}</tr>
+            <td class='links'>
+              {isNonEmpty(project.links.project_url) && (
+                <Icon href={project.links.project_url}>
+                  <FiExternalLink className='icon' style={{ scale: '1.2' }} />
+                </Icon>
+              )}
+              <Icon href={project.links.github}>
+                <FiGithub className='icon' style={{ scale: '1.2' }} />
+              </Icon>
+            </td>
           </tr>
         ))
       }
@@ -65,7 +76,7 @@ const projects: SanityResult<ProjectType> = data.result
     border-bottom: 1px solid var(--text-gray-light);
   }
 
-  @media (min-width: $breakpoint-main) {
+  @media (min-width: 60em) {
     tr.head-row {
       .head-name {
         width: 25%;
@@ -101,11 +112,13 @@ const projects: SanityResult<ProjectType> = data.result
     color: var(--text-gray-light);
     font-family: var(--font-mono);
     text-align: left;
-    width: 70px;
     text-align: right;
+    display: flex;
+    justify-content: right;
+    column-gap: 0.2em;
   }
 
-  @media (min-width: $breakpoint-main) {
+  @media (min-width: 60em) {
     .desc {
       display: table-cell;
     }
