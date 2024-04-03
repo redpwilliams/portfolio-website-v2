@@ -5,17 +5,13 @@ import type { ProjectType } from '@schemas'
 import Icon from './Icon.astro'
 import { Image } from 'astro:assets'
 
-const isNonEmpty = (str: string | undefined) => {
-  if (str === undefined) return false
-  return str.trim().length !== 0
-}
+import { isNonEmpty } from '@util'
 
 interface Props {
   project: ProjectType
 }
 
 const { project } = Astro.props
-// project.title += ' ' + project.title
 ---
 
 <li class='project-container'>

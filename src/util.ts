@@ -101,6 +101,17 @@ export function formatDate(date: string) {
 }
 
 /**
+ * Determines if `str` is empty or contentful. Used mainly for verifying if
+ * Icon hrefs exist before rendering them.
+ * @param str - The string to check
+ * @returns Whether or not `str` is contnentful
+ */
+export function isNonEmpty(str: string | undefined) {
+  if (str === undefined) return false
+  return str.trim().length !== 0
+}
+
+/**
  * Creates the "Academia" Disjoint Force-Directed Graph
    @see https://observablehq.com/@d3/force-directed-graph/2?intent=fork 
  */
