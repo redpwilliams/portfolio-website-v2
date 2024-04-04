@@ -1,4 +1,5 @@
 ---
+export const prerender = true
 // Components and Images
 import { Layout } from '@layouts'
 import { Button, SectionHeader, Project, Report } from '@components'
@@ -10,6 +11,8 @@ import { Image } from 'astro:assets'
 import type { SanityResult } from '@types'
 import type { ProjectType, ReportType } from '@schemas'
 import { fetchSanityData } from '@util'
+
+import '@styles/gist-dark-mode.css'
 
 // Fetch Sanity data
 const query = `[
@@ -164,7 +167,9 @@ const displayAcademiaGraph = false
         )
       }
     </section>
-
+    <!-- <link rel='stylesheet' href='/gist-dark-mode.css' /> -->
+    <script is:inline src='https://gist.github.com/fernandodof/89caf28315764fd862393752adac07ac.js'
+    ></script>
     <section>
       <SectionHeader title='Reports' />
       {
