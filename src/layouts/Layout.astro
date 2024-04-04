@@ -175,7 +175,7 @@ const { title } = Astro.props
           import type { SpotifyDataFulfilled } from '@types'
 
           // NOTE - Boolean flag to turn on/off spotify request ping
-          const SPOTIFY_REQUEST_FLAG = import.meta.env.ENABLE_SPOTIFY
+          const SPOTIFY_REQUEST_FLAG = import.meta.env.PUBLIC_ENABLE_SPOTIFY
 
           // Get UI elements
           const spotifyBars = Array.from(
