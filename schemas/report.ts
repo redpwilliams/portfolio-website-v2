@@ -14,13 +14,6 @@ export default defineType({
       type: 'string',
       description: 'Report title.'
     }),
-    // Caption
-    defineField({
-      title: 'Caption',
-      name: 'caption',
-      type: 'string',
-      description: 'Report caption'
-    }),
     // Slug
     defineField({
       title: 'Slug',
@@ -91,7 +84,6 @@ export default defineType({
 
 export type ReportType = {
   title: string
-  caption: string
   slug: string
   image_url: string
   alt_text: string
