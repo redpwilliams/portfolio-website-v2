@@ -9,50 +9,66 @@ const clientSecret = process.env.SPOTIFY_CLIENT_SECRET
 let accessToken: string | null | undefined
 
 export const GET: APIRoute = async () => {
-  const SPOTIFY_REQUEST_FLAG = import.meta.env.ENABLE_SPOTIFY
+  try {
+    const SPOTIFY_REQUEST_FLAG = import.meta.env.PUBLIC_ENABLE_SPOTIFY
 
-  if (!SPOTIFY_REQUEST_FLAG) {
-    return new Response('', {
-      headers: { 'Content-Type': 'application/problem+json' },
-      status: 400
+    if (!SPOTIFY_REQUEST_FLAG) {
+      return new Response('', {
+        headers: { 'Content-Type': 'application/problem+json' },
+        status: 400
+      })
+    }
+    // Log request times
+    const thisRequestTime = Date.now()
+    const lastRequestTime: number = Number(await kv.hget('spotify', 'last_request_time'))
+
+    // Handle too many requests (5 second time-out)
+    if (thisRequestTime - lastRequestTime < 5 * 1000) {
+      // TODO - Use application/problem+json
+      return new Response('', {
+        headers: { 'Content-Type': 'application/problem+json' },
+        status: 400
+      })
+    }
+
+    // Save latest request time
+    await kv.hset('spotify', { last_request_time: Date.now().toString() })
+
+    // Get access token from db if previous access token does not exist
+    accessToken = accessToken ?? (await kv.hget('spotify', 'access_token'))
+
+    // Fetch data (assuming a.t. is fine, code handles it in another function)
+    const data = await FetchSpotifyData(accessToken!)
+
+    // Set spotify data as last listened to in db
+    kv.hset('spotify', { last_data: JSON.stringify(data) })
+
+    // Set headers
+    const headers = new Headers()
+    headers.append('Content-Type', 'application/json')
+
+    // Craft response
+    return new Response(JSON.stringify({ access_token: accessToken ?? '', ...data }), {
+      headers: { 'Content-Type': 'application/json' },
+      status: setStatusCode(data)
     })
+  } catch (e) {
+    // Vercel KV error
+    return new Response(
+      JSON.stringify({
+        type: 'https://vercel.com/docs/storage/vercel-kv/vercel-kv-error-codes',
+        title: 'Bad Gateway - Error with Vercel KV',
+        detail: 'There was some error using Vercel KV at this endpoint',
+        instance: '/api/spotify',
+        status: 502,
+        accessToken: accessToken ?? ''
+      }),
+      {
+        headers: { 'Content-Type': 'application+problem/json' },
+        status: 502
+      }
+    )
   }
-  // Log request times
-  const thisRequestTime = Date.now()
-  const lastRequestTime: number = Number(await kv.hget('spotify', 'last_request_time'))
-
-  // Handle too many requests (5 second time-out)
-  if (thisRequestTime - lastRequestTime < 5 * 1000) {
-    // TODO - Use application/problem+json
-    return new Response('', {
-      headers: { 'Content-Type': 'application/problem+json' },
-      status: 400
-    })
-  }
-
-  // Save latest request time
-  // FIXME - Handle request timeout
-  await kv.hset('spotify', { last_request_time: Date.now().toString() })
-  // REVIEW - Saving the new request time here instead of closer to the actual spotify request
-
-  // Get access token from db if previous access token does not exist
-  accessToken = accessToken ?? (await kv.hget('spotify', 'access_token'))
-
-  // Fetch data (assuming a.t. is fine, code handles it in another function)
-  const data = await FetchSpotifyData(accessToken!)
-
-  // Set spotify data as last listened to in db
-  kv.hset('spotify', { last_data: JSON.stringify(data) })
-
-  // Set headers
-  const headers = new Headers()
-  headers.append('Content-Type', 'application/json')
-
-  // Craft response
-  return new Response(JSON.stringify({ access_token: accessToken ?? '', ...data }), {
-    headers: { 'Content-Type': 'application/json' },
-    status: setStatusCode(data)
-  })
 }
 
 /**
