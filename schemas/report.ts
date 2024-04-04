@@ -1,3 +1,4 @@
+// TODO - Rename to blog
 import { defineType, defineField } from 'sanity'
 import type { PortableTextBlock } from '@portabletext/types'
 import { H1, H2 } from './RichTextComponents'
