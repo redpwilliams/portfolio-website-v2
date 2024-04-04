@@ -124,6 +124,21 @@ const { title } = Astro.props
       </nav>
       <slot />
       <aside class='email'><div><a>{email}</a></div></aside>
+      <script>
+        function hasScrollbar() {
+          return document.documentElement.scrollHeight > window.innerHeight
+        }
+
+        // Function to add or remove 'has-scrollbar' class based on scrollbar presence
+        function updateStyles() {
+          const email_aside = document.getElementsByClassName('email').item(0) as HTMLElement
+          email_aside.style.setProperty('--necessary-absolute', hasScrollbar() ? null : 'absolute')
+        }
+
+        // Call updateStyles on page load and window resize to update styles dynamically
+        window.addEventListener('load', updateStyles)
+        window.addEventListener('resize', updateStyles)
+      </script>
     </div>
     <footer>
       <Logo />
@@ -350,6 +365,7 @@ const { title } = Astro.props
   .main-container {
     background-color: var(--bg-color);
     flex-grow: 1;
+    position: relative;
   }
 
   aside,
@@ -420,8 +436,7 @@ const { title } = Astro.props
     main {
       padding: 0 75px;
       min-height: 30vh; // TODO - Use with Footer height variable (30vh as of right now)
-      max-width: 1600px;
-      margin: 0 auto;
+      @include page-containing-block;
     }
 
     aside {
@@ -448,9 +463,13 @@ const { title } = Astro.props
     .email {
       left: 0;
       right: auto;
-      position: sticky;
+      // Handles when the screen is resized/has no scroll,
+      // and this container is not flush with the footer
+      position: var(--necessary-absolute, sticky);
       bottom: 0;
       font-size: 1.6vh;
+      // top: 100%;
+      margin-top: -5rem;
 
       & > div {
         display: block;
