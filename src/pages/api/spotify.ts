@@ -12,7 +12,7 @@ export const GET: APIRoute = async () => {
   try {
     const SPOTIFY_REQUEST_FLAG = import.meta.env.PUBLIC_ENABLE_SPOTIFY
 
-    if (!SPOTIFY_REQUEST_FLAG) {
+    if (SPOTIFY_REQUEST_FLAG === 'false') {
       return new Response('', {
         headers: { 'Content-Type': 'application/problem+json' },
         status: 400
