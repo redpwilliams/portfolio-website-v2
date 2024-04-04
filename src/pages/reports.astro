@@ -16,12 +16,13 @@ reports.forEach((report) => {
   // month (2-digit) / day
   report.date_published = `${report.date_published.substring(5, 7)}/${day}`
 })
+
+const headerText =
+  'Successess, failures, and everything in between in making some of my favorite projects.'
 ---
 
-<Layout title='Reports'>
-  <PageTableLayout
-    title='Reports'
-    headerText='Successess, failures, and everything in between in making some of my favorite projects.'>
+<Layout title='Red Williams - Reports' meta_content={headerText}>
+  <PageTableLayout title='Reports' headerText={headerText}>
     <thead>
       <tr class='head-row'>
         <th class='head-title'>Title</th>

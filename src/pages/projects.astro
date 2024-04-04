@@ -11,12 +11,13 @@ import { fetchSanityData, isNonEmpty } from '@util'
 const query = `*[_type == "project"]`
 const data = await fetchSanityData(query)
 const projects: SanityResult<ProjectType> = data.result
+
+const headerText =
+  "Some of the cool things I've been working on, from niche ideas to large applications."
 ---
 
-<Layout title='Projects'>
-  <PageTableLayout
-    title='Projects'
-    headerText="Some of the cool things I've been working on, from niche ideas to large applications.">
+<Layout title='Red Williams - Projects' meta_content={headerText}>
+  <PageTableLayout title='Projects' headerText={headerText}>
     <thead>
       <tr class='head-row'>
         <th class='head-name'>Name</th>
