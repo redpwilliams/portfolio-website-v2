@@ -175,7 +175,7 @@ const { title } = Astro.props
           import type { SpotifyDataFulfilled } from '@types'
 
           // NOTE - Boolean flag to turn on/off spotify request ping
-          const SPOTIFY_REQUEST_FLAG = false
+          const SPOTIFY_REQUEST_FLAG = import.meta.env.ENABLE_SPOTIFY
 
           // Get UI elements
           const spotifyBars = Array.from(
@@ -253,8 +253,7 @@ const { title } = Astro.props
 
           // Call the function when the DOM content is loaded
           if (spotifyTrack && spotifyArtists) {
-            // document.addEventListener('DOMContentLoaded', updateSpotifyInfo)
-            updateSpotifyInfo()
+            updateSpotifyInfo() // Need to call it at least once to initialize styles/settings
             SPOTIFY_REQUEST_FLAG && setInterval(updateSpotifyInfo, 1000 * 30) // 30 seconds
           }
         </script>

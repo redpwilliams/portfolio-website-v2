@@ -9,7 +9,7 @@ const clientSecret = process.env.SPOTIFY_CLIENT_SECRET
 let accessToken: string | null | undefined
 
 export const GET: APIRoute = async () => {
-  const SPOTIFY_REQUEST_FLAG = false
+  const SPOTIFY_REQUEST_FLAG = import.meta.env.ENABLE_SPOTIFY
 
   if (!SPOTIFY_REQUEST_FLAG) {
     return new Response('', {
