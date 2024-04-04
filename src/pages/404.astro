@@ -4,27 +4,32 @@ import { Layout } from '@layouts'
 export const prerender = true
 ---
 
-<Layout title='Page Not Found'>
+<Layout title='Red Williams - Page Not Found'>
   <main>
     <h1>404</h1>
-    <h2>Page Not Found! :/</h2>
+    <h2>Page Not Found!<br />:/</h2>
   </main>
 </Layout>
 <style>
   main {
     text-align: center;
-    height: 100vh;
+    max-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     font-family: var(--font-mono);
+    padding-top: 10rem;
   }
 
   h1 {
-    font-size: 5rem;
-    color: var(--text-main);
-    text-shadow:
-      var(--gradient-start) -2px 0 4px,
-      var(--gradient-end) 2px 0 4px;
+    font-size: clamp(100px, 25vw, 200px);
+    background: var(--gradient);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+  }
+
+  h2 {
+    font-family: var(--font-sans);
+    font-size: clamp(30px, 5vw, 50px);
   }
 </style>
