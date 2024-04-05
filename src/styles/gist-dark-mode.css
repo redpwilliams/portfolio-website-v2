@@ -73,7 +73,7 @@ body.blog pre > code,
 /* Imported Ambiance Theme */
 /* https://github.com/StylishThemes/GitHub-Dark/blob/master/src/themes/github/ambiance.css */
 :root {
-  --ghd-code-background: #202020;
+  --ghd-code-background: #424242;
   --ghd-code-color: #e6e1dc;
 }
 .pl-c,
@@ -82,22 +82,22 @@ body.blog pre > code,
   font-style: italic !important;
 } /* comment */
 .pl-c1 {
-  color: #cf7ea9 !important;
+  color: #f57b7b !important;
 } /* constant */
 .pl-e {
-  color: #aac6e3 !important;
+  color: #7eb4ee !important;
 } /* entity */
 .pl-en {
-  color: #aac6e3 !important;
+  color: #7eb4ee !important;
 } /* entity.name */
 .pl-ent {
-  color: #aac6e3 !important;
+  color: #7eb4ee !important;
 } /* entity.name.tag */
 .pl-k {
   color: #fa8d6a !important;
 } /* keyword */
 .pl-mb {
-  color: #cf7ea9 !important;
+  color: #f57b7b !important;
   font-weight: bold !important;
 } /* markup.bold */
 .pl-mdh {
@@ -142,10 +142,10 @@ body.blog pre > code,
   color: #8f9d6a !important;
 } /* punctuation.definition.string */
 .pl-s {
-  color: #aac6e3 !important;
+  color: #d1d4dc !important;
 } /* storage */
 .pl-s1 {
-  color: #8f9d6a !important;
+  color: #b5a8d6 !important;
 } /* string */
 .pl-s1 .pl-pse .pl-s2 {
   color: #8f9d6a !important;
@@ -176,16 +176,16 @@ body.blog pre > code,
   color: #dad085 !important;
 } /* string.regexp.character-class */
 .pl-st {
-  color: #aac6e3 !important;
+  color: #7eb4ee !important;
 } /* support.type */
 .pl-stj {
   color: #99c !important;
 } /* storage.type.java */
 .pl-sv {
-  color: #cf7ea9 !important;
+  color: #f57b7b !important;
 } /* support.variable */
 .pl-v {
-  color: #aac6e3 !important;
+  color: #7eb4ee !important;
 } /* variable */
 .pl-vo, /* variable.other */
 .pl-vpf {
@@ -209,7 +209,7 @@ body.blog pre > code,
 } /* invalid.illegal */
 .pl-corl,
 .highlight .pl-corl span.x {
-  color: #aac6e3 !important;
+  color: #7eb4ee !important;
   text-decoration: underline !important;
 } /* links */
 .pl-token.active,
