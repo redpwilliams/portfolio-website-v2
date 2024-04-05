@@ -62,8 +62,12 @@ body.blog pre > code,
 .blob-num {
   padding: 10px 8px 9px;
   text-align: right;
-  color: #6b6b6b !important;
+  color: #6b6b6b;
   border: 0;
+  cursor: auto !important;
+}
+.blob-num:hover {
+  color: #c4c4c4 !important;
 }
 .blob-code,
 .blob-code-inner {
