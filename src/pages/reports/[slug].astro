@@ -22,7 +22,7 @@ if (!report) return Astro.redirect('/404')
 
 const { day, month, year } = formatDate(report.date_published)
 report.date_published = `${month} ${day}, ${year}`
-console.log(report.content[report.content.length - 4])
+
 const headers = report.content
   .filter((object) => object.style === 'h1')
   .map((h1) => h1.children[0].text)

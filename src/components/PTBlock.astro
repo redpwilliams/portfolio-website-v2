@@ -7,7 +7,6 @@ export type Props = $<BlockType>
 
 const props = Astro.props
 const html: string = await Astro.slots.render('default')
-console.log('--> ' + html)
 let gistLink
 if (html.startsWith('https://gist.github.com/')) gistLink = html
 ---
