@@ -68,6 +68,7 @@ export default defineType({
       name: 'content',
       type: 'array',
       title: 'Content',
+      // https://www.sanity.io/docs/customizing-the-portable-text-editor#14d3f8b767ae
       of: [
         {
           type: 'block',

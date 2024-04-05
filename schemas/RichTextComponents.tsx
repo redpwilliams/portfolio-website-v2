@@ -10,5 +10,10 @@ export const SubHeading = (props: { children: React.ReactElement }) => {
 }
 
 export const Gist = (props: { children: React.ReactElement }) => {
-  return <span style={{ fontSize: '1.3em', fontWeight: 600 }}>{props.children}</span>
+  return (
+    <span
+      style={{ fontSize: '1em', fontWeight: 400, fontFamily: 'monospace', fontStyle: 'italic' }}>
+      {props.children}
+    </span>
+  )
 }
