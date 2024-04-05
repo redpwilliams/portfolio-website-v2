@@ -40,7 +40,7 @@ body.blog pre > code,
 .api code,
 .CodeMirror,
 .highlight {
-  background-color: #1d1f21 !important;
+  background-color: var(--ghd-code-background) !important;
   color: #c5c8c6 !important;
 }
 .gist .blob-code {
@@ -73,7 +73,7 @@ body.blog pre > code,
 /* Imported Ambiance Theme */
 /* https://github.com/StylishThemes/GitHub-Dark/blob/master/src/themes/github/ambiance.css */
 :root {
-  --ghd-code-background: #424242;
+  --ghd-code-background: #1d1f21;
   --ghd-code-color: #e6e1dc;
 }
 .pl-c,
@@ -230,6 +230,8 @@ body.blog pre > code,
 
 .gist-data {
   border-bottom: unset !important;
+  max-height: 400px;
+  background-color: var(--ghd-code-background) !important;
 }
 
 .gist-meta {
