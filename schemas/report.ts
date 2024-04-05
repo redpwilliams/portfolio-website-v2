@@ -1,7 +1,7 @@
 // TODO - Rename to blog
 import { defineType, defineField } from 'sanity'
 import type { PortableTextBlock } from '@portabletext/types'
-import { H1, H2 } from './RichTextComponents'
+import { MainHeading, SubHeading, Gist } from './RichTextComponents'
 
 export default defineType({
   title: 'Reports',
@@ -73,8 +73,9 @@ export default defineType({
           type: 'block',
           styles: [
             { title: 'Normal', value: 'normal' },
-            { title: 'H1', value: 'h1', component: H1 },
-            { title: 'H2', value: 'h2', component: H2 },
+            { title: 'Main Heading', value: 'h1', component: MainHeading },
+            { title: 'Sub Heading', value: 'h2', component: SubHeading },
+            { title: 'Gist', value: 'code', component: Gist },
             { title: 'Quote', value: 'blockquote' }
           ]
         }
