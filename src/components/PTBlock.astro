@@ -14,7 +14,9 @@ if (html.startsWith('https://gist.github.com/')) gistLink = html
 
 {
   gistLink ? (
-    <script is:inline src={gistLink} />
+    <code>
+      <script is:inline src={gistLink} />
+    </code>
   ) : (
     <Block class='sdfs' {...props}>
       <slot />
@@ -56,6 +58,11 @@ if (html.startsWith('https://gist.github.com/')) gistLink = html
       background: var(--gradient);
       left: 0;
     }
+  }
+
+  code {
+    display: block;
+    margin-bottom: 20px;
   }
 </style>
 <script>
