@@ -125,7 +125,9 @@ const { title, meta_content } = Astro.props
         </ul>
       </nav>
       <slot />
-      <aside class='email'><div><a>{email}</a></div></aside>
+      <aside class='email'>
+        <div><a href={'mailto:' + email} target='_blank'>{email}</a></div>
+      </aside>
       <script>
         function hasScrollbar() {
           return document.documentElement.scrollHeight > window.innerHeight
