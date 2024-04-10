@@ -16,11 +16,15 @@ const { project } = Astro.props
 
 <li class='project-container'>
   <div class='thumbnail-wrapper'>
-    <a href={project.links.project_url ?? project.links.github} target='_blank' class='img-screen'
+    <a
+      href={project.links.project_url ?? project.links.github}
+      target='_blank'
+      class='img-screen'
+      aria-label="Gradient screen over the project image that doubles as a link to the project's link or its corresponding Github repository"
     ></a>
     <Image
       src={project.image_url}
-      alt={`Thumbnail image describing the ${project.title} project `}
+      alt={project.image_alt}
       width={500}
       height={500}
       class='fp-thumbnail'
