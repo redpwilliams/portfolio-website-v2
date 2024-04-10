@@ -134,11 +134,11 @@ const displayAcademiaGraph = false
         </div>
       </div>
     </section>
+    <!-- MARK: Projects -->
     <section>
       <SectionHeader title='Projects' />
       {
         // If there are no projects that were fetched . . .
-        // REVIEW - Separate into projects specifically, not just entire data object
         data.result.length === 0 ? (
           // . . . Display an empty message
           <>
@@ -166,16 +166,14 @@ const displayAcademiaGraph = false
         )
       }
     </section>
+    <!-- MARK: Reports -->
     <section>
       <SectionHeader title='Reports' />
       {
         // If there are no reports that were fetched . . .
-        // REVIEW - Separate into projects specifically, not just entire data object
         data.result.length === 0 ? (
           // . . . Display an empty message
-          <>
-            <h4>Nothing to See right now!</h4>
-          </>
+          <h4>Nothing to See right now!</h4>
         ) : (
           // . . . Else display reports as normal
           <ul id='reports'>

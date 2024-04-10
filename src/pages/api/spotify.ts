@@ -24,7 +24,6 @@ export const GET: APIRoute = async () => {
 
     // Handle too many requests (5 second time-out)
     if (thisRequestTime - lastRequestTime < 5 * 1000) {
-      // TODO - Use application/problem+json
       return new Response('', {
         headers: { 'Content-Type': 'application/problem+json' },
         status: 400
@@ -135,7 +134,7 @@ const FetchAccessToken = async (): Promise<SpotifyAccessToken> => {
     }
 
     const data: SpotifyAccessToken = await res.json()
-    accessToken = data.access_token // TODO - Move to KV store
+    accessToken = data.access_token // Keep local to minimize repetitive calls
     return { access_token: data.access_token }
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error)
@@ -145,10 +144,8 @@ const FetchAccessToken = async (): Promise<SpotifyAccessToken> => {
 
 const RevalidateAccessToken = async () => {
   console.warn('Access token expired. Fetching a new one . . .')
-  accessToken = (await FetchAccessToken()).access_token // REVIEW - Handle null?
+  accessToken = (await FetchAccessToken()).access_token
   await kv.hset('spotify', { access_token: accessToken }) // Put new access token back into database
-  /* REVIEW - Return without re-requesting allows the server enough downtime after fetching the new access token
-     Before making a new request (instead of calling FetchSpotifyData immediately) */
   return {
     message: 'Access token expired, stored the new one in db'
   }

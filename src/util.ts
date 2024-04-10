@@ -57,7 +57,6 @@ export async function fetchSanityData(query: string) {
     data = await res.json()
   } catch (err) {
     // Fetch failed, returning empty SanityResult array
-    // TODO - Craft better error detection
     data = { query: QUERY, result: [], ms: 0 }
   }
 
