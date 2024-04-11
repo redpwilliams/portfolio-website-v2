@@ -337,6 +337,7 @@ const { title, meta_content } = Astro.props
     background-color: var(--bg-color);
     flex-grow: 1;
     position: relative;
+    padding-bottom: 7.5rem;
   }
 
   aside,
@@ -408,6 +409,10 @@ const { title, meta_content } = Astro.props
       padding: 0 75px;
       min-height: 30vh;
       @include page-containing-block;
+    }
+
+    .main-container {
+      padding-bottom: 0;
     }
 
     aside {
