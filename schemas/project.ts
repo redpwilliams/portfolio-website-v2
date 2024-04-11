@@ -33,7 +33,13 @@ export default defineType({
       description: 'Project thumbnail.',
       hidden: ({ document }) => !document?.featured
     }),
-    // TODO - Add image alt text
+    defineField({
+      title: 'Thumbnail Alt Text',
+      name: 'image_alt',
+      type: 'string',
+      description: 'Descriptive alt text of the Thumbnail',
+      hidden: ({ document }) => !document?.featured
+    }),
     // Description
     defineField({
       title: 'Description',
@@ -47,7 +53,7 @@ export default defineType({
       name: 'links',
       type: 'object',
       description: 'Github and Project links.',
-      fields: [
+      field: [
         // Github
         defineField({
           title: 'Github',
