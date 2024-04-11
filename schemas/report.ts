@@ -1,5 +1,5 @@
 // TODO - Rename to blog
-import { defineType, defineField } from 'sanity'
+import { defineType, defineField, defineArrayMember } from 'sanity'
 import type { PortableTextBlock } from '@portabletext/types'
 import { MainHeading, SubHeading, Gist } from './RichTextComponents'
 
@@ -22,7 +22,7 @@ export default defineType({
       type: 'slug',
       options: {
         source: 'title',
-        slugify: (input) => input.toLowerCase().replace(/\s+/g, '-').slice(0, 200)
+        slugify: (input: string) => input.toLowerCase().replace(/\s+/g, '-').slice(0, 200)
       },
       validation: (Rule) => Rule.required()
     }),
@@ -69,8 +69,9 @@ export default defineType({
       type: 'array',
       title: 'Content',
       // https://www.sanity.io/docs/customizing-the-portable-text-editor#14d3f8b767ae
+      // @ts-expect-error Works but Sanity's type definition does not
       of: [
-        {
+        defineArrayMember({
           type: 'block',
           styles: [
             { title: 'Normal', value: 'normal' },
@@ -79,7 +80,7 @@ export default defineType({
             { title: 'Gist', value: 'code', component: Gist },
             { title: 'Quote', value: 'blockquote' }
           ]
-        }
+        })
       ]
     })
   ]
