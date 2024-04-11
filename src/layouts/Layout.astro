@@ -5,11 +5,11 @@ import { SocialIcons } from '@constants'
 
 const email = 'redpwilliams@gmail.com'
 
-const navHeaders: { name: string; href: string }[] = [
+const navHeaders: { name: string; href: string; target?: '_blank' }[] = [
   { name: 'Home', href: '/' },
   { name: 'Projects', href: '/projects' },
   { name: 'Reports', href: '/reports' },
-  { name: 'Resume', href: '/resume' }
+  { name: 'Resume', href: '/resume.pdf', target: '_blank' }
 ]
 
 const isSubpath = (currentUrl: string, basePath: string): boolean => {
@@ -70,14 +70,15 @@ const { title, meta_content } = Astro.props
           }
         </ul>
       </aside>
+      <!-- MARK: Navbar -->
       <nav class='main-nav'>
-        <!-- TODO - https://rodneylab.com/astro-js-non-html-routes/ -->
         <ul>
           {
             navHeaders.map((header) => (
               <li>
                 <a
                   href={header.href}
+                  target={header.target}
                   style={{
                     color: isSubpath(Astro.url.pathname, header.href) ? 'var(--text-main)' : ''
                   }}>
