@@ -214,12 +214,12 @@ const displayAcademiaGraph = false
       />
     </section>
     <!-- MARK: Bottom Socials -->
-    <section>
-      <ul id='bottom-socials'>
+    <section class='bottom-socials'>
+      <ul id='bottom-socials-ul'>
         {
           SocialIcons.map((social) => (
-            <li style='scale: 1.3; line-height: 0'>
-              <Icon href={social.href} translateOnHover>
+            <li style='scale: 1.5; line-height: 0'>
+              <Icon href={social.href}>
                 <social.icon className='icon' style={social.style} />
               </Icon>
             </li>
@@ -453,23 +453,30 @@ const displayAcademiaGraph = false
     }
   }
 
-  #bottom-socials {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2em;
+  .bottom-socials {
     position: relative;
-    background-color: var(--bg-color);
-    z-index: 2;
 
     &::before {
       position: absolute;
       left: 0;
       right: 0;
       content: '';
-      height: 10px;
-      background-color: red;
+      height: 2px;
+      top: 50%;
+      translate: translateY(-50%);
+      background-color: var(--text-gray-light);
     }
+  }
+
+  #bottom-socials-ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+    position: relative;
+    background-color: var(--bg-color);
+    width: min-content;
+    margin: 0 auto;
   }
 
   @media (min-width: $breakpoint-main) {
