@@ -1,8 +1,10 @@
 ---
 export const prerender = true
+
 // Components and Images
 import { Layout } from '@layouts'
-import { Button, SectionHeader, Project, Report } from '@components'
+import { Button, SectionHeader, Project, Report, Icon } from '@components'
+import { SocialIcons } from '@constants'
 import ProfilePicture from '@img/pfp.png'
 import BackgroundStroke from '@img/pfp_outline.png'
 import { Image } from 'astro:assets'
@@ -200,7 +202,7 @@ const displayAcademiaGraph = false
       <h3>Let's Connect!</h3>
       <p>
         I am currently looking for Internships around Summer 2024. I would love the opportunity to
-        work and learn from you! Please reach out if you have any questions, or would like to hear
+        work and learn from you! Please reach out with any questions, or would like to hear back
         from me.
         <br />
          Thanks!
@@ -210,6 +212,20 @@ const displayAcademiaGraph = false
         href='mailto:redpwilliams@gmail.com'
         style={{ margin: '10px auto' }}
       />
+    </section>
+    <!-- MARK: Bottom Socials -->
+    <section>
+      <ul id='bottom-socials'>
+        {
+          SocialIcons.map((social) => (
+            <li style='scale: 1.3; line-height: 0'>
+              <Icon href={social.href} translateOnHover>
+                <social.icon className='icon' style={social.style} />
+              </Icon>
+            </li>
+          ))
+        }
+      </ul>
     </section>
   </main>
 </Layout>
@@ -434,6 +450,25 @@ const displayAcademiaGraph = false
 
     & p {
       padding: 15px 0;
+    }
+  }
+
+  #bottom-socials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+    position: relative;
+    background-color: var(--bg-color);
+    z-index: 2;
+
+    &::before {
+      position: absolute;
+      left: 0;
+      right: 0;
+      content: '';
+      height: 10px;
+      background-color: red;
     }
   }
 

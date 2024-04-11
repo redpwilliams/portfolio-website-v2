@@ -1,44 +1,7 @@
 ---
 // Icon component
 import { Icon, Logo } from '@components'
-
-// Icons
-import { FiGithub, FiInstagram, FiLinkedin } from 'react-icons/fi'
-import { LiaSpotify } from 'react-icons/lia'
-import { FaXTwitter, FaThreads } from 'react-icons/fa6'
-
-// Types
-import type { IconProps } from '@types'
-
-const socials: IconProps[] = [
-  {
-    icon: FiGithub,
-    href: 'https://github.com/redpwilliams/'
-  },
-  {
-    icon: LiaSpotify,
-    href: 'https://open.spotify.com/user/jpw918?si=9641a1c3c57b4e04',
-    style: {
-      transform: 'scale(1.4)' // Spotify logo is weird for whatever reason
-    }
-  },
-  {
-    icon: FiInstagram,
-    href: 'https://www.instagram.com/red.williams18/'
-  },
-  {
-    icon: FiLinkedin,
-    href: 'https://www.linkedin.com/in/redwilliams18/'
-  },
-  {
-    icon: FaXTwitter,
-    href: 'https://twitter.com/redpw_'
-  },
-  {
-    icon: FaThreads,
-    href: 'https://www.threads.net/@red.williams18'
-  }
-]
+import { SocialIcons } from '@constants'
 
 const email = 'redpwilliams@gmail.com'
 
@@ -97,7 +60,7 @@ const { title, meta_content } = Astro.props
       <aside class='socials'>
         <ul>
           {
-            socials.map((social) => (
+            SocialIcons.map((social) => (
               <li style='scale: 1.3; line-height: 0'>
                 <Icon href={social.href} translateOnHover>
                   <social.icon className='icon' style={social.style} />
@@ -216,7 +179,6 @@ const { title, meta_content } = Astro.props
 
           // Loop to request data from Spotify and populate the UI with
           async function updateSpotifyInfo() {
-            console.log('Running')
             try {
               const response = await fetch('/api/spotify')
 
@@ -279,7 +241,6 @@ const { title, meta_content } = Astro.props
           // Call the function when the DOM content is loaded
           if (spotifyTrack && spotifyArtists) {
             updateSpotifyInfo() // Need to call it at least once to initialize styles/settings
-            console.log(SPOTIFY_REQUEST_FLAG)
             if (!SPOTIFY_REQUEST_FLAG) setInterval(updateSpotifyInfo, 1000 * 30) // 30 seconds
           }
         </script>
