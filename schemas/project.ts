@@ -53,7 +53,8 @@ export default defineType({
       name: 'links',
       type: 'object',
       description: 'Github and Project links.',
-      field: [
+      // @ts-expect-error Works but Sanity's type definition does not
+      fields: [
         // Github
         defineField({
           title: 'Github',
@@ -75,6 +76,7 @@ export default defineType({
       title: 'Technology List',
       name: 'technologies',
       type: 'array',
+      // @ts-expect-error Same thing. Their index.d.ts file mentions how it might now work well in VS Code so I guess it's ok
       of: [
         defineArrayMember({
           title: 'Tech',
