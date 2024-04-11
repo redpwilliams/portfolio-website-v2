@@ -71,12 +71,11 @@ const headerText =
     & > * {
       padding: $cell-padding;
       letter-spacing: 0.05em;
-      font-family: var(--font-mono);
-      text-transform: uppercase;
+      font-weight: 500;
     }
 
-    color: var(--text-gray-light);
-    border-bottom: 1px solid var(--text-gray-light);
+    color: var(--text-gray-dark);
+    border-bottom: 1px solid var(--text-gray-dark);
   }
 
   @media (min-width: 60em) {
@@ -128,7 +127,10 @@ const headerText =
   }
 
   .body-row {
-    border-bottom: 1px solid #3f3f3f;
+    &:not(:last-child) {
+      border-bottom: 1px solid #3f3f3f;
+    }
+
     & > * {
       padding: $cell-padding;
     }
