@@ -500,9 +500,13 @@ const { title, meta_content } = Astro.props
   footer {
     width: 100%;
     background-color: var(--bg-color-secondary);
-    border-bottom: 4px solid transparent;
-    border-image: var(--gradient);
-    border-image-slice: 1;
+
+    // NOTE - I'm disabling this small gradient because it doesn't look
+    // as good with overscroll, and I'd rather have overscroll than this
+
+    // border-bottom: 4px solid transparent;
+    // border-image: var(--gradient);
+    // border-image-slice: 1;
 
     & > * {
       margin: 0 auto;
