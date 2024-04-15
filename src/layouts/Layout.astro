@@ -62,7 +62,7 @@ const { title, meta_content } = Astro.props
           {
             SocialIcons.map((social) => (
               <li style='scale: 1.3; line-height: 0'>
-                <Icon href={social.href} translateOnHover>
+                <Icon href={social.href} translateOnHover iconLabel={social.name + ' icon'}>
                   <social.icon className='icon' style={social.style} />
                 </Icon>
               </li>

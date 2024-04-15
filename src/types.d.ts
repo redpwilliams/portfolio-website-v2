@@ -14,6 +14,7 @@ export type SanityResult<T extends Record<string, string | string[] | object | n
 
 export type IconProps = {
   icon: IconType
+  name: string
   href: string
   style?: CSSProperties
 }

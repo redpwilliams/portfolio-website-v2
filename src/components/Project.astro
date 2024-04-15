@@ -47,7 +47,10 @@ const { project } = Astro.props
     {/* Github link + icon */}
     {
       isNonEmpty(project.links.github) && (
-        <Icon href={project.links.github || '#'} style={{ marginRight: '10px' }}>
+        <Icon
+          href={project.links.github || '#'}
+          style={{ marginRight: '10px' }}
+          iconLabel='Github icon'>
           <FiGithub className='icon' style={{ scale: '1.2', strokeWidth: '2.25px' }} />
         </Icon>
       )
@@ -56,7 +59,7 @@ const { project } = Astro.props
     {/* Project link + icon */}
     {
       isNonEmpty(project.links.project_url) && (
-        <Icon href={project.links.project_url || '#'}>
+        <Icon href={project.links.project_url || '#'} iconLabel='External link icon'>
           <FiExternalLink className='icon' style={{ scale: '1.3' }} />
         </Icon>
       )

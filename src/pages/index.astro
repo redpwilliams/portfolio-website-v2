@@ -113,7 +113,7 @@ const displayAcademiaGraph = false
         <div id='img-wrapper'>
           <Image
             src={ProfilePicture}
-            alt='A profile picture with a hexagonal outline'
+            alt='Headshot of me in a hexagonal viewport.'
             quality='high'
             format='png'
             class='pfp'
@@ -124,7 +124,7 @@ const displayAcademiaGraph = false
           <div class='stroke-wrapper translate'>
             <Image
               src={BackgroundStroke}
-              alt='A profile picture with a hexagonal outline'
+              alt='The outline of a hexagon.'
               quality='high'
               format='png'
               class='stroke rotate'
@@ -204,7 +204,7 @@ const displayAcademiaGraph = false
         {
           SocialIcons.map((social) => (
             <li style='scale: 1.3; line-height: 0'>
-              <Icon href={social.href}>
+              <Icon href={social.href} iconLabel={social.name + ' icon'}>
                 <social.icon className='icon' style={social.style} />
               </Icon>
             </li>

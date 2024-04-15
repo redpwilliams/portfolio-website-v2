@@ -34,11 +34,11 @@ const headerText =
             <td class='desc'>{project.description}</td>
             <td class='links'>
               {isNonEmpty(project.links.project_url) && (
-                <Icon href={project.links.project_url}>
+                <Icon href={project.links.project_url} iconLabel='External link icon'>
                   <FiExternalLink className='icon' style={{ scale: '1.2' }} />
                 </Icon>
               )}
-              <Icon href={project.links.github}>
+              <Icon href={project.links.github} iconLabel='Github icon'>
                 <FiGithub className='icon' style={{ scale: '1.2' }} />
               </Icon>
             </td>
