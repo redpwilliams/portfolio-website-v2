@@ -17,15 +17,24 @@ const { href, text, target, ...attrs } = Astro.props
 ---
 
 <div class='button-container' {...attrs}>
-  <button>
-    <a href={href} target={target ?? '_blank'} referrerpolicy='no-referrer'>{text}</a>
-  </button>
+  <a class='button-link' href={href} target={target ?? '_blank'} referrerpolicy='no-referrer'
+    >{text}</a
+  >
 </div>
 <style lang='scss'>
-  button {
+  .button-container {
+    position: relative;
+    width: fit-content;
+
+    &:hover button {
+      transform: translate(-4px, -4px);
+    }
+  }
+
+  .button-link {
     width: fit-content;
     cursor: pointer;
-    border: solid 1px transparent;
+    border: solid 2px transparent;
     background-image: linear-gradient(var(--bg-color), var(--bg-color)), var(--gradient);
     border-image-slice: 1;
     border-radius: 4px;
@@ -40,15 +49,7 @@ const { href, text, target, ...attrs } = Astro.props
     position: relative;
     transition: all 0.3s ease-in-out;
     z-index: 1;
-  }
-
-  .button-container {
-    position: relative;
-    width: fit-content;
-
-    &:hover button {
-      transform: translate(-4px, -4px);
-    }
+    color: var(--text-main);
   }
 
   .button-container::after {
@@ -59,8 +60,5 @@ const { href, text, target, ...attrs } = Astro.props
     background: var(--gradient);
     inset: 0 0 0 0;
     border-radius: 4px;
-  }
-  a {
-    color: var(--text-main);
   }
 </style>
