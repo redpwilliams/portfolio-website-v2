@@ -28,9 +28,12 @@ const headers = report.content
   .map((h1) => h1.children[0].text)
 ---
 
-<Layout title={'Red Williams - ' + report.title} meta_content={report.description}>
+<Layout
+  title={'Red Williams - ' + report.title}
+  meta_content={report.description}
+  content_id='#title'>
   <main>
-    <h1 class='title'>{report.title}</h1>
+    <h1 id='title' class='title'>{report.title}</h1>
     <p class='caption'>{report.description}</p>
     <div class='article'>
       <nav class='navigation'>
