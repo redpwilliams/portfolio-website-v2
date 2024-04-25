@@ -1,11 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
 import type { HTMLAttributeAnchorTarget } from 'react'
-/* 
-  I like: 
-    https://uiverse.io/gharsh11032000/foolish-sloth-90
-    https://uiverse.io/mrtqzbek11/moody-bulldog-15
-*/
 
 interface Props extends HTMLAttributes<'button'> {
   href: string
@@ -18,16 +13,33 @@ const { href, text, target, ...attrs } = Astro.props
 
 <div class='button-container' {...attrs}>
   <a class='button-link' href={href} target={target ?? '_blank'} referrerpolicy='no-referrer'
-    >{text}</a
-  >
+    ><span class='button-text'>{text}</span>
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      width='48'
+      height='24'
+      viewBox='0 0 48 24'
+      fill='none'
+      class='button-arrow'>
+      <path
+        d='M1 11C0.447715 11 2.0231e-08 11.4477 0 12C-2.0231e-08 12.5523 0.447715 13 1 13L1 11ZM47.7071 12.7071C48.0976 12.3166 48.0976 11.6834 47.7071 11.2929L41.3431 4.92893C40.9526 4.53841 40.3195 4.53841 39.9289 4.92893C39.5384 5.31946 39.5384 5.95262 39.9289 6.34315L45.5858 12L39.9289 17.6569C39.5384 18.0474 39.5384 18.6805 39.9289 19.0711C40.3195 19.4616 40.9526 19.4616 41.3431 19.0711L47.7071 12.7071ZM1 13L47 13L47 11L1 11L1 13Z'
+        fill='currentColor'></path>
+    </svg>
+  </a>
 </div>
 <style lang='scss'>
   .button-container {
     position: relative;
     width: fit-content;
 
-    &:hover button {
-      transform: translate(-4px, -4px);
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient);
+      inset: 0 0 0 0;
+      border-radius: 4px;
     }
   }
 
@@ -50,15 +62,39 @@ const { href, text, target, ...attrs } = Astro.props
     transition: all 0.3s ease-in-out;
     z-index: 1;
     color: var(--text-main);
+
+    &:hover,
+    &:focus-visible {
+      .button-text {
+        left: -36px;
+      }
+
+      .button-arrow {
+        opacity: 1;
+        path {
+          color: var(--text-white) !important;
+        }
+      }
+    }
   }
 
-  .button-container::after {
-    content: '';
+  .button-text {
+    position: relative;
+    transition: all 0.25s ease;
+    left: 0;
+    background-color: var(--bg-color);
+    z-index: 1;
+  }
+
+  .button-arrow {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background: var(--gradient);
-    inset: 0 0 0 0;
-    border-radius: 4px;
+    content: '';
+    right: 10%;
+    opacity: 0;
+    transition: opacity 0.25s ease 0.25s;
+    path {
+      color: var(--bg-color);
+      transition: color 0.1s ease;
+    }
   }
 </style>
