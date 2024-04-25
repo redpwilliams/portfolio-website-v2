@@ -373,7 +373,8 @@ const { title, meta_content } = Astro.props
     left: 0;
     right: 0;
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       border-color: var(--text-gray-light);
     }
 
@@ -389,7 +390,8 @@ const { title, meta_content } = Astro.props
         transition: color 0.2s ease;
         font-weight: 400;
 
-        &:hover {
+        &:hover,
+        &:focus-visible {
           color: var(--text-main);
         }
       }
@@ -533,7 +535,7 @@ const { title, meta_content } = Astro.props
   }
 
   footer:hover .logo rect,
-  footer:focus .logo rect {
+  footer:focus-visible .logo rect {
     height: 77px;
     &.lower-level {
       height: 90px;
@@ -642,9 +644,9 @@ const { title, meta_content } = Astro.props
   }
 
   #spotify-track:hover,
-  #spotify-track:focus,
+  #spotify-track:focus-visible,
   .spotify-artist:hover,
-  .spotify-artist:focus {
+  .spotify-artist:focus-visible {
     &::after {
       // TODO - Add transition
       position: absolute;
