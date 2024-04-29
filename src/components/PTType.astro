@@ -1,0 +1,15 @@
+---
+import { Image } from 'astro:assets'
+
+const props = Astro.props
+const { node } = props
+const typeIs = (type: string) => type === node._type
+---
+
+{
+  typeIs('image') ? (
+    <Image src={node.asset.url} alt='temp' width={300} height={300} />
+  ) : (
+    <p>Unknown</p>
+  )
+}

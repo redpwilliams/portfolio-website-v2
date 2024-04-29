@@ -6,13 +6,14 @@ import { Image } from 'astro:assets'
 import { PortableText } from 'astro-portabletext'
 
 // https://github.com/theisel/astro-portabletext/blob/main/astro-portabletext/README.md
-import { PTBlock, PTList } from '@components'
+import { PTBlock, PTList, PTType } from '@components'
 
 const { slug } = Astro.params
 
 // Fetch Sanity data
 const query = `*[_type == "report" && slug.current == "${slug}"][0]
-{ ..., "image_url": thumbnail.asset->url, "slug": slug.current }`
+{ ..., "image_url": thumbnail.asset->url, "slug": slug.current, 
+content[] { ..., _type == "image" => { asset->{url} }} }`
 
 const data = await fetchSanityData(query)
 const report = data.result as unknown as ReportType
@@ -26,6 +27,8 @@ report.date_published = `${month} ${day}, ${year}`
 const headers = report.content
   .filter((object) => object.style === 'h1')
   .map((h1) => h1.children[0].text)
+
+console.log(report.content)
 ---
 
 <Layout
@@ -86,7 +89,10 @@ const headers = report.content
           <p>{report.read_time} min read</p>
           <p>{report.date_published}</p>
         </div>
-        <PortableText value={report.content} components={{ block: PTBlock, list: PTList }} />
+        <PortableText
+          value={report.content}
+          components={{ block: PTBlock, list: PTList, type: PTType }}
+        />
       </div>
     </div>
   </main>

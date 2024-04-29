@@ -80,6 +80,9 @@ export default defineType({
             { title: 'Gist', value: 'code', component: Gist },
             { title: 'Quote', value: 'blockquote' }
           ]
+        }),
+        defineArrayMember({
+          type: 'image'
         })
       ]
     })
