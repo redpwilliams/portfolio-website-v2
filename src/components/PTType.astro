@@ -7,8 +7,17 @@ const typeIs = (type: string) => type === node._type
 ---
 
 {
-  typeIs('image') ? (
-    <Image src={node.asset.url} alt='temp' width={300} height={300} class='pttype-image' />
+  typeIs('image_object') ? (
+    <Image
+      src={
+        node.image_url ??
+        'https://images.unsplash.com/photo-1505533321630-975218a5f66f?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dj'
+      }
+      alt={node.alt}
+      width={300}
+      height={300}
+      class='pttype-image'
+    />
   ) : (
     <p>Unknown</p>
   )
@@ -19,6 +28,7 @@ const typeIs = (type: string) => type === node._type
     display: block;
     margin: 2rem auto;
     max-width: 100%;
+    height: auto;
     outline: 2px solid var(--text-gray-dark);
     border-radius: 4px;
   }

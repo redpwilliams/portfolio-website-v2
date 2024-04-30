@@ -13,7 +13,7 @@ const { slug } = Astro.params
 // Fetch Sanity data
 const query = `*[_type == "report" && slug.current == "${slug}"][0]
 { ..., "image_url": thumbnail.asset->url, "slug": slug.current, 
-content[] { ..., _type == "image" => { asset->{url} }} }`
+content[] { ..., _type == "image_object" => { "image_url": inline_image.asset->url }} }`
 
 const data = await fetchSanityData(query)
 const report = data.result as unknown as ReportType

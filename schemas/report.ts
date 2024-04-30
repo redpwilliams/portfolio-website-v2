@@ -82,11 +82,9 @@ export default defineType({
           ]
         }),
         defineArrayMember({
-          type: 'image'
-        }),
-        defineArrayMember({
+          title: 'Image Object',
           type: 'object',
-          name: 'image-object',
+          name: 'image_object',
           fields: [
             {
               type: 'image',
