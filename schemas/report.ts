@@ -83,6 +83,20 @@ export default defineType({
         }),
         defineArrayMember({
           type: 'image'
+        }),
+        defineArrayMember({
+          type: 'object',
+          name: 'image-object',
+          fields: [
+            {
+              type: 'image',
+              name: 'inline_image'
+            },
+            {
+              type: 'string',
+              name: 'alt'
+            }
+          ]
         })
       ]
     })
