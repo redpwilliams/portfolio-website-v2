@@ -8,8 +8,18 @@ const typeIs = (type: string) => type === node._type
 
 {
   typeIs('image') ? (
-    <Image src={node.asset.url} alt='temp' width={300} height={300} />
+    <Image src={node.asset.url} alt='temp' width={300} height={300} class='pttype-image' />
   ) : (
     <p>Unknown</p>
   )
 }
+
+<style>
+  .pttype-image {
+    display: block;
+    margin: 2rem auto;
+    max-width: 100%;
+    outline: 2px solid var(--text-gray-dark);
+    border-radius: 4px;
+  }
+</style>
